@@ -33,7 +33,7 @@ CREATE TABLE `Employees` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Employees`
+-- Dumping database for table `Employees`
 --
 
 LOCK TABLES `Employees` WRITE;
@@ -57,7 +57,7 @@ CREATE TABLE `ProjectParcipitants` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ProjectParcipitants`
+-- Dumping database for table `ProjectParcipitants`
 --
 
 LOCK TABLES `ProjectParcipitants` WRITE;
@@ -82,7 +82,7 @@ CREATE TABLE `Projects` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Projects`
+-- Dumping database for table `Projects`
 --
 
 LOCK TABLES `Projects` WRITE;
@@ -106,7 +106,7 @@ CREATE TABLE `Skills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Skills`
+-- Dumping database for table `Skills`
 --
 
 LOCK TABLES `Skills` WRITE;
@@ -132,7 +132,7 @@ CREATE TABLE `SubProjects` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `SubProjects`
+-- Dumping database for table `SubProjects`
 --
 
 LOCK TABLES `SubProjects` WRITE;
@@ -156,7 +156,7 @@ CREATE TABLE `SubProjectsEstimatetWorkHours` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `SubProjectsEstimatetWorkHours`
+-- Dumping database for table `SubProjectsEstimatetWorkHours`
 --
 
 LOCK TABLES `SubProjectsEstimatetWorkHours` WRITE;
@@ -180,7 +180,7 @@ CREATE TABLE `SubTaskEstimatetWorkHours` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `SubTaskEstimatetWorkHours`
+-- Dumping database for table `SubTaskEstimatetWorkHours`
 --
 
 LOCK TABLES `SubTaskEstimatetWorkHours` WRITE;
@@ -207,7 +207,7 @@ CREATE TABLE `SubTasks` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `SubTasks`
+-- Dumping database for table `SubTasks`
 --
 
 LOCK TABLES `SubTasks` WRITE;
@@ -232,7 +232,7 @@ CREATE TABLE `Tasks` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Tasks`
+-- Dumping database for table `Tasks`
 --
 
 LOCK TABLES `Tasks` WRITE;
@@ -256,7 +256,7 @@ CREATE TABLE `TasksEstimatetWorkHours` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `TasksEstimatetWorkHours`
+-- Dumping database for table `TasksEstimatetWorkHours`
 --
 
 LOCK TABLES `TasksEstimatetWorkHours` WRITE;
@@ -282,7 +282,7 @@ CREATE TABLE `TaskTakers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `TaskTakers`
+-- Dumping database for table `TaskTakers`
 --
 
 LOCK TABLES `TaskTakers` WRITE;
