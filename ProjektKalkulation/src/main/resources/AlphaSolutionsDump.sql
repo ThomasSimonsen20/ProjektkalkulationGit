@@ -1,4 +1,4 @@
- -- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
 -- Host: 127.0.0.1    Database: AlphaSolutions
 -- ------------------------------------------------------
@@ -16,6 +16,23 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Employee_Skills`
+--
+
+DROP TABLE IF EXISTS `Employee_Skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Employee_Skills` (
+  `Employee_Id` int NOT NULL,
+  `Skill_Id` int NOT NULL,
+  PRIMARY KEY (`Employee_Id`,`Skill_Id`),
+  KEY `Skill_Id_idx` (`Skill_Id`),
+  CONSTRAINT `Employee_Id` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
+  CONSTRAINT `Skill_Id` FOREIGN KEY (`Skill_Id`) REFERENCES `Skills` (`Skill_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Employees`
 --
 
@@ -27,19 +44,12 @@ CREATE TABLE `Employees` (
   `First_Name` varchar(50) NOT NULL,
   `Last_Name` varchar(100) NOT NULL,
   `Profile_Picture` varchar(200) DEFAULT NULL,
+  `Employee_Number` int NOT NULL,
   PRIMARY KEY (`Employee_Id`),
-  UNIQUE KEY `Employee_Id_UNIQUE` (`Employee_Id`)
+  UNIQUE KEY `Employee_Id_UNIQUE` (`Employee_Id`),
+  UNIQUE KEY `Employee_Number_UNIQUE` (`Employee_Number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `Employees`
---
-
-LOCK TABLES `Employees` WRITE;
-/*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ProjectParcipitants`
@@ -52,18 +62,12 @@ CREATE TABLE `ProjectParcipitants` (
   `Project_Id` int NOT NULL,
   `Employee_Id` int NOT NULL,
   `Role` varchar(100) NOT NULL,
-  PRIMARY KEY (`Project_Id`,`Employee_Id`,`Role`)
+  PRIMARY KEY (`Project_Id`,`Employee_Id`,`Role`),
+  KEY `Employee_Id_idx` (`Employee_Id`),
+  CONSTRAINT `Employee_Id_PP` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
+  CONSTRAINT `Project_Id` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `ProjectParcipitants`
---
-
-LOCK TABLES `ProjectParcipitants` WRITE;
-/*!40000 ALTER TABLE `ProjectParcipitants` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ProjectParcipitants` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Projects`
@@ -82,15 +86,6 @@ CREATE TABLE `Projects` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping database for table `Projects`
---
-
-LOCK TABLES `Projects` WRITE;
-/*!40000 ALTER TABLE `Projects` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Projects` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Skills`
 --
 
@@ -98,21 +93,13 @@ DROP TABLE IF EXISTS `Skills`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Skills` (
-  `Employee_Id` int NOT NULL,
-  `Skill` varchar(100) NOT NULL,
-  KEY `_idx` (`Employee_Id`),
-  CONSTRAINT `Employee_Id` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`)
+  `Skill_Id` int NOT NULL AUTO_INCREMENT,
+  `Skill_Description` varchar(200) NOT NULL,
+  PRIMARY KEY (`Skill_Id`),
+  UNIQUE KEY `Skill_Id_UNIQUE` (`Skill_Id`),
+  KEY `_idx` (`Skill_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `Skills`
---
-
-LOCK TABLES `Skills` WRITE;
-/*!40000 ALTER TABLE `Skills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Skills` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `SubProjects`
@@ -127,18 +114,11 @@ CREATE TABLE `SubProjects` (
   `SubProject_Name` varchar(100) NOT NULL,
   `SubProject_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`SubProject_Id`),
-  UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`)
+  UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
+  KEY `Project_Id_idx` (`Project_Id`),
+  CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `SubProjects`
---
-
-LOCK TABLES `SubProjects` WRITE;
-/*!40000 ALTER TABLE `SubProjects` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SubProjects` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `SubProjectsEstimatetWorkHours`
@@ -148,21 +128,15 @@ DROP TABLE IF EXISTS `SubProjectsEstimatetWorkHours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SubProjectsEstimatetWorkHours` (
+  `SubProjectEWH_Id` int NOT NULL,
   `SubProject_Id` int NOT NULL,
   `EstimatetWorkHours` double NOT NULL,
+  PRIMARY KEY (`SubProjectEWH_Id`),
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
+  UNIQUE KEY `SubProjectEWH_Id_UNIQUE` (`SubProjectEWH_Id`),
   CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `SubProjectsEstimatetWorkHours`
---
-
-LOCK TABLES `SubProjectsEstimatetWorkHours` WRITE;
-/*!40000 ALTER TABLE `SubProjectsEstimatetWorkHours` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SubProjectsEstimatetWorkHours` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `SubTaskEstimatetWorkHours`
@@ -172,21 +146,15 @@ DROP TABLE IF EXISTS `SubTaskEstimatetWorkHours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SubTaskEstimatetWorkHours` (
+  `SubTaskEWH_Id` int NOT NULL AUTO_INCREMENT,
   `Subtask_Id` int NOT NULL,
   `EstimatetWorkHours` double NOT NULL,
+  PRIMARY KEY (`SubTaskEWH_Id`),
+  UNIQUE KEY `SubTaskEWH_Id_UNIQUE` (`SubTaskEWH_Id`),
   KEY `SubTask_Id_idx` (`Subtask_Id`),
   CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `SubTasks` (`SubTask_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `SubTaskEstimatetWorkHours`
---
-
-LOCK TABLES `SubTaskEstimatetWorkHours` WRITE;
-/*!40000 ALTER TABLE `SubTaskEstimatetWorkHours` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SubTaskEstimatetWorkHours` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `SubTasks`
@@ -202,18 +170,9 @@ CREATE TABLE `SubTasks` (
   PRIMARY KEY (`SubTask_Id`),
   UNIQUE KEY `SubTask_Id_UNIQUE` (`SubTask_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
-  CONSTRAINT `Task_Id_FKSub` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
+  CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `SubTasks`
---
-
-LOCK TABLES `SubTasks` WRITE;
-/*!40000 ALTER TABLE `SubTasks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SubTasks` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Tasks`
@@ -227,18 +186,11 @@ CREATE TABLE `Tasks` (
   `SubProject_Id` int NOT NULL,
   `Task_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Task_Id`),
-  UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`)
+  UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
+  KEY `SubProject_Id_idx` (`SubProject_Id`),
+  CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `Tasks`
---
-
-LOCK TABLES `Tasks` WRITE;
-/*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `TasksEstimatetWorkHours`
@@ -248,21 +200,15 @@ DROP TABLE IF EXISTS `TasksEstimatetWorkHours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `TasksEstimatetWorkHours` (
+  `TasksEWH_Id` int NOT NULL AUTO_INCREMENT,
   `Task_Id` int NOT NULL,
-  `EstimatetWorkHours` varchar(45) DEFAULT NULL,
+  `EstimatetWorkHours` double DEFAULT NULL,
+  PRIMARY KEY (`TasksEWH_Id`),
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
+  UNIQUE KEY `TasksEWH_Id_UNIQUE` (`TasksEWH_Id`),
   CONSTRAINT `Task_Id` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `TasksEstimatetWorkHours`
---
-
-LOCK TABLES `TasksEstimatetWorkHours` WRITE;
-/*!40000 ALTER TABLE `TasksEstimatetWorkHours` DISABLE KEYS */;
-/*!40000 ALTER TABLE `TasksEstimatetWorkHours` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `TaskTakers`
@@ -280,15 +226,6 @@ CREATE TABLE `TaskTakers` (
   CONSTRAINT `Task_Id_FK` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping database for table `TaskTakers`
---
-
-LOCK TABLES `TaskTakers` WRITE;
-/*!40000 ALTER TABLE `TaskTakers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `TaskTakers` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -299,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-26 21:06:36
+-- Dump completed on 2020-11-27 22:06:11
