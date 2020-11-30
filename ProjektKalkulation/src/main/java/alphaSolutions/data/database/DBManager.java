@@ -1,4 +1,4 @@
-package data.database;
+package alphaSolutions.data.database;
 
 import java.io.FileInputStream;
 import java.io.IOException;

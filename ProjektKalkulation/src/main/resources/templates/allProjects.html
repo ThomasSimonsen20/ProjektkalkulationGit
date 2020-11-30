@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>allProjects</title>
+</head>
+<body>
+
+<div>
+    <a href="/createProject">Create Project</a>
+</div>
+
+<div th:each="project : ${Project}">
+    <br>
+    <p th:text="${project.getProjectName()}"></p>
+    <p th:text="${project.getProjectDescription()}"></p>
+    <br>
+</div>
+
+</body>
+</html>

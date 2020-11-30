@@ -1,4 +1,4 @@
-package springBoot;
+package alphaSolutions.springBoot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
