@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -25,7 +26,7 @@ public class MyController {
     }
 
     @GetMapping("/allProjects")
-    public String allProjects(Model model) {
+    public String allProjects(Model model, WebRequest request) {
         model.addAttribute("Project", systemController.getAllProjects());
         return "allProjects";
     }
@@ -44,7 +45,12 @@ public class MyController {
     }
 
     @GetMapping("/test")
-    public String test() {
+    public String test(@RequestParam("id") int idProject,Model model, WebRequest request) {
+        Project currentProject = systemController.getProject(idProject);
+        projectSessionInfo(request, currentProject);
+
+        model.addAttribute("Project", currentProject);
+
         return "/projectFileTest";
     }
 

@@ -15,7 +15,7 @@
     <br>
 
     <div style="background: aqua; width: 75px">
-        <a href="/test">
+        <a th:href="@{/test(id=${project.getProjectId()})}">
     <p th:text="${project.getProjectName()}"><br></p>
     <p th:text="${project.getProjectDescription()}"></p>
         </a>

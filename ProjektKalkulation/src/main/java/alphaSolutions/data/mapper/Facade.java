@@ -16,4 +16,8 @@ public class Facade {
     public ArrayList<Project> getAllProjects() {
        return projectMapper.getAllProjects();
     }
+
+    public Project getProject(int id) {
+        return projectMapper.getProject(id);
+    }
 }

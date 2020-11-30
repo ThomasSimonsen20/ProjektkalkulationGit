@@ -48,5 +48,31 @@ public class ProjectMapper {
         return projectList;
     }
 
+    public Project getProject(int id) {
+        Project project = new Project();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM projects WHERE Project_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int projectId = rs.getInt("Project_Id");
+                String projectName = rs.getString("Project_Name");
+                String projectDescription = rs.getString("Project_Description");
+                project.setProjectId(projectId);
+                project.setProjectName(projectName);
+                project.setProjectDescription(projectDescription);
+                //Project project = new Project(projectName, projectDescription);
+                //project.setProjectId(projectId);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return project;
+    }
+
 
 }

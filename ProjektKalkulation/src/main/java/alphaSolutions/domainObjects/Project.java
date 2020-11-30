@@ -11,7 +11,11 @@ public class Project {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
     }
-/*
+
+    public Project() {
+    }
+
+    /*
     public Project(int projectId, String projectName, String projectDescription) {
         this.projectId = projectId;
         this.projectName = projectName;

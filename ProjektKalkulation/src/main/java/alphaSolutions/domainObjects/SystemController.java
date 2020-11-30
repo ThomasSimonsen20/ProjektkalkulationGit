@@ -20,4 +20,8 @@ public class SystemController {
     public ArrayList<Project> getAllProjects() {
         return facade.getAllProjects();
     }
+
+    public Project getProject(int id) {
+        return facade.getProject(id);
+    }
 }
