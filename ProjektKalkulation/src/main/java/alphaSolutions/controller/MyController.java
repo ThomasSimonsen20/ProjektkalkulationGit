@@ -42,4 +42,13 @@ public class MyController {
 
         return "redirect:/allProjects";
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "/projectFileTest";
+    }
+
+    private void projectSessionInfo(WebRequest request, Project project) {
+        request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
+    }
 }

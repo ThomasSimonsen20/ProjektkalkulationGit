@@ -13,8 +13,14 @@
 
 <div th:each="project : ${Project}">
     <br>
-    <p th:text="${project.getProjectName()}"></p>
+
+    <div style="background: aqua; width: 75px">
+        <a href="/test">
+    <p th:text="${project.getProjectName()}"><br></p>
     <p th:text="${project.getProjectDescription()}"></p>
+        </a>
+    </div>
+
     <br>
 </div>
 
