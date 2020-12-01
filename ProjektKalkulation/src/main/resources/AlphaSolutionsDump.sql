@@ -167,9 +167,12 @@ CREATE TABLE `SubTasks` (
   `SubTask_Id` int NOT NULL AUTO_INCREMENT,
   `Task_Id` int NOT NULL,
   `SubTask_Description` varchar(500) DEFAULT NULL,
+  `Project_Id` int NOT NULL,
   PRIMARY KEY (`SubTask_Id`),
   UNIQUE KEY `SubTask_Id_UNIQUE` (`SubTask_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
+  KEY `Project_Id_ST_idx` (`Project_Id`),
+  CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -185,9 +188,12 @@ CREATE TABLE `Tasks` (
   `Task_Id` int NOT NULL AUTO_INCREMENT,
   `SubProject_Id` int NOT NULL,
   `Task_Description` varchar(500) DEFAULT NULL,
+  `Project_Id` int NOT NULL,
   PRIMARY KEY (`Task_Id`),
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
   KEY `SubProject_Id_idx` (`SubProject_Id`),
+  KEY `Project_Id_Tasks_idx` (`Project_Id`),
+  CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -236,4 +242,4 @@ CREATE TABLE `TaskTakers` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-27 22:06:11
+-- Dump completed on 2020-12-01  9:53:49
