@@ -1,7 +1,6 @@
 package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
-import alphaSolutions.domainObjects.Project;
 import alphaSolutions.domainObjects.SubProject;
 
 import java.sql.*;
@@ -21,13 +20,13 @@ public class SubProjectMapper {
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
             int id = ids.getInt(1);
-            subProject.setSubProjectID(id);
+            subProject.setSubProjectId(id);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
+    public ArrayList<SubProject> getSubProjectsBasedOnProjectID(int id) {
         ArrayList<SubProject> subProjectList = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
@@ -42,7 +41,7 @@ public class SubProjectMapper {
                 String subProjectName = rs.getString("SubProject_Name");
                 String subProjectDescription = rs.getString("SubProject_Description");
                 SubProject subProject = new SubProject(projectId, subProjectName, subProjectDescription);
-                subProject.setSubProjectID(subProjectID);
+                subProject.setSubProjectId(subProjectID);
                 subProjectList.add(subProject);
             }
 
@@ -50,5 +49,31 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
         return subProjectList;
+    }
+
+    public SubProject getSubProject(int id) {
+        SubProject subProject = new SubProject();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM subprojects WHERE SubProject_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int subProjectID = rs.getInt("SubProject_Id");
+                int projectId = rs.getInt("Project_Id");
+                String subProjectName = rs.getString("SubProject_Name");
+                String subProjectDescription = rs.getString("SubProject_Description");
+                subProject.setSubProjectId(subProjectID);
+                subProject.setProjectId(projectId);
+                subProject.setSubProjectName(subProjectName);
+                subProject.setSubProjectDescription(subProjectDescription);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return subProject;
     }
 }

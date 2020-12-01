@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: AlphaSolutions
+-- Host: 127.0.0.1    Database: alphasolutions
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -16,30 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Employee_Skills`
+-- Table structure for table `employee_skills`
 --
 
-DROP TABLE IF EXISTS `Employee_Skills`;
+DROP TABLE IF EXISTS `employee_skills`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Employee_Skills` (
+CREATE TABLE `employee_skills` (
   `Employee_Id` int NOT NULL,
   `Skill_Id` int NOT NULL,
   PRIMARY KEY (`Employee_Id`,`Skill_Id`),
   KEY `Skill_Id_idx` (`Skill_Id`),
-  CONSTRAINT `Employee_Id` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
-  CONSTRAINT `Skill_Id` FOREIGN KEY (`Skill_Id`) REFERENCES `Skills` (`Skill_Id`)
+  CONSTRAINT `Employee_Id` FOREIGN KEY (`Employee_Id`) REFERENCES `employees` (`Employee_Id`),
+  CONSTRAINT `Skill_Id` FOREIGN KEY (`Skill_Id`) REFERENCES `skills` (`Skill_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Employees`
+-- Dumping data for table `employee_skills`
 --
 
-DROP TABLE IF EXISTS `Employees`;
+LOCK TABLES `employee_skills` WRITE;
+/*!40000 ALTER TABLE `employee_skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee_skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Employees` (
+CREATE TABLE `employees` (
   `Employee_Id` int NOT NULL AUTO_INCREMENT,
   `First_Name` varchar(50) NOT NULL,
   `Last_Name` varchar(100) NOT NULL,
@@ -52,47 +61,75 @@ CREATE TABLE `Employees` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `ProjectParcipitants`
+-- Dumping data for table `employees`
 --
 
-DROP TABLE IF EXISTS `ProjectParcipitants`;
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `projectparcipitants`
+--
+
+DROP TABLE IF EXISTS `projectparcipitants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ProjectParcipitants` (
+CREATE TABLE `projectparcipitants` (
   `Project_Id` int NOT NULL,
   `Employee_Id` int NOT NULL,
   `Role` varchar(100) NOT NULL,
   PRIMARY KEY (`Project_Id`,`Employee_Id`,`Role`),
   KEY `Employee_Id_idx` (`Employee_Id`),
-  CONSTRAINT `Employee_Id_PP` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
-  CONSTRAINT `Project_Id` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`)
+  CONSTRAINT `Employee_Id_PP` FOREIGN KEY (`Employee_Id`) REFERENCES `employees` (`Employee_Id`),
+  CONSTRAINT `Project_Id` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Projects`
+-- Dumping data for table `projectparcipitants`
 --
 
-DROP TABLE IF EXISTS `Projects`;
+LOCK TABLES `projectparcipitants` WRITE;
+/*!40000 ALTER TABLE `projectparcipitants` DISABLE KEYS */;
+/*!40000 ALTER TABLE `projectparcipitants` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `projects`
+--
+
+DROP TABLE IF EXISTS `projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Projects` (
+CREATE TABLE `projects` (
   `Project_Id` int NOT NULL AUTO_INCREMENT,
   `Project_Name` varchar(100) NOT NULL,
   `Project_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Project_Id`),
   UNIQUE KEY `Project_Id_UNIQUE` (`Project_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Skills`
+-- Dumping data for table `projects`
 --
 
-DROP TABLE IF EXISTS `Skills`;
+LOCK TABLES `projects` WRITE;
+/*!40000 ALTER TABLE `projects` DISABLE KEYS */;
+INSERT INTO `projects` VALUES (7,'Alpha Solution','Skal lave kalkulationsværktøj');
+/*!40000 ALTER TABLE `projects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `skills`
+--
+
+DROP TABLE IF EXISTS `skills`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Skills` (
+CREATE TABLE `skills` (
   `Skill_Id` int NOT NULL AUTO_INCREMENT,
   `Skill_Description` varchar(200) NOT NULL,
   PRIMARY KEY (`Skill_Id`),
@@ -102,13 +139,22 @@ CREATE TABLE `Skills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `SubProjects`
+-- Dumping data for table `skills`
 --
 
-DROP TABLE IF EXISTS `SubProjects`;
+LOCK TABLES `skills` WRITE;
+/*!40000 ALTER TABLE `skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `skills` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subprojects`
+--
+
+DROP TABLE IF EXISTS `subprojects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `SubProjects` (
+CREATE TABLE `subprojects` (
   `SubProject_Id` int NOT NULL AUTO_INCREMENT,
   `Project_Id` int NOT NULL,
   `SubProject_Name` varchar(100) NOT NULL,
@@ -116,54 +162,82 @@ CREATE TABLE `SubProjects` (
   PRIMARY KEY (`SubProject_Id`),
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   KEY `Project_Id_idx` (`Project_Id`),
-  CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `SubProjectsEstimatetWorkHours`
+-- Dumping data for table `subprojects`
 --
 
-DROP TABLE IF EXISTS `SubProjectsEstimatetWorkHours`;
+LOCK TABLES `subprojects` WRITE;
+/*!40000 ALTER TABLE `subprojects` DISABLE KEYS */;
+INSERT INTO `subprojects` VALUES (22,7,'Loginshit','lav loginshit');
+/*!40000 ALTER TABLE `subprojects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subprojectsestimatetworkhours`
+--
+
+DROP TABLE IF EXISTS `subprojectsestimatetworkhours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `SubProjectsEstimatetWorkHours` (
+CREATE TABLE `subprojectsestimatetworkhours` (
   `SubProjectEWH_Id` int NOT NULL,
   `SubProject_Id` int NOT NULL,
   `EstimatetWorkHours` double NOT NULL,
   PRIMARY KEY (`SubProjectEWH_Id`),
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   UNIQUE KEY `SubProjectEWH_Id_UNIQUE` (`SubProjectEWH_Id`),
-  CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
+  CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `SubTaskEstimatetWorkHours`
+-- Dumping data for table `subprojectsestimatetworkhours`
 --
 
-DROP TABLE IF EXISTS `SubTaskEstimatetWorkHours`;
+LOCK TABLES `subprojectsestimatetworkhours` WRITE;
+/*!40000 ALTER TABLE `subprojectsestimatetworkhours` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subprojectsestimatetworkhours` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subtaskestimatetworkhours`
+--
+
+DROP TABLE IF EXISTS `subtaskestimatetworkhours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `SubTaskEstimatetWorkHours` (
+CREATE TABLE `subtaskestimatetworkhours` (
   `SubTaskEWH_Id` int NOT NULL AUTO_INCREMENT,
   `Subtask_Id` int NOT NULL,
   `EstimatetWorkHours` double NOT NULL,
   PRIMARY KEY (`SubTaskEWH_Id`),
   UNIQUE KEY `SubTaskEWH_Id_UNIQUE` (`SubTaskEWH_Id`),
   KEY `SubTask_Id_idx` (`Subtask_Id`),
-  CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `SubTasks` (`SubTask_Id`)
+  CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `SubTasks`
+-- Dumping data for table `subtaskestimatetworkhours`
 --
 
-DROP TABLE IF EXISTS `SubTasks`;
+LOCK TABLES `subtaskestimatetworkhours` WRITE;
+/*!40000 ALTER TABLE `subtaskestimatetworkhours` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subtaskestimatetworkhours` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subtasks`
+--
+
+DROP TABLE IF EXISTS `subtasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `SubTasks` (
+CREATE TABLE `subtasks` (
   `SubTask_Id` int NOT NULL AUTO_INCREMENT,
   `Task_Id` int NOT NULL,
   `SubTask_Description` varchar(500) DEFAULT NULL,
@@ -172,66 +246,109 @@ CREATE TABLE `SubTasks` (
   UNIQUE KEY `SubTask_Id_UNIQUE` (`SubTask_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
   KEY `Project_Id_ST_idx` (`Project_Id`),
-  CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
-  CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`),
+  CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Tasks`
+-- Dumping data for table `subtasks`
 --
 
-DROP TABLE IF EXISTS `Tasks`;
+LOCK TABLES `subtasks` WRITE;
+/*!40000 ALTER TABLE `subtasks` DISABLE KEYS */;
+INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7);
+/*!40000 ALTER TABLE `subtasks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tasks`
+--
+
+DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Tasks` (
+CREATE TABLE `tasks` (
   `Task_Id` int NOT NULL AUTO_INCREMENT,
-  `SubProject_Id` int NOT NULL,
-  `Task_Description` varchar(500) DEFAULT NULL,
   `Project_Id` int NOT NULL,
+  `SubProject_Id` int NOT NULL,
+  `Task_Name` varchar(50) DEFAULT NULL,
+  `Task_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Task_Id`),
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
   KEY `SubProject_Id_idx` (`SubProject_Id`),
   KEY `Project_Id_Tasks_idx` (`Project_Id`),
-  CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
-  CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`),
+  CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `TasksEstimatetWorkHours`
+-- Dumping data for table `tasks`
 --
 
-DROP TABLE IF EXISTS `TasksEstimatetWorkHours`;
+LOCK TABLES `tasks` WRITE;
+/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
+INSERT INTO `tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit');
+/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tasksestimatetworkhours`
+--
+
+DROP TABLE IF EXISTS `tasksestimatetworkhours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `TasksEstimatetWorkHours` (
+CREATE TABLE `tasksestimatetworkhours` (
   `TasksEWH_Id` int NOT NULL AUTO_INCREMENT,
   `Task_Id` int NOT NULL,
   `EstimatetWorkHours` double DEFAULT NULL,
   PRIMARY KEY (`TasksEWH_Id`),
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
   UNIQUE KEY `TasksEWH_Id_UNIQUE` (`TasksEWH_Id`),
-  CONSTRAINT `Task_Id` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
+  CONSTRAINT `Task_Id` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `TaskTakers`
+-- Dumping data for table `tasksestimatetworkhours`
 --
 
-DROP TABLE IF EXISTS `TaskTakers`;
+LOCK TABLES `tasksestimatetworkhours` WRITE;
+/*!40000 ALTER TABLE `tasksestimatetworkhours` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tasksestimatetworkhours` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tasktakers`
+--
+
+DROP TABLE IF EXISTS `tasktakers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `TaskTakers` (
+CREATE TABLE `tasktakers` (
   `Task_Id` int NOT NULL,
   `Employee_Id` int NOT NULL,
   PRIMARY KEY (`Employee_Id`,`Task_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
-  CONSTRAINT `Employee_Id_FK` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
-  CONSTRAINT `Task_Id_FK` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
+  CONSTRAINT `Employee_Id_FK` FOREIGN KEY (`Employee_Id`) REFERENCES `employees` (`Employee_Id`),
+  CONSTRAINT `Task_Id_FK` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tasktakers`
+--
+
+LOCK TABLES `tasktakers` WRITE;
+/*!40000 ALTER TABLE `tasktakers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tasktakers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'alphasolutions'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -242,4 +359,4 @@ CREATE TABLE `TaskTakers` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01  9:53:49
+-- Dump completed on 2020-12-01 16:30:52

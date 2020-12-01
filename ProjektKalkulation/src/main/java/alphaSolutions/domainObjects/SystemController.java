@@ -33,4 +33,29 @@ public class SystemController {
     public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
         return facade.getSubProjectBasedOnProjectID(id);
     }
+
+    public SubProject getSubProject(int id) {
+        return facade.getSubProject(id);
+    }
+
+    public Task createTask(Task task) {
+        facade.createTask(task);
+        return task;
+    }
+
+    public ArrayList<Task> getTasksBasedOnSubProjectID(int id) {
+        return facade.getTasksBasedOnSubProjectID(id);
+    }
+
+    public Task getTask(int id) {
+        return facade.getTask(id);
+    }
+
+    public SubTask createSubTask(SubTask subTask) {
+        facade.createSubTask(subTask);
+        return subTask;
+    }
+    public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
+        return facade.getSubTasksBasedOnTaskId(id);
+    }
 }

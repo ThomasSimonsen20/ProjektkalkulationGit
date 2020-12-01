@@ -1,10 +1,8 @@
 package alphaSolutions.domainObjects;
 
-import java.util.ArrayList;
-
 public class SubProject {
 
-    private int subProjectID;
+    private int subProjectId;
     private int projectId;
     private String subProjectName;
     private String subProjectDescription;
@@ -28,8 +26,8 @@ public class SubProject {
     /*----------------------Getters-------------------------------------*/
     /*------------------------------------------------------------------*/
 
-    public int getSubProjectID() {
-        return subProjectID;
+    public int getSubProjectId() {
+        return subProjectId;
     }
 
     public String getSubProjectName() {
@@ -53,8 +51,8 @@ public class SubProject {
         this.projectId = projectId;
     }
 
-    public void setSubProjectID(int subProjectID) {
-        this.subProjectID = subProjectID;
+    public void setSubProjectId(int subProjectId) {
+        this.subProjectId = subProjectId;
     }
 
     public void setSubProjectName(String subProjectName) {

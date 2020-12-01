@@ -3,18 +3,22 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>subProjects</title>
 </head>
 <body>
+
+<h1>ALLE SUBPROJEKTER SIDEN</h1>
+
 <div>
     <a href="/createSubProject">Create Subproject</a>
 </div>
 
 <div th:each="subProject : ${subProject}">
-    <br>
     <div style="background: aqua; width: 75px">
+        <a th:href="@{/task(id=${subProject.getSubProjectId})}">
             <p th:text="${subProject.getSubProjectName()}"><br></p>
             <p th:text="${subProject.getSubProjectDescription()}"></p>
+        </a>
     </div>
     <br>
 </div>

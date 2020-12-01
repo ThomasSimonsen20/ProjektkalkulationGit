@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+
+<h1>ALLE SUBTASKS SIDEN</h1>
+
+<div>
+    <a href="/createSubTask">Create subTask</a>
+</div>
+
+<div th:each="subTasks : ${subTasks}">
+    <div style="background: aqua; width: 75px">
+        <p th:text="${subTasks.getSubTaskDescription()}"><br></p>
+    </div>
+    <br>
+</div>
+
+
+</body>
+</html>
