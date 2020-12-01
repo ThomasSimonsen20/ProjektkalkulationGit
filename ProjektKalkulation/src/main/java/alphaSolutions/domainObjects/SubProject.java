@@ -8,8 +8,7 @@ public class SubProject {
     private int projectId;
     private String subProjectName;
     private String subProjectDescription;
-    private ArrayList<Task> tasks = new ArrayList<>();
-    //private Organizer organizer = new Organizer();
+
 
 
     /*------------------------------------------------------------------*/
@@ -20,7 +19,6 @@ public class SubProject {
         this.projectId = projectId;
         this.subProjectName = subProjectName;
         this.subProjectDescription = subProjectDescription;
-        //organizer.
     }
 
     public SubProject() {
@@ -71,7 +69,4 @@ public class SubProject {
     /*----------------------Adders--------------------------------------*/
     /*------------------------------------------------------------------*/
 
-    public void addTaskToList(Task t){
-        tasks.add(t);
-    }
 }

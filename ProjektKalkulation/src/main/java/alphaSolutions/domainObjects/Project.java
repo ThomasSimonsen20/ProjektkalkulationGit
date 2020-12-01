@@ -7,7 +7,6 @@ public class Project {
     private int projectId;
     private String projectName;
     private String projectDescription;
-    private ArrayList<SubProject> subProjects = new ArrayList<>();
 
 
     /*------------------------------------------------------------------*/
@@ -57,9 +56,5 @@ public class Project {
     /*------------------------------------------------------------------*/
     /*----------------------Adders--------------------------------------*/
     /*------------------------------------------------------------------*/
-
-    public void addSubProjectToList(SubProject sP){
-        subProjects.add(sP);
-    }
 
 }
