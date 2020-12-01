@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Project</title>
+</head>
+<body>
+
+<form name="createSubProject" action="/createSubProject/submit" method="post">
+    <label>Subproject Name:</label>
+    <input type="text" name="subProjectName" required>
+    <label>Subproject Description:</label>
+    <input type="text" name="subProjectDescription" required>
+    <button type="submit">Create</button>
+</form>
+
+</body>
+</html>

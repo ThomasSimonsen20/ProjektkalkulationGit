@@ -54,6 +54,27 @@ public class MyController {
         return "subProjects";
     }
 
+    @GetMapping("/createSubProject")
+    public String createSubProject() {
+        return "createSubProject";
+    }
+
+    @PostMapping("/createSubProject/submit")
+    public String createSubProjectSubmit(WebRequest request, SubProject subProject){
+        Project project = (Project) request.getAttribute("Project",WebRequest.SCOPE_SESSION);
+
+        String subProjectName = request.getParameter("subProjectName");
+        String subProjectDescription = request.getParameter("subProjectDescription");
+
+        //subProject.setProjectId(project.getProjectId());
+        subProject.setSubProjectName(subProjectName);
+        subProject.setSubProjectDescription(subProjectDescription);
+
+        systemController.createSubProject(subProject);
+
+        return "redirect:/subProjects";
+    }
+
     private void projectSessionInfo(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
     }
