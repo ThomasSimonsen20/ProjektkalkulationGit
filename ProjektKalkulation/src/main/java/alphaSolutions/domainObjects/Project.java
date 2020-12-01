@@ -15,14 +15,6 @@ public class Project {
     public Project() {
     }
 
-    /*
-    public Project(int projectId, String projectName, String projectDescription) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.projectDescription = projectDescription;
-    }
-
- */
 
     public int getProjectId() {
         return projectId;

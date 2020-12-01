@@ -20,13 +20,12 @@ public class MyController {
     }
 
     @GetMapping("/createProject")
-    public String createProject(Model model, Project project) {
-       // model.addAttribute("project", project);
+    public String createProject() {
         return "createProject";
     }
 
     @GetMapping("/allProjects")
-    public String allProjects(Model model, WebRequest request) {
+    public String allProjects(Model model) {
         model.addAttribute("Project", systemController.getAllProjects());
         return "allProjects";
     }
@@ -44,14 +43,15 @@ public class MyController {
         return "redirect:/allProjects";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/subProject")
     public String test(@RequestParam("id") int idProject,Model model, WebRequest request) {
         Project currentProject = systemController.getProject(idProject);
         projectSessionInfo(request, currentProject);
 
         model.addAttribute("Project", currentProject);
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(idProject));
 
-        return "/projectFileTest";
+        return "subProjects";
     }
 
     private void projectSessionInfo(WebRequest request, Project project) {

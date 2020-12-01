@@ -24,4 +24,13 @@ public class SystemController {
     public Project getProject(int id) {
         return facade.getProject(id);
     }
+
+    public SubProject createSubProject(SubProject subProject) {
+        facade.createSubProject(subProject);
+        return subProject;
+    }
+
+    public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
+        return facade.getSubProjectBasedOnProjectID(id);
+    }
 }
