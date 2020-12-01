@@ -25,8 +25,8 @@ public class SystemController {
         return facade.getProject(id);
     }
 
-    public SubProject createSubProject(SubProject subProject) {
-        facade.createSubProject(subProject);
+    public SubProject createSubProject(SubProject subProject, int projectId) {
+        facade.createSubProject(subProject, projectId);
         return subProject;
     }
 

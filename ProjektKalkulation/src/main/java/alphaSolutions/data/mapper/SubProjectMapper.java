@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class SubProjectMapper {
 
-    public void createSubProject(SubProject subProject) {
+    public void createSubProject(SubProject subProject, int projectId) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO subprojects (Project_Id, SubProject_Name, SubProject_Description) VALUES (?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, subProject.getProjectId());
+            ps.setInt(1, projectId);
             ps.setString(2, subProject.getSubProjectName());
             ps.setString(3, subProject.getSubProjectDescription());
             ps.executeUpdate();

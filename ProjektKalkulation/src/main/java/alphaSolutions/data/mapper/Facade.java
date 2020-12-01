@@ -23,8 +23,8 @@ public class Facade {
         return projectMapper.getProject(id);
     }
 
-    public SubProject createSubProject(SubProject subProject) {
-        subProjectMapper.createSubProject(subProject);
+    public SubProject createSubProject(SubProject subProject, int projectId) {
+        subProjectMapper.createSubProject(subProject, projectId);
         return subProject;
     }
 
