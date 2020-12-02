@@ -60,6 +60,29 @@ public class MyController {
         return "redirect:/allProjects";
     }
 
+    @GetMapping("/updateProject")
+    public String updateProject(@RequestParam("id") int idProject, WebRequest request) {
+        Project currentProject = systemController.getProject(idProject);
+        projectSessionInfo(request, currentProject);
+        return "updateProject";
+    }
+
+    @PostMapping("/updateProject/submit")
+    public String updateProjectSubmit(Model model, WebRequest request) {
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
+
+        String projectName = request.getParameter("projectName");
+        String projectDescription = request.getParameter("projectDescription");
+
+        project.setProjectName(projectName);
+        project.setProjectDescription(projectDescription);
+
+        systemController.updateProject(project);
+
+        return "redirect:/allProjects";
+    }
+
+
     @GetMapping("/subProject")
     public String subProject(@RequestParam("id") int idProject, Model model, WebRequest request) {
         Project currentProject = systemController.getProject(idProject);

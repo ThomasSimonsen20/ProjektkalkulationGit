@@ -83,4 +83,9 @@ public class SystemController {
     public ArrayList<String> getSkillsForCertainEmployee(int employeeId) {
         return facade.getSkillsForCertainEmployee(employeeId);
     }
+
+    public Project updateProject(Project project) {
+        facade.updateProject(project);
+        return project;
+    }
 }

@@ -2,6 +2,7 @@ package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.Project;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -72,6 +73,24 @@ public class ProjectMapper {
             ex.printStackTrace();
         }
         return project;
+    }
+
+    public void updateProject(Project project) {
+        try {
+            Connection con = DBManager.getConnection();
+            /*String SQL = "ALTER TABLE `projects` ADD CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `subprojects` (`Project_Id`);" +
+                    "REPLACE INTO projects (Project_Id, Project_Name, Project_Description) VALUES (?,?,?)";
+
+             */
+            String SQL = "REPLACE INTO projects (Project_Id, Project_Name, Project_Description) VALUES (?,?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, project.getProjectId());
+            ps.setString(2, project.getProjectName());
+            ps.setString(3, project.getProjectDescription());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
