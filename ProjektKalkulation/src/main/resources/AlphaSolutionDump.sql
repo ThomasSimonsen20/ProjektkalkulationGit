@@ -103,7 +103,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `Projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `projects` (
+CREATE TABLE `Projects` (
   `Project_Id` int NOT NULL AUTO_INCREMENT,
   `Project_Name` varchar(100) NOT NULL,
   `Project_Description` varchar(500) DEFAULT NULL,
@@ -342,7 +342,7 @@ CREATE TABLE `TaskTakers` (
 --
 
 LOCK TABLES `TaskTakers` WRITE;
-/*!40000 ALTER TABLE `TaskTakers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `TaskTakers` DISABLqE KEYS */;
 /*!40000 ALTER TABLE `TaskTakers` ENABLE KEYS */;
 UNLOCK TABLES;
 
