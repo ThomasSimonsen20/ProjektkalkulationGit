@@ -25,10 +25,8 @@
 <table>
     <tbody class="tbody">
     <tr class="tr" th:each="employee : ${Staff}">
-        <td class="name-and-age" th:text="${employee.getFirstName()} + ', ' + ${employee.getLastName()}"> NAME & AGE </td>
-        <td>
-            <a th:href="@{/addtofavorites(id=${user.getId()})}" class="btn">Tilføj Favorit</a> <!-- http://www.thymeleaf.org/doc/articles/standardurlsyntax.html -->
-        </td>
+        <td th:text="${employee.getFirstName()} + ', ' + ${employee.getLastName()}"> NAME & AGE </td>
+        <td th:text="${employee.getFirstName()} + ', ' + ${employee.getLastName()}"></td>
         </th:block>
     </tr>
     </tbody>

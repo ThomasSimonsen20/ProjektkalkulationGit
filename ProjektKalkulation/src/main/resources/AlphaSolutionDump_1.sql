@@ -38,6 +38,7 @@ CREATE TABLE `Employee_Skills` (
 
 LOCK TABLES `Employee_Skills` WRITE;
 /*!40000 ALTER TABLE `Employee_Skills` DISABLE KEYS */;
+INSERT INTO `Employee_Skills` VALUES (5,1),(10,1),(1,2),(1,3),(2,3),(9,3),(3,5),(1,6),(5,6),(6,8),(4,9),(7,9),(8,10),(10,10);
 /*!40000 ALTER TABLE `Employee_Skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +137,7 @@ CREATE TABLE `Skills` (
   PRIMARY KEY (`Skill_Id`),
   UNIQUE KEY `Skill_Id_UNIQUE` (`Skill_Id`),
   KEY `_idx` (`Skill_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +146,7 @@ CREATE TABLE `Skills` (
 
 LOCK TABLES `Skills` WRITE;
 /*!40000 ALTER TABLE `Skills` DISABLE KEYS */;
+INSERT INTO `Skills` VALUES (1,'Mac IOS'),(2,'BackEnd'),(3,'FrontEnd'),(4,'Android'),(5,'Linux'),(6,'JUnit Tests'),(7,'CSS'),(8,'HTML'),(9,'Windows'),(10,'ThymeLeaf');
 /*!40000 ALTER TABLE `Skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,4 +358,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-02  9:59:36
+-- Dump completed on 2020-12-02 13:41:51
