@@ -73,6 +73,6 @@ public class Employee {
     }
 
     public void setSkills (int employeeId){
-        this.skills = systemController.getSkillsForCertainEmployee(this.employeeId);
+        this.skills = systemController.getSkillsForCertainEmployee(employeeId);
     }
 }
