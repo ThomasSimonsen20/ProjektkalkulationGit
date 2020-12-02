@@ -68,9 +68,10 @@ public class EmployeesMapper {
         ArrayList<String> skills = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "Select Skill_Description" +
-                    "FROM Employee_Skills" +
-                    "LEFT JOIN Skills ON Employee_Skills.Skill_Id = Skills.Skill_Id" +
+
+            String SQL = "Select Skill_Description\n" +
+                    "FROM Employee_Skills\n" +
+                    "LEFT JOIN Skills ON Employee_Skills.Skill_Id = Skills.Skill_Id\n" +
                     "WHERE Employee_Id = ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, id);
