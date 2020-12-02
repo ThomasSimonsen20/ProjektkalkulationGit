@@ -79,4 +79,9 @@ public class SystemController {
     public Employee getEmployee(int employeeId) {
         return facade.getEmployee(employeeId);
     }
+
+    public Project updateProject(Project project) {
+        facade.updateProject(project);
+        return project;
+    }
 }

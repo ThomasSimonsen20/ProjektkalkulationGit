@@ -67,4 +67,9 @@ public class Facade {
     public Employee getEmployee(int employeeId) {
         return employeesMapper.getEmployee(employeeId);
     }
+
+    public Project updateProject(Project project) {
+        projectMapper.updateProject(project);
+        return project;
+    }
 }
