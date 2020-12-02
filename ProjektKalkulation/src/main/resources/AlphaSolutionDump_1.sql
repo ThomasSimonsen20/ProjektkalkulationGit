@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
--- Host: 127.0.0.1    Database: alphasolutions
+-- Host: 127.0.0.1    Database: AlphaSolutions
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `employee_skills`
+-- Table structure for table `Employee_Skills`
 --
 
 DROP TABLE IF EXISTS `Employee_Skills`;
@@ -33,7 +33,7 @@ CREATE TABLE `Employee_Skills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `employee_skills`
+-- Dumping data for table `Employee_Skills`
 --
 
 LOCK TABLES `Employee_Skills` WRITE;
@@ -42,7 +42,7 @@ LOCK TABLES `Employee_Skills` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `employees`
+-- Table structure for table `Employees`
 --
 
 DROP TABLE IF EXISTS `Employees`;
@@ -57,20 +57,21 @@ CREATE TABLE `Employees` (
   PRIMARY KEY (`Employee_Id`),
   UNIQUE KEY `Employee_Id_UNIQUE` (`Employee_Id`),
   UNIQUE KEY `Employee_Number_UNIQUE` (`Employee_Number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `employees`
+-- Dumping data for table `Employees`
 --
 
 LOCK TABLES `Employees` WRITE;
 /*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
+INSERT INTO `Employees` VALUES (1,'Søren','Sørensen',NULL,1234),(2,'Mike','Jensen',NULL,3411),(3,'Sean','Pearsen',NULL,5622),(4,'Ole','Henriksen',NULL,7611),(5,'Michael','Henningensen',NULL,6533),(6,'Ulla','Mogensen',NULL,8766),(7,'Sabine','Sleif',NULL,1223),(8,'Trine','Poulsen',NULL,4352),(9,'Magrethe','Egebo',NULL,3244),(10,'Stine','Arresø',NULL,4322);
 /*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `projectparcipitants`
+-- Table structure for table `ProjectParcipitants`
 --
 
 DROP TABLE IF EXISTS `ProjectParcipitants`;
@@ -88,7 +89,7 @@ CREATE TABLE `ProjectParcipitants` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `projectparcipitants`
+-- Dumping data for table `ProjectParcipitants`
 --
 
 LOCK TABLES `ProjectParcipitants` WRITE;
@@ -97,7 +98,7 @@ LOCK TABLES `ProjectParcipitants` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `projects`
+-- Table structure for table `Projects`
 --
 
 DROP TABLE IF EXISTS `Projects`;
@@ -109,21 +110,21 @@ CREATE TABLE `Projects` (
   `Project_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Project_Id`),
   UNIQUE KEY `Project_Id_UNIQUE` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `projects`
+-- Dumping data for table `Projects`
 --
 
 LOCK TABLES `Projects` WRITE;
 /*!40000 ALTER TABLE `Projects` DISABLE KEYS */;
-INSERT INTO `Projects` VALUES (7,'Alpha Solution','Skal lave kalkulationsværktøj');
+INSERT INTO `Projects` VALUES (7,'Alpha Solution','Skal lave kalkulationsværktøj'),(8,'Project 2','Project 2 descrip');
 /*!40000 ALTER TABLE `Projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `skills`
+-- Table structure for table `Skills`
 --
 
 DROP TABLE IF EXISTS `Skills`;
@@ -139,7 +140,7 @@ CREATE TABLE `Skills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `skills`
+-- Dumping data for table `Skills`
 --
 
 LOCK TABLES `Skills` WRITE;
@@ -148,7 +149,7 @@ LOCK TABLES `Skills` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subprojects`
+-- Table structure for table `Subprojects`
 --
 
 DROP TABLE IF EXISTS `Subprojects`;
@@ -163,21 +164,21 @@ CREATE TABLE `Subprojects` (
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   KEY `Project_Id_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subprojects`
+-- Dumping data for table `Subprojects`
 --
 
 LOCK TABLES `Subprojects` WRITE;
 /*!40000 ALTER TABLE `Subprojects` DISABLE KEYS */;
-INSERT INTO `Subprojects` VALUES (22,7,'Loginshit','lav loginshit');
+INSERT INTO `Subprojects` VALUES (22,7,'Loginshit','lav loginshit'),(23,8,'SubProject 2','SubProject 2 Descrip');
 /*!40000 ALTER TABLE `Subprojects` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subprojectsestimatetworkhours`
+-- Table structure for table `SubprojectsEstimatetWorkHours`
 --
 
 DROP TABLE IF EXISTS `SubprojectsEstimatetWorkHours`;
@@ -195,7 +196,7 @@ CREATE TABLE `SubprojectsEstimatetWorkHours` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subprojectsestimatetworkhours`
+-- Dumping data for table `SubprojectsEstimatetWorkHours`
 --
 
 LOCK TABLES `SubprojectsEstimatetWorkHours` WRITE;
@@ -204,7 +205,7 @@ LOCK TABLES `SubprojectsEstimatetWorkHours` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subtaskestimatetworkhours`
+-- Table structure for table `SubtaskEstimatetWorkHours`
 --
 
 DROP TABLE IF EXISTS `SubtaskEstimatetWorkHours`;
@@ -222,7 +223,7 @@ CREATE TABLE `SubtaskEstimatetWorkHours` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subtaskestimatetworkhours`
+-- Dumping data for table `SubtaskEstimatetWorkHours`
 --
 
 LOCK TABLES `SubtaskEstimatetWorkHours` WRITE;
@@ -231,7 +232,7 @@ LOCK TABLES `SubtaskEstimatetWorkHours` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subtasks`
+-- Table structure for table `Subtasks`
 --
 
 DROP TABLE IF EXISTS `Subtasks`;
@@ -248,21 +249,21 @@ CREATE TABLE `Subtasks` (
   KEY `Project_Id_ST_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subtasks`
+-- Dumping data for table `Subtasks`
 --
 
 LOCK TABLES `Subtasks` WRITE;
 /*!40000 ALTER TABLE `Subtasks` DISABLE KEYS */;
-INSERT INTO `Subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7);
+INSERT INTO `Subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8);
 /*!40000 ALTER TABLE `Subtasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tasks`
+-- Table structure for table `Tasks`
 --
 
 DROP TABLE IF EXISTS `Tasks`;
@@ -280,21 +281,21 @@ CREATE TABLE `Tasks` (
   KEY `Project_Id_Tasks_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tasks`
+-- Dumping data for table `Tasks`
 --
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit');
+INSERT INTO `Tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit'),(9,8,23,'Task 2','Task 2 Descrip');
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tasksestimatetworkhours`
+-- Table structure for table `TasksEstimatetWorkHours`
 --
 
 DROP TABLE IF EXISTS `TasksEstimatetWorkHours`;
@@ -312,7 +313,7 @@ CREATE TABLE `TasksEstimatetWorkHours` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tasksestimatetworkhours`
+-- Dumping data for table `TasksEstimatetWorkHours`
 --
 
 LOCK TABLES `TasksEstimatetWorkHours` WRITE;
@@ -321,7 +322,7 @@ LOCK TABLES `TasksEstimatetWorkHours` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tasktakers`
+-- Table structure for table `TaskTakers`
 --
 
 DROP TABLE IF EXISTS `TaskTakers`;
@@ -338,17 +339,13 @@ CREATE TABLE `TaskTakers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tasktakers`
+-- Dumping data for table `TaskTakers`
 --
 
 LOCK TABLES `TaskTakers` WRITE;
 /*!40000 ALTER TABLE `TaskTakers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `TaskTakers` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'alphasolutions'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -359,4 +356,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 16:30:52
+-- Dump completed on 2020-12-02  9:59:36

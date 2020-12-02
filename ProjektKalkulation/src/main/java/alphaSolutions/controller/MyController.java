@@ -26,6 +26,22 @@ public class MyController {
         return "allProjects";
     }
 
+    @GetMapping("/staffOverview")
+    public String staffOverview(Model model) {
+        model.addAttribute("Staff", systemController.getAllStaff());
+        return "staffOverview";
+    }
+
+    @GetMapping("/employee")
+    public String employee(@RequestParam("id") int employeeId, Model model, WebRequest request) {
+        Employee currentEmployee = systemController.getEmployee(employeeId);
+        employeeSessionInfo(request, currentEmployee);
+
+        model.addAttribute("Employee", currentEmployee);
+
+        return "employee";
+    }
+
     @GetMapping("/createProject")
     public String createProject() {
         return "createProject";
@@ -161,5 +177,9 @@ public class MyController {
 
     private void taskSessionInfo(WebRequest request, Task task) {
         request.setAttribute("task", task, WebRequest.SCOPE_SESSION);
+    }
+
+    private void employeeSessionInfo(WebRequest request, Employee employee) {
+        request.setAttribute("employee", employee, WebRequest.SCOPE_SESSION);
     }
 }

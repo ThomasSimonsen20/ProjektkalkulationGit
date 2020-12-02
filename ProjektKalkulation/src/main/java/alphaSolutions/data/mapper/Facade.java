@@ -1,9 +1,6 @@
 package alphaSolutions.data.mapper;
 
-import alphaSolutions.domainObjects.Project;
-import alphaSolutions.domainObjects.SubProject;
-import alphaSolutions.domainObjects.SubTask;
-import alphaSolutions.domainObjects.Task;
+import alphaSolutions.domainObjects.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +10,7 @@ public class Facade {
     private SubProjectMapper subProjectMapper = new SubProjectMapper();
     private TaskMapper taskMapper = new TaskMapper();
     private SubTaskMapper subTaskMapper = new SubTaskMapper();
+    private EmployeesMapper employeesMapper = new EmployeesMapper();
 
     public Project createProject(Project project) {
         projectMapper.createProject(project);
@@ -60,5 +58,13 @@ public class Facade {
 
     public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
         return subTaskMapper.getSubTasksBasedOnTaskId(id);
+    }
+
+    public ArrayList<Employee> getAllStaff() {
+        return employeesMapper.getAllStaff();
+    }
+
+    public Employee getEmployee(int employeeId) {
+        return employeesMapper.getEmployee(employeeId);
     }
 }

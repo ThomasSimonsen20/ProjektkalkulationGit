@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Overview</title>
+    <link th:href="@{/styles/home.css}" rel="stylesheet">
+</head>
+<body>
+<h1>Staff Page</h1>
+
+<br>
+
+<!--
+<div th:each="employee : ${Staff}">
+    <div style="background: aqua; width: 75px">
+        <a th:href="@{/employee(id=${employee.getEmployeeId()})}">
+            <p th:utext="${employee.getFirstName()} + ${employee.getLastName()}"></p>
+            <p th:utext="${employee.getEmployeeNumber()}"></p>
+        </a>
+    </div>
+</div>
+-->
+
+<table>
+    <tbody class="tbody">
+    <tr class="tr" th:each="employee : ${Staff}">
+        <td class="name-and-age" th:text="${employee.getFirstName()} + ', ' + ${employee.getLastName()}"> NAME & AGE </td>
+        <td>
+            <a th:href="@{/addtofavorites(id=${user.getId()})}" class="btn">Tilføj Favorit</a> <!-- http://www.thymeleaf.org/doc/articles/standardurlsyntax.html -->
+        </td>
+        </th:block>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

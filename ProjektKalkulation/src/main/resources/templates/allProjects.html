@@ -13,17 +13,19 @@
     <a href="/createProject">Create Project</a>
 </div>
 
-<div th:each="project : ${Project}">
-    <br>
+<div>
+    <a href="/staffOverview" >Staff Overview</a>
+</div>
 
+<br>
+
+<div th:each="project : ${Project}">
     <div style="background: aqua; width: 75px">
         <a th:href="@{/subProject(id=${project.getProjectId()})}">
     <p th:text="${project.getProjectName()}"><br></p>
     <p th:text="${project.getProjectDescription()}"></p>
         </a>
     </div>
-
-    <br>
 </div>
 
 </body>

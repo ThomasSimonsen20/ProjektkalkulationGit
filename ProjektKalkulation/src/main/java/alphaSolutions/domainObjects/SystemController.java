@@ -8,14 +8,41 @@ public class SystemController {
 
     private final Facade facade;
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Constructors--------------------------------*/
+    /*------------------------------------------------------------------*/
+
     public SystemController(Facade facade) {
         this.facade = facade;
     }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Creators-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public Project createProject(Project project) {
         facade.createProject(project);
         return project;
     }
+
+    public SubProject createSubProject(SubProject subProject, int projectId) {
+        facade.createSubProject(subProject, projectId);
+        return subProject;
+    }
+
+    public Task createTask(Task task) {
+        facade.createTask(task);
+        return task;
+    }
+
+    public SubTask createSubTask(SubTask subTask) {
+        facade.createSubTask(subTask);
+        return subTask;
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public ArrayList<Project> getAllProjects() {
         return facade.getAllProjects();
@@ -23,11 +50,6 @@ public class SystemController {
 
     public Project getProject(int id) {
         return facade.getProject(id);
-    }
-
-    public SubProject createSubProject(SubProject subProject, int projectId) {
-        facade.createSubProject(subProject, projectId);
-        return subProject;
     }
 
     public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
@@ -38,11 +60,6 @@ public class SystemController {
         return facade.getSubProject(id);
     }
 
-    public Task createTask(Task task) {
-        facade.createTask(task);
-        return task;
-    }
-
     public ArrayList<Task> getTasksBasedOnSubProjectID(int id) {
         return facade.getTasksBasedOnSubProjectID(id);
     }
@@ -51,11 +68,15 @@ public class SystemController {
         return facade.getTask(id);
     }
 
-    public SubTask createSubTask(SubTask subTask) {
-        facade.createSubTask(subTask);
-        return subTask;
-    }
     public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
         return facade.getSubTasksBasedOnTaskId(id);
+    }
+
+    public ArrayList<Employee> getAllStaff() {
+        return facade.getAllStaff();
+    }
+
+    public Employee getEmployee(int employeeId) {
+        return facade.getEmployee(employeeId);
     }
 }
