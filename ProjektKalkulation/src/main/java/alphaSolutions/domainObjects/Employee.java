@@ -1,11 +1,19 @@
 package alphaSolutions.domainObjects;
 
+import alphaSolutions.data.mapper.Facade;
+
+import java.util.ArrayList;
+
 public class Employee {
 
     private int employeeId;
     private String firstName;
     private String lastName;
     private int employeeNumber;
+    private ArrayList<String> skills = new ArrayList<>();
+
+    private SystemController systemController = new SystemController(new Facade());
+
 
     /*------------------------------------------------------------------*/
     /*----------------------Constructors--------------------------------*/
@@ -15,6 +23,7 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeNumber = employeeNumber;
+
     }
 
     public Employee() {
@@ -40,6 +49,9 @@ public class Employee {
         return employeeId;
     }
 
+    public ArrayList<String> getSkills(){
+        return skills;
+    }
     /*------------------------------------------------------------------*/
     /*----------------------Setters-------------------------------------*/
     /*------------------------------------------------------------------*/
@@ -58,5 +70,9 @@ public class Employee {
 
     public void setEmployeeNumber(int employeeNumber) {
         this.employeeNumber = employeeNumber;
+    }
+
+    public void setSkills (int employeeId){
+        this.skills = systemController.getSkillsForCertainEmployee(this.employeeId);
     }
 }

@@ -27,6 +27,7 @@ public class EmployeesMapper {
                 String lastName = rs.getString("Last_Name");
                 Employee employee = new Employee(firstName, lastName, employeeNumber);
                 employee.setEmployeeId(employeeId);
+                employee.setSkills(employeeId);
                 employeeList.add(employee);
             }
 
@@ -61,5 +62,25 @@ public class EmployeesMapper {
             ex.printStackTrace();
         }
         return employee;
+    }
+
+    public ArrayList<String> getSkillsForCertainEmployee(int id) {
+        ArrayList<String> skills = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "Select Skill_Description" +
+                    "FROM Employee_Skills" +
+                    "LEFT JOIN Skills ON Employee_Skills.Skill_Id = Skills.Skill_Id" +
+                    "WHERE Employee_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                skills.add(rs.getString("Skill_Description"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return skills;
     }
 }

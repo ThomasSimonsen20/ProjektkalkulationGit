@@ -67,4 +67,8 @@ public class Facade {
     public Employee getEmployee(int employeeId) {
         return employeesMapper.getEmployee(employeeId);
     }
+
+    public ArrayList<String> getSkillsForCertainEmployee(int employeeId) {
+        return employeesMapper.getSkillsForCertainEmployee(employeeId);
+    }
 }

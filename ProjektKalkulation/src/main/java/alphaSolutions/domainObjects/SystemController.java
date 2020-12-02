@@ -79,4 +79,8 @@ public class SystemController {
     public Employee getEmployee(int employeeId) {
         return facade.getEmployee(employeeId);
     }
+
+    public ArrayList<String> getSkillsForCertainEmployee(int employeeId) {
+        return facade.getSkillsForCertainEmployee(employeeId);
+    }
 }

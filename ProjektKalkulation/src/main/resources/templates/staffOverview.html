@@ -25,8 +25,7 @@
 <table>
     <tbody class="tbody">
     <tr class="tr" th:each="employee : ${Staff}">
-        <td th:text="${employee.getFirstName()} + ', ' + ${employee.getLastName()}"> NAME & AGE </td>
-        <td th:text="${employee.getFirstName()} + ', ' + ${employee.getLastName()}"></td>
+        <td th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"> NAME & AGE </td>
         </th:block>
     </tr>
     </tbody>
