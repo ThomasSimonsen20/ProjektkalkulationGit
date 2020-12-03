@@ -1,0 +1,6 @@
+1. Ret edit funktioner. THOMAS
+2. Opdater database til at håndtere afhængigheder imellem tasks. SIMON
+3. Lav visning af afhængigheder imellem tasks i html'en.
+4. Indsæt tid på Employees i DB. (så vi kan se hvor meget tid de har til rådighed). Opdater evt struktur i DB
+5. Visning af tid til rådighed på allStaff.html
+6. Lav en måde at editere subProject, Task og Subtask så man kan indsætte et tidsestimat. Skal både kunne gøre når man opretter (Default: 0) og efter man har oprettet.

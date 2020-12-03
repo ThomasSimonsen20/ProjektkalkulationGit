@@ -23,10 +23,10 @@
 -->
 
 
-<table>
+<table >
     <tbody class="tbody">
     <tr class="tr" th:each="employee : ${Staff}">
-        <td th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"> NAME & AGE </td>
+        <th th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"> NAME & AGE </th>
         <td th:each="skills : ${employee.getSkills()}" th:text="${skills}"></td>
         </th:block>
     </tr>
