@@ -32,6 +32,7 @@ public class SubProjectMapper {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM subprojects WHERE Project_Id = ?";
+
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
@@ -43,6 +44,7 @@ public class SubProjectMapper {
                 String subProjectDescription = rs.getString("SubProject_Description");
                 SubProject subProject = new SubProject(projectId, subProjectName, subProjectDescription);
                 subProject.setSubProjectId(subProjectID);
+                subProject.setEstimatetWorkHours(getSubProjectEstimatetWorkHours(subProject.getSubProjectId()));
                 subProjectList.add(subProject);
             }
 
@@ -92,5 +94,46 @@ public class SubProjectMapper {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void setSubProjectEstimatetWorkHours(SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subProject.getSubProjectId());
+            ps.setDouble(2, subProject.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            subProject.setSubProjectEWHId(id);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public double getSubProjectEstimatetWorkHours(int id) {
+        Double estimatetWorkHours = 0.0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT SubprojectsEstimatetWorkHours.EstimatetWorkHours\n" +
+                    "FROM SubprojectsEstimatetWorkHours\n" +
+                    "WHERE SubprojectsEstimatetWorkHours.SubProject_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                estimatetWorkHours = rs.getDouble("EstimatetWorkHours");
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return estimatetWorkHours;
     }
 }

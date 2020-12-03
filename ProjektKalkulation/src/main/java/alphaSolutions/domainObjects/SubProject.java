@@ -6,6 +6,8 @@ public class SubProject {
     private int projectId;
     private String subProjectName;
     private String subProjectDescription;
+    private double EstimatetWorkHours;
+    private int subProjectEWHId;
 
 
 
@@ -42,6 +44,13 @@ public class SubProject {
         return subProjectDescription;
     }
 
+    public double getEstimatetWorkHours() {
+        return EstimatetWorkHours;
+    }
+
+    public int getSubProjectEWHId() {
+        return subProjectEWHId;
+    }
 
     /*------------------------------------------------------------------*/
     /*----------------------Setters-------------------------------------*/
@@ -61,6 +70,14 @@ public class SubProject {
 
     public void setSubProjectDescription(String subProjectDescription) {
         this.subProjectDescription = subProjectDescription;
+    }
+
+    public void setEstimatetWorkHours(double estimatetWorkHours) {
+        EstimatetWorkHours = estimatetWorkHours;
+    }
+
+    public void setSubProjectEWHId(int subProjectEWHId) {
+        this.subProjectEWHId = subProjectEWHId;
     }
 
     /*------------------------------------------------------------------*/

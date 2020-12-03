@@ -40,6 +40,11 @@ public class SystemController {
         return subTask;
     }
 
+    public SubProject setSubProjectEstimatetWorkHours(SubProject subProject) {
+        facade.setSubProjectEstimatetWorkHours(subProject);
+        return subProject;
+    }
+
     /*------------------------------------------------------------------*/
     /*----------------------Getters-------------------------------------*/
     /*------------------------------------------------------------------*/

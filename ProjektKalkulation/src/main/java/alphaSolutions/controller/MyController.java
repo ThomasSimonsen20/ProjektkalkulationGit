@@ -106,11 +106,14 @@ public class MyController {
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
+        String subProjectEstimatetWorkHours = request.getParameter("subProjectEstimatetWorkHours");
 
         subProject.setSubProjectName(subProjectName);
         subProject.setSubProjectDescription(subProjectDescription);
+        subProject.setEstimatetWorkHours(Double.parseDouble(subProjectEstimatetWorkHours));
 
         systemController.createSubProject(subProject, project.getProjectId());
+        systemController.setSubProjectEstimatetWorkHours(subProject);
 
         model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
 
