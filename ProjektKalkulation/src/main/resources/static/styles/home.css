@@ -7,6 +7,11 @@
     margin-right: auto;
 }
 
+.ttable{
+    border-collapse: separate;
+    border-spacing: 20px 10px;
+}
+
 .tbody {
     display: flex;
     justify-content: center;
@@ -14,7 +19,17 @@
     flex-flow: wrap;
 }
 
+.th {
+    text-transform: uppercase;
+    background-color: aquamarine;
+    color: white;
+}
+
 .tr {
+
     display: grid;
     padding-top: 15px;
+    padding: 5px;
+
+
 }
