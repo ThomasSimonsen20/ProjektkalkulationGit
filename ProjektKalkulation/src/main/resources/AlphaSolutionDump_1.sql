@@ -111,7 +111,7 @@ CREATE TABLE `Projects` (
   `Project_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Project_Id`),
   UNIQUE KEY `Project_Id_UNIQUE` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +120,7 @@ CREATE TABLE `Projects` (
 
 LOCK TABLES `Projects` WRITE;
 /*!40000 ALTER TABLE `Projects` DISABLE KEYS */;
-INSERT INTO `Projects` VALUES (7,'Alpha Solution','Skal lave kalkulationsværktøj'),(8,'Project 2','Project 2 descrip');
+INSERT INTO `Projects` VALUES (7,'Alpha Solution','Skal lave kalkulationsværktøj'),(8,'Project 2','Project 2 descrip'),(9,'Project 3','Project 3 descrip');
 /*!40000 ALTER TABLE `Projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `Subprojects` (
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   KEY `Project_Id_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `Subprojects` (
 
 LOCK TABLES `Subprojects` WRITE;
 /*!40000 ALTER TABLE `Subprojects` DISABLE KEYS */;
-INSERT INTO `Subprojects` VALUES (22,7,'Loginshit','lav loginshit'),(23,8,'SubProject 2','SubProject 2 Descrip');
+INSERT INTO `Subprojects` VALUES (22,7,'Loginshit','lav loginshit'),(23,8,'SubProject 2','SubProject 2 Descrip'),(24,9,'SubProject 3','SubProject 3 Descrip');
 /*!40000 ALTER TABLE `Subprojects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +251,7 @@ CREATE TABLE `Subtasks` (
   KEY `Project_Id_ST_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,8 +260,34 @@ CREATE TABLE `Subtasks` (
 
 LOCK TABLES `Subtasks` WRITE;
 /*!40000 ALTER TABLE `Subtasks` DISABLE KEYS */;
-INSERT INTO `Subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8);
+INSERT INTO `Subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8),(6,10,'Subtask 3 Description',9),(7,10,'Subtask 3a Description',9);
 /*!40000 ALTER TABLE `Subtasks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `TaskDependencies`
+--
+
+DROP TABLE IF EXISTS `TaskDependencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `TaskDependencies` (
+  `Task_Id` int NOT NULL,
+  `TaskDependency_Id` int NOT NULL,
+  PRIMARY KEY (`Task_Id`,`TaskDependency_Id`),
+  KEY `Task_Dependency_Id_idx` (`TaskDependency_Id`),
+  CONSTRAINT `Task_Dependency_Id_TD` FOREIGN KEY (`TaskDependency_Id`) REFERENCES `Tasks` (`Task_Id`),
+  CONSTRAINT `Task_Id_TD` FOREIGN KEY (`Task_Id`) REFERENCES `Tasks` (`Task_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `TaskDependencies`
+--
+
+LOCK TABLES `TaskDependencies` WRITE;
+/*!40000 ALTER TABLE `TaskDependencies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `TaskDependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -283,7 +309,7 @@ CREATE TABLE `Tasks` (
   KEY `Project_Id_Tasks_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,7 +318,7 @@ CREATE TABLE `Tasks` (
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit'),(9,8,23,'Task 2','Task 2 Descrip');
+INSERT INTO `Tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit'),(9,8,23,'Task 2','Task 2 Descrip'),(10,9,24,'Task 3','Task 3 Descrip');
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,4 +384,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-02 13:41:51
+-- Dump completed on 2020-12-03 12:43:16
