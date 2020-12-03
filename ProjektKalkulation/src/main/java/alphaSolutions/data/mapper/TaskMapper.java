@@ -84,6 +84,31 @@ public class TaskMapper {
         return task;
     }
 
+    public ArrayList<String> getTaskDependencies(int id) {
+        ArrayList<String> tasksList = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT TaskDependencies.TaskDependency_Id, Tasks.Task_Name\n" +
+                    "FROM TaskDependencies\n" +
+                    "LEFT JOIN Tasks ON TaskDependencies.TaskDependency_Id = Tasks.Task_Id\n" +
+                    "WHERE TaskDependencies.Task_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                //int taskId = rs.getInt("Task_Id");
+                String taskName = rs.getString("Task_Name");
+                tasksList.add(taskName);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return tasksList;
+    }
+
     public void updateTask(Task task) {
         try {
             Connection con = DBManager.getConnection();

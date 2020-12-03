@@ -77,6 +77,10 @@ public class Facade {
         return project;
     }
 
+    public ArrayList<String> getTaskDependencies(int taskId) {
+        return taskMapper.getTaskDependencies(taskId);
+    }
+
     public SubProject updateSubProject(SubProject subProject) {
         subProjectMapper.updateSubProject(subProject);
         return subProject;

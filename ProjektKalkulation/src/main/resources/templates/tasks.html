@@ -12,7 +12,18 @@
     <a href="/createTask">Create Task</a>
 </div>
 
+<table th:each="tasks : ${tasks}">
+    <tbody style="background: aqua; width: 75px">
+    <tr th:href="@{/subTask(id=${tasks.getTaskId()})}">
+        <th th:text="${tasks.getTaskName()}"><br>> NAME & AGE </th>
+        <td th:each="dependentTasksNames : ${tasks.getTaskDependencies()}" th:text="${dependentTasksNames}"></td>
+        <!--  <td th:text="${tasks.getTaskDescription()}"></td>  -->
+    </tr>
+    </tbody>
+</table>
 
+
+<!--
 <div th:each="tasks : ${tasks}">
     <div style="background: aqua; width: 75px">
         <a th:href="@{/subTask(id=${tasks.getTaskId()})}">
@@ -23,6 +34,7 @@
     </div>
     <br>
 </div>
+-->
 
 
 </body>

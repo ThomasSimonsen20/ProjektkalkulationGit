@@ -89,6 +89,10 @@ public class SystemController {
         return project;
     }
 
+    public ArrayList<String> getTaskDependencies(int taskId) {
+        return facade.getTaskDependencies(taskId);
+    }
+
     public SubProject updateSubProject(SubProject subProject) {
         facade.updateSubProject(subProject);
         return subProject;
