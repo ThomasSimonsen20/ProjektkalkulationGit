@@ -52,4 +52,45 @@ public class SubTaskMapper {
         return subTasksList;
     }
 
+    public SubTask getSubTask(int id) {
+        SubTask subTask = new SubTask();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM subtasks WHERE SubTask_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int subTaskId = rs.getInt("SubTask_Id");
+                int taskId = rs.getInt("Task_Id");
+                int projectId = rs.getInt("Project_Id");
+                String subTaskDescription = rs.getString("SubTask_Description");
+
+                subTask.setSubTaskId(subTaskId);
+                subTask.setTaskId(taskId);
+                subTask.setProjectId(projectId);
+                subTask.setSubTaskDescription(subTaskDescription);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return subTask;
+    }
+
+    public void updateSubTask(SubTask subTask) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subtasks SET SubTask_Description = ? WHERE SubTask_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, subTask.getSubTaskDescription());
+            ps.setInt(2, subTask.getSubTaskId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

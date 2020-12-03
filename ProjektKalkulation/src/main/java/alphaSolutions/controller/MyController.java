@@ -68,7 +68,7 @@ public class MyController {
     }
 
     @PostMapping("/updateProject/submit")
-    public String updateProjectSubmit(Model model, WebRequest request) {
+    public String updateProjectSubmit(WebRequest request) {
         Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
 
         String projectName = request.getParameter("projectName");
@@ -117,6 +117,32 @@ public class MyController {
         return "subProjects";
     }
 
+    @GetMapping("/updateSubProject")
+    public String updateSubProject(@RequestParam("id") int idSubProject, WebRequest request) {
+        SubProject currentSubProject = systemController.getSubProject(idSubProject);
+        subProjectSessionInfo(request, currentSubProject);
+        return "updateSubProject";
+    }
+
+    @PostMapping("/updateSubProject/submit")
+    public String updateSubProjectSubmit(WebRequest request, Model model) {
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION); //Vil gerne ha fjernet
+
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+
+        String subProjectName = request.getParameter("subProjectName");
+        String subProjectDescription = request.getParameter("subProjectDescription");
+
+        subProject.setSubProjectName(subProjectName);
+        subProject.setSubProjectDescription(subProjectDescription);
+
+        systemController.updateSubProject(subProject);
+
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId())); //Vil gerne ha fjernet
+
+        return "subProjects";
+    }
+
     @GetMapping("/task")
     public String task(@RequestParam("id") int idSubProject, Model model, WebRequest request) {
         SubProject currentSubProject = systemController.getSubProject(idSubProject);
@@ -148,6 +174,32 @@ public class MyController {
         task.setSubProjectId(subProject.getSubProjectId());
 
         systemController.createTask(task);
+
+        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+
+        return "tasks";
+    }
+
+    @GetMapping("/updateTask")
+    public String updateTask(@RequestParam("id") int idTask, WebRequest request) {
+        Task currentTask = systemController.getTask(idTask);
+        taskSessionInfo(request, currentTask);
+        return "updateTask";
+    }
+
+    @PostMapping("/updateTask/submit")
+    public String updateTaskSubmit(WebRequest request, Model model) {
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+
+        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+
+        String taskName = request.getParameter("taskName");
+        String taskDescription = request.getParameter("taskDescription");
+
+        task.setTaskName(taskName);
+        task.setTaskDescription(taskDescription);
+
+        systemController.updateTask(task);
 
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
@@ -189,6 +241,29 @@ public class MyController {
        return "subTasks";
     }
 
+    @GetMapping("/updateSubTask")
+    public String updateSubTask(@RequestParam("id") int idSubTask, WebRequest request) {
+        SubTask currentSubTask = systemController.getSubTask(idSubTask);
+        subTaskSessionInfo(request, currentSubTask);
+        return "updateSubTask";
+    }
+
+    @PostMapping("/updateSubTask/submit")
+    public String updateSubTaskSubmit(WebRequest request, Model model) {
+        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+
+        SubTask subTask = (SubTask) request.getAttribute("subTask", WebRequest.SCOPE_SESSION);
+
+        String subTaskDescription = request.getParameter("subTaskDescription");
+        subTask.setSubTaskDescription(subTaskDescription);
+
+        systemController.updateSubTask(subTask);
+
+        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(task.getTaskId()));
+
+        return "subTasks";
+    }
+
 
     private void projectSessionInfo(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
@@ -200,6 +275,10 @@ public class MyController {
 
     private void taskSessionInfo(WebRequest request, Task task) {
         request.setAttribute("task", task, WebRequest.SCOPE_SESSION);
+    }
+
+    private void subTaskSessionInfo(WebRequest request, SubTask subTask) {
+        request.setAttribute("subTask", subTask, WebRequest.SCOPE_SESSION);
     }
 
     private void employeeSessionInfo(WebRequest request, Employee employee) {

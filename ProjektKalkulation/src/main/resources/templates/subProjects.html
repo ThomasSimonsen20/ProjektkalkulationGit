@@ -19,6 +19,7 @@
             <p th:text="${subProject.getSubProjectName()}"><br></p>
             <p th:text="${subProject.getSubProjectDescription()}"></p>
         </a>
+        <a th:href="@{/updateSubProject(id=${subProject.getSubProjectId()})}">ÆNDRE</a>
     </div>
     <br>
 </div>

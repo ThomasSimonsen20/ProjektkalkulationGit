@@ -88,4 +88,23 @@ public class SystemController {
         facade.updateProject(project);
         return project;
     }
+
+    public SubProject updateSubProject(SubProject subProject) {
+        facade.updateSubProject(subProject);
+        return subProject;
+    }
+
+    public Task updateTask(Task task) {
+        facade.updateTask(task);
+        return task;
+    }
+
+    public SubTask updateSubTask(SubTask subTask) {
+        facade.updateSubTask(subTask);
+        return subTask;
+    }
+
+    public SubTask getSubTask(int id) {
+        return facade.getSubTask(id);
+    }
 }

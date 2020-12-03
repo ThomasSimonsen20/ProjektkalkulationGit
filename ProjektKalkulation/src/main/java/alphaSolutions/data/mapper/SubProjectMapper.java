@@ -1,6 +1,7 @@
 package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
+import alphaSolutions.domainObjects.Project;
 import alphaSolutions.domainObjects.SubProject;
 
 import java.sql.*;
@@ -75,5 +76,21 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
         return subProject;
+    }
+
+
+    public void updateSubProject(SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subprojects SET SubProject_Name = ?, SubProject_Description = ? WHERE SubProject_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, subProject.getSubProjectName());
+            ps.setString(2, subProject.getSubProjectDescription());
+            ps.setInt(3, subProject.getSubProjectId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -76,4 +76,23 @@ public class Facade {
         projectMapper.updateProject(project);
         return project;
     }
+
+    public SubProject updateSubProject(SubProject subProject) {
+        subProjectMapper.updateSubProject(subProject);
+        return subProject;
+    }
+
+    public Task updateTask(Task task) {
+        taskMapper.updateTask(task);
+        return task;
+    }
+
+    public SubTask updateSubTask(SubTask subTask) {
+        subTaskMapper.updateSubTask(subTask);
+        return subTask;
+    }
+
+    public SubTask getSubTask(int id) {
+        return subTaskMapper.getSubTask(id);
+    }
 }

@@ -83,4 +83,19 @@ public class TaskMapper {
         }
         return task;
     }
+
+    public void updateTask(Task task) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE tasks SET Task_Name = ?, Task_Description = ? WHERE Task_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, task.getTaskName());
+            ps.setString(2, task.getTaskDescription());
+            ps.setInt(3, task.getTaskId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

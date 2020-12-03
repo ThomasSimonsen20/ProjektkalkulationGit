@@ -19,6 +19,7 @@
             <p th:text="${tasks.getTaskName()}"><br></p>
             <p th:text="${tasks.getTaskDescription()}"></p>
         </a>
+        <a th:href="@{/updateTask(id=${tasks.getTaskId()})}">ÆNDRE</a>
     </div>
     <br>
 </div>

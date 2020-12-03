@@ -78,16 +78,13 @@ public class ProjectMapper {
     public void updateProject(Project project) {
         try {
             Connection con = DBManager.getConnection();
-            /*String SQL = "ALTER TABLE `projects` ADD CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `subprojects` (`Project_Id`);" +
-                    "REPLACE INTO projects (Project_Id, Project_Name, Project_Description) VALUES (?,?,?)";
-
-             */
-            String SQL = "REPLACE INTO projects (Project_Id, Project_Name, Project_Description) VALUES (?,?,?)";
+            String SQL = "UPDATE projects SET Project_Description = ?, Project_Name = ? WHERE Project_Id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, project.getProjectId());
+            ps.setString(1, project.getProjectDescription());
             ps.setString(2, project.getProjectName());
-            ps.setString(3, project.getProjectDescription());
+            ps.setInt(3, project.getProjectId());
             ps.executeUpdate();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -16,7 +16,9 @@
 <div th:each="subTasks : ${subTasks}">
     <div style="background: aqua; width: 75px">
         <p th:text="${subTasks.getSubTaskDescription()}"><br></p>
+        <a th:href="@{/updateSubTask(id=${subTasks.getSubTaskId()})}">ÆNDRE</a>
     </div>
+
     <br>
 </div>
 
