@@ -55,6 +55,7 @@ CREATE TABLE `Employees` (
   `Last_Name` varchar(100) NOT NULL,
   `Profile_Picture` varchar(200) DEFAULT NULL,
   `Employee_Number` int NOT NULL,
+  `WorkHoursAvailable` double DEFAULT NULL,
   PRIMARY KEY (`Employee_Id`),
   UNIQUE KEY `Employee_Id_UNIQUE` (`Employee_Id`),
   UNIQUE KEY `Employee_Number_UNIQUE` (`Employee_Number`)
@@ -67,7 +68,7 @@ CREATE TABLE `Employees` (
 
 LOCK TABLES `Employees` WRITE;
 /*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
-INSERT INTO `Employees` VALUES (1,'Søren','Sørensen',NULL,1234),(2,'Mike','Jensen',NULL,3411),(3,'Sean','Pearsen',NULL,5622),(4,'Ole','Henriksen',NULL,7611),(5,'Michael','Henningensen',NULL,6533),(6,'Ulla','Mogensen',NULL,8766),(7,'Sabine','Sleif',NULL,1223),(8,'Trine','Poulsen',NULL,4352),(9,'Magrethe','Egebo',NULL,3244),(10,'Stine','Arresø',NULL,4322);
+INSERT INTO `Employees` VALUES (1,'Søren','Sørensen',NULL,1234,NULL),(2,'Mike','Jensen',NULL,3411,NULL),(3,'Sean','Pearsen',NULL,5622,NULL),(4,'Ole','Henriksen',NULL,7611,NULL),(5,'Michael','Henningensen',NULL,6533,NULL),(6,'Ulla','Mogensen',NULL,8766,NULL),(7,'Sabine','Sleif',NULL,1223,NULL),(8,'Trine','Poulsen',NULL,4352,NULL),(9,'Magrethe','Egebo',NULL,3244,NULL),(10,'Stine','Arresø',NULL,4322,NULL);
 /*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,6 +83,7 @@ CREATE TABLE `ProjectParcipitants` (
   `Project_Id` int NOT NULL,
   `Employee_Id` int NOT NULL,
   `Role` varchar(100) NOT NULL,
+  `ProjectEstimatetWorkHours` double DEFAULT NULL,
   PRIMARY KEY (`Project_Id`,`Employee_Id`,`Role`),
   KEY `Employee_Id_idx` (`Employee_Id`),
   CONSTRAINT `Employee_Id_PP` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
@@ -384,4 +386,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-03 12:43:16
+-- Dump completed on 2020-12-03 13:26:42
