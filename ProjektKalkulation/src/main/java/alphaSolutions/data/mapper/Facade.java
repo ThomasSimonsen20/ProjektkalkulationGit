@@ -104,4 +104,9 @@ public class Facade {
         subProjectMapper.setSubProjectEstimatetWorkHours(subProject);
         return subProject;
     }
+
+    public Task setTaskEstimatetWorkHours(Task task) {
+        taskMapper.setTaskEstimatetWorkHours(task);
+        return task;
+    }
 }

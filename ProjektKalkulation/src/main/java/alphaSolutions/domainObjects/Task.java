@@ -11,6 +11,8 @@ public class Task {
     private int subProjectId;
     private String taskName;
     private String taskDescription;
+    private double EstimatetWorkHours;
+    private int tasksEWHId;
     private SystemController systemController = new SystemController(new Facade());
 
 
@@ -53,6 +55,13 @@ public class Task {
         return systemController.getTaskDependencies(this.taskId);
     }
 
+    public double getEstimatetWorkHours() {
+        return EstimatetWorkHours;
+    }
+
+    public int getTasksEWHId() {
+        return tasksEWHId;
+    }
 
     /*------------------------------------------------------------------*/
     /*----------------------Setters-------------------------------------*/
@@ -78,6 +87,13 @@ public class Task {
         this.subProjectId = subProjectId;
     }
 
+    public void setEstimatetWorkHours(double estimatetWorkHours) {
+        EstimatetWorkHours = estimatetWorkHours;
+    }
+
+    public void setTasksEWHId(int tasksEWHId) {
+        this.tasksEWHId = tasksEWHId;
+    }
 }
 
 

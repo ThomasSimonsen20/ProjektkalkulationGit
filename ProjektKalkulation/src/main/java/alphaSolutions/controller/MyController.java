@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class MyController {
@@ -102,7 +105,7 @@ public class MyController {
     @PostMapping("/createSubProject/submit")
     public String createSubProjectSubmit(WebRequest request, SubProject subProject, Model model){
 
-        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_REQUEST);
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
@@ -129,9 +132,9 @@ public class MyController {
 
     @PostMapping("/updateSubProject/submit")
     public String updateSubProjectSubmit(WebRequest request, Model model) {
-        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION); //Vil gerne ha fjernet
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_REQUEST); //Vil gerne ha fjernet
 
-        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_REQUEST);
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
@@ -170,13 +173,16 @@ public class MyController {
 
         String taskName = request.getParameter("taskName");
         String taskDescription = request.getParameter("taskDescription");
+        String taskEstimatetWorkHours = request.getParameter("taskEstimatetWorkHours");
 
         task.setTaskName(taskName);
         task.setTaskDescription(taskDescription);
         task.setProjectId(project.getProjectId());
         task.setSubProjectId(subProject.getSubProjectId());
+        task.setEstimatetWorkHours(Double.parseDouble(taskEstimatetWorkHours));
 
         systemController.createTask(task);
+        systemController.setTaskEstimatetWorkHours(task);
 
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
