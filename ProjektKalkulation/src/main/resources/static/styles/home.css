@@ -13,23 +13,55 @@
 }
 
 .tbody {
+
     display: flex;
     justify-content: center;
     text-align: center;
     flex-flow: wrap;
 }
 
-.th {
-    text-transform: uppercase;
-    background-color: aquamarine;
+.td {
+
+    padding: 5px;
+    background: aqua;
+    text-align: center;
+    border-radius: 25px;
+}
+
+td a {
+    color: black;
+    text-decoration: none;
+    text-decoration-color: none;
+    display: block;
+    height:100%;
+    width:100%;
+}
+
+td a:hover {
     color: white;
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
 }
 
 .tr {
 
-    display: grid;
     padding-top: 15px;
     padding: 5px;
+}
 
+.dependencies {
+
+    padding: 5px;
+    text-align: center;
+    border-radius: 40px;
+
+    display: grid;
+    background-color: darkorange;
+}
+
+.dependencies, .td {
+    background-clip: content-box;
+
+    margin: 5px;
 
 }
+

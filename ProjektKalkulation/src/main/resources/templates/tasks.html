@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
+    <link th:href="@{/styles/home.css}" rel="stylesheet">
 </head>
 <body>
 <h1>ALLE TASK SIDEN</h1>
@@ -12,15 +13,45 @@
     <a href="/createTask">Create Task</a>
 </div>
 
-<table th:each="tasks : ${tasks}">
-    <tbody style="background: aqua; width: 75px">
-    <tr th:href="@{/subTask(id=${tasks.getTaskId()})}">
-        <th th:text="${tasks.getTaskName()}"><br>> NAME & AGE </th>
-        <td th:each="dependentTasksNames : ${tasks.getTaskDependencies()}" th:text="${dependentTasksNames}"></td>
+
+
+<th:block>
+<table>
+    <tr class="trHeader">
+    <th>Opgavenavn</th>
+    <th>Opgaven er afhængig af</th>
+    </tr>
+
+    <th:block th:each="tasks : ${tasks}">
+    <tr class="tr" >
+
+        <td><a class="td" th:href="@{/subTask(id=${tasks.getTaskId()})}" th:text="${tasks.getTaskName()}"></a></td>
+        <td class="dependencies" th:each="dependentTasksNames : ${tasks.getTaskDependencies()}" th:text="${dependentTasksNames}"></td>
         <!--  <td th:text="${tasks.getTaskDescription()}"></td>  -->
+    </tr>
+    </th:block>
+
+
+
+</table>
+
+    <!--
+</table>
+</th:block>
+
+<table th:each="tasks : ${tasks}">
+    <tbody class="tbody">
+    <tr class="tr">
+        <th class="th" th:href="@{/subTask(id=${tasks.getTaskId()})}" th:text="${tasks.getTaskName()} + ' afhængig af: '"><br>> NAME & AGE </th>
+        <td class="td" th:each="dependentTasksNames : ${tasks.getTaskDependencies()}" th:text="${dependentTasksNames}"></td>
+
     </tr>
     </tbody>
 </table>
+
+    -->
+
+
 
 
 <!--

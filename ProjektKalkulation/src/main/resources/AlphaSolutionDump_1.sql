@@ -73,18 +73,17 @@ INSERT INTO `Employees` VALUES (1,'Søren','Sørensen',NULL,1234,NULL),(2,'Mike'
 UNLOCK TABLES;
 
 --
--- Table structure for table `ProjectParcipitants`
+-- Table structure for table `ProjectParticipants`
 --
 
-DROP TABLE IF EXISTS `ProjectParcipitants`;
+DROP TABLE IF EXISTS `ProjectParticipants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ProjectParcipitants` (
+CREATE TABLE `ProjectParticipants` (
   `Project_Id` int NOT NULL,
   `Employee_Id` int NOT NULL,
-  `Role` varchar(100) NOT NULL,
   `ProjectEstimatetWorkHours` double DEFAULT NULL,
-  PRIMARY KEY (`Project_Id`,`Employee_Id`,`Role`),
+  PRIMARY KEY (`Project_Id`,`Employee_Id`),
   KEY `Employee_Id_idx` (`Employee_Id`),
   CONSTRAINT `Employee_Id_PP` FOREIGN KEY (`Employee_Id`) REFERENCES `Employees` (`Employee_Id`),
   CONSTRAINT `Project_Id` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`)
@@ -92,12 +91,12 @@ CREATE TABLE `ProjectParcipitants` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ProjectParcipitants`
+-- Dumping data for table `ProjectParticipants`
 --
 
-LOCK TABLES `ProjectParcipitants` WRITE;
-/*!40000 ALTER TABLE `ProjectParcipitants` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ProjectParcipitants` ENABLE KEYS */;
+LOCK TABLES `ProjectParticipants` WRITE;
+/*!40000 ALTER TABLE `ProjectParticipants` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ProjectParticipants` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -189,14 +188,14 @@ DROP TABLE IF EXISTS `SubprojectsEstimatetWorkHours`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SubprojectsEstimatetWorkHours` (
-  `SubProjectEWH_Id` int NOT NULL,
+  `SubProjectEWH_Id` int NOT NULL AUTO_INCREMENT,
   `SubProject_Id` int NOT NULL,
   `EstimatetWorkHours` double NOT NULL,
   PRIMARY KEY (`SubProjectEWH_Id`),
-  UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   UNIQUE KEY `SubProjectEWH_Id_UNIQUE` (`SubProjectEWH_Id`),
+  KEY `SubProject_Id` (`SubProject_Id`),
   CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `Subprojects` (`SubProject_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,6 +204,7 @@ CREATE TABLE `SubprojectsEstimatetWorkHours` (
 
 LOCK TABLES `SubprojectsEstimatetWorkHours` WRITE;
 /*!40000 ALTER TABLE `SubprojectsEstimatetWorkHours` DISABLE KEYS */;
+INSERT INTO `SubprojectsEstimatetWorkHours` VALUES (1,22,12),(2,22,11),(3,22,222),(4,22,65);
 /*!40000 ALTER TABLE `SubprojectsEstimatetWorkHours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,6 +289,7 @@ CREATE TABLE `TaskDependencies` (
 
 LOCK TABLES `TaskDependencies` WRITE;
 /*!40000 ALTER TABLE `TaskDependencies` DISABLE KEYS */;
+INSERT INTO `TaskDependencies` VALUES (8,17),(20,17),(8,18),(8,19);
 /*!40000 ALTER TABLE `TaskDependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +312,7 @@ CREATE TABLE `Tasks` (
   KEY `Project_Id_Tasks_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `Projects` (`Project_Id`),
   CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `SubProjects` (`SubProject_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +321,7 @@ CREATE TABLE `Tasks` (
 
 LOCK TABLES `Tasks` WRITE;
 /*!40000 ALTER TABLE `Tasks` DISABLE KEYS */;
-INSERT INTO `Tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit'),(9,8,23,'Task 2','Task 2 Descrip'),(10,9,24,'Task 3','Task 3 Descrip');
+INSERT INTO `Tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit'),(9,8,23,'Task 2','Task 2 Descrip'),(10,9,24,'Task 3','Task 3 Descrip'),(17,7,22,'Rediger HP','Gør det flot'),(18,7,22,'Udfyld CSS','Blå farver'),(19,7,22,'Tøm Skraldespand','Sæt ny pose i bagefter'),(20,7,22,'Ny Task','Dette er en helt ny Task'),(21,7,22,'siadte task','jeg lavede en slåfejl i SIDSTE');
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -386,4 +387,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-03 13:26:42
+-- Dump completed on 2020-12-04 12:51:11
