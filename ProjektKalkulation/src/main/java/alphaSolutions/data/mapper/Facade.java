@@ -101,7 +101,7 @@ public class Facade {
     }
 
     public SubProject setSubProjectEstimatetWorkHours(SubProject subProject) {
-        subProjectMapper.setSubProjectEstimatetWorkHours(subProject);
+        subProjectMapper.createSubProjectEstimatetWorkHours(subProject);
         return subProject;
     }
 

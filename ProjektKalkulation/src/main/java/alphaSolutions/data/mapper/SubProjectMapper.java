@@ -1,7 +1,6 @@
 package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
-import alphaSolutions.domainObjects.Project;
 import alphaSolutions.domainObjects.SubProject;
 
 import java.sql.*;
@@ -43,8 +42,7 @@ public class SubProjectMapper {
                 String subProjectName = rs.getString("SubProject_Name");
                 String subProjectDescription = rs.getString("SubProject_Description");
                 SubProject subProject = new SubProject(subProjectID, projectId, subProjectName, subProjectDescription);
-                subProject.setEstimatetWorkHours(getSubProjectEstimatetWorkHours(subProject.getSubProjectId()));
-                subProject.setSubProjectEWHId(getSubProjectEWHId(subProject.getSubProjectId()));
+                getSubprojectsEstimatetWorkHoursTable(subProject);
                 subProjectList.add(subProject);
             }
 
@@ -72,9 +70,7 @@ public class SubProjectMapper {
                 subProject.setProjectId(projectId);
                 subProject.setSubProjectName(subProjectName);
                 subProject.setSubProjectDescription(subProjectDescription);
-                subProject.setSubProjectEWHId(getSubProjectEWHId(subProjectID));
-                subProject.setEstimatetWorkHours(getSubProjectEstimatetWorkHours(subProjectID));
-
+                getSubprojectsEstimatetWorkHoursTable(subProject);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -112,7 +108,7 @@ public class SubProjectMapper {
         }
     }
 
-    public void setSubProjectEstimatetWorkHours(SubProject subProject) {
+    public void createSubProjectEstimatetWorkHours(SubProject subProject) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
@@ -131,47 +127,25 @@ public class SubProjectMapper {
         }
     }
 
-    public double getSubProjectEstimatetWorkHours(int id) {
-        Double estimatetWorkHours = 0.0;
+    public void getSubprojectsEstimatetWorkHoursTable(SubProject subProject) throws SQLException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT SubprojectsEstimatetWorkHours.EstimatetWorkHours\n" +
+            String SQL = "SELECT SubprojectsEstimatetWorkHours.EstimatetWorkHours, SubprojectsEstimatetWorkHours.SubProjectEWH_Id\n" +
                     "FROM SubprojectsEstimatetWorkHours\n" +
                     "WHERE SubprojectsEstimatetWorkHours.SubProject_Id = ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, id);
+            ps.setInt(1, subProject.getSubProjectId());
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
-                estimatetWorkHours = rs.getDouble("EstimatetWorkHours");
-
+                subProject.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
+                subProject.setSubProjectEWHId(rs.getInt("SubProjectEWH_Id"));
             }
-
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return estimatetWorkHours;
     }
 
-    public int getSubProjectEWHId(int id) {
-        int SubProjectEWHId = 0;
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT SubprojectsEstimatetWorkHours.SubProjectEWH_Id\n" +
-                    "FROM SubprojectsEstimatetWorkHours\n" +
-                    "WHERE SubprojectsEstimatetWorkHours.SubProject_Id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
-                SubProjectEWHId = rs.getInt("SubProjectEWH_Id");
-
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return SubProjectEWHId;
-    }
 }
