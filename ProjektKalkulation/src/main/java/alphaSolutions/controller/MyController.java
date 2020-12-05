@@ -105,7 +105,7 @@ public class MyController {
     @PostMapping("/createSubProject/submit")
     public String createSubProjectSubmit(WebRequest request, SubProject subProject, Model model){
 
-        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_REQUEST);
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
@@ -132,9 +132,9 @@ public class MyController {
 
     @PostMapping("/updateSubProject/submit")
     public String updateSubProjectSubmit(WebRequest request, Model model) {
-        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_REQUEST); //Vil gerne ha fjernet
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
 
-        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_REQUEST);
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
@@ -144,7 +144,7 @@ public class MyController {
 
         systemController.updateSubProject(subProject);
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId())); //Vil gerne ha fjernet
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
 
         return "subProjects";
     }
@@ -238,12 +238,15 @@ public class MyController {
         Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
 
         String subTaskDescription = request.getParameter("subTaskDescription");
+        String subTaskEstimatetWorkHours = request.getParameter("subTaskEstimatetWorkHours");
 
         subTask.setProjectId(project.getProjectId());
         subTask.setTaskId(task.getTaskId());
         subTask.setSubTaskDescription(subTaskDescription);
+        subTask.setEstimatetWorkHours(Double.parseDouble(subTaskEstimatetWorkHours));
 
        systemController.createSubTask(subTask);
+       systemController.setSubTaskEstimatetWorkHours(subTask);
 
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(task.getTaskId()));
 

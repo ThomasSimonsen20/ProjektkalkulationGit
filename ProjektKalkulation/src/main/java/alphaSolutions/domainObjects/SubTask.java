@@ -6,6 +6,8 @@ public class SubTask {
     private int projectId;
     private int taskId;
     private String subTaskDescription;
+    private double EstimatetWorkHours;
+    private int subtasksEWHId;
 
     public SubTask(int projectId, int taskId, String subTaskDescription) {
         this.projectId = projectId;
@@ -36,6 +38,13 @@ public class SubTask {
         return subTaskDescription;
     }
 
+    public double getEstimatetWorkHours() {
+        return EstimatetWorkHours;
+    }
+
+    public int getSubtasksEWHId() {
+        return subtasksEWHId;
+    }
 
     /*------------------------------------------------------------------*/
     /*----------------------Setters-------------------------------------*/
@@ -56,5 +65,13 @@ public class SubTask {
 
     public void setSubTaskDescription(String subTaskDescription) {
         this.subTaskDescription = subTaskDescription;
+    }
+
+    public void setEstimatetWorkHours(double estimatetWorkHours) {
+        EstimatetWorkHours = estimatetWorkHours;
+    }
+
+    public void setSubtasksEWHId(int subtasksEWHId) {
+        this.subtasksEWHId = subtasksEWHId;
     }
 }

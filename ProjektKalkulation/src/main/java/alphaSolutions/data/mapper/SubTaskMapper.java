@@ -22,7 +22,7 @@ public class SubTaskMapper {
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
             int id = ids.getInt(1);
-            subTask.setTaskId(id);
+            subTask.setSubTaskId(id);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -44,6 +44,7 @@ public class SubTaskMapper {
                 String subTaskDescription = rs.getString("SubTask_Description");
                 SubTask subTask = new SubTask(projectId, taskId, subTaskDescription);
                 subTask.setSubTaskId(subTaskId);
+                subTask.setEstimatetWorkHours(getSubTaskEstimatetWorkHours(subTaskId));
                 subTasksList.add(subTask);
             }
         } catch (SQLException ex) {
@@ -91,6 +92,46 @@ public class SubTaskMapper {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void setSubTaskEstimatetWorkHours(SubTask subTask) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subtaskestimatetworkhours (Subtask_Id, EstimatetWorkHours) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subTask.getSubTaskId());
+            ps.setDouble(2, subTask.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            subTask.setSubtasksEWHId(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public double getSubTaskEstimatetWorkHours(int id) {
+        Double estimatetWorkHours = 0.0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT subtaskestimatetworkhours.EstimatetWorkHours\n" +
+                    "FROM subtaskestimatetworkhours\n" +
+                    "WHERE subtaskestimatetworkhours.Subtask_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                estimatetWorkHours = rs.getDouble("EstimatetWorkHours");
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return estimatetWorkHours;
     }
 
 }
