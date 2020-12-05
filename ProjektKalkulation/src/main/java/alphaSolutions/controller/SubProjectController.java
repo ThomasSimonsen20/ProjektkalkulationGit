@@ -70,11 +70,14 @@ public class SubProjectController {
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
+        String subProjectEstimatetWorkHours = request.getParameter("subProjectEstimatetWorkHours");
 
         subProject.setSubProjectName(subProjectName);
         subProject.setSubProjectDescription(subProjectDescription);
+        subProject.setEstimatetWorkHours(Double.parseDouble(subProjectEstimatetWorkHours));
 
         systemController.updateSubProject(subProject);
+        systemController.updateEstimatetWorkHours(subProject);
 
         model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
 

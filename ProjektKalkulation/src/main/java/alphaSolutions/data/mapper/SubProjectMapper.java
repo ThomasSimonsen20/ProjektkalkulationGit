@@ -72,6 +72,7 @@ public class SubProjectMapper {
                 subProject.setProjectId(projectId);
                 subProject.setSubProjectName(subProjectName);
                 subProject.setSubProjectDescription(subProjectDescription);
+                subProject.setSubProjectEWHId(getSubProjectEWHId(subProjectID));
 
             }
         } catch (SQLException ex) {
@@ -89,6 +90,20 @@ public class SubProjectMapper {
             ps.setString(1, subProject.getSubProjectName());
             ps.setString(2, subProject.getSubProjectDescription());
             ps.setInt(3, subProject.getSubProjectId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateEstimatetWorkHours(SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProjectEWH_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setDouble(1, subProject.getEstimatetWorkHours());
+            ps.setInt(2, subProject.getSubProjectEWHId());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -135,5 +150,27 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
         return estimatetWorkHours;
+    }
+
+    public int getSubProjectEWHId(int id) {
+        int SubProjectEWHId = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT SubprojectsEstimatetWorkHours.SubProjectEWH_Id\n" +
+                    "FROM SubprojectsEstimatetWorkHours\n" +
+                    "WHERE SubprojectsEstimatetWorkHours.SubProject_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                SubProjectEWHId = rs.getInt("SubProjectEWH_Id");
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return SubProjectEWHId;
     }
 }

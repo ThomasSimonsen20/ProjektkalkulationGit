@@ -126,4 +126,9 @@ public class SystemController {
     public SubTask getSubTask(int id) {
         return facade.getSubTask(id);
     }
+
+    public SubProject updateEstimatetWorkHours(SubProject subProject) {
+        facade.updateEstimatetWorkHours(subProject);
+        return subProject;
+    }
 }
