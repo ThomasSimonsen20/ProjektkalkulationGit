@@ -40,10 +40,6 @@ public class SystemController {
         return subTask;
     }
 
-    public SubProject setSubProjectEstimatetWorkHours(SubProject subProject) {
-        facade.setSubProjectEstimatetWorkHours(subProject);
-        return subProject;
-    }
 
     public Task setTaskEstimatetWorkHours(Task task) {
         facade.setTaskEstimatetWorkHours(task);
@@ -108,6 +104,7 @@ public class SystemController {
         return facade.getTaskDependencies(taskId);
     }
 
+
     public SubProject updateSubProject(SubProject subProject) {
         facade.updateSubProject(subProject);
         return subProject;
@@ -125,10 +122,5 @@ public class SystemController {
 
     public SubTask getSubTask(int id) {
         return facade.getSubTask(id);
-    }
-
-    public SubProject updateEstimatetWorkHours(SubProject subProject) {
-        facade.updateEstimatetWorkHours(subProject);
-        return subProject;
     }
 }

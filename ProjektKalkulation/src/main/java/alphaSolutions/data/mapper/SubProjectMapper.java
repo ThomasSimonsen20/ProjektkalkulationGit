@@ -21,6 +21,19 @@ public class SubProjectMapper {
             ids.next();
             int id = ids.getInt(1);
             subProject.setSubProjectId(id);
+
+
+            SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subProject.getSubProjectId());
+            ps.setDouble(2, subProject.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+            ids = ps.getGeneratedKeys();
+            ids.next();
+            id = ids.getInt(1);
+            subProject.setSubProjectEWHId(id);
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -89,38 +102,11 @@ public class SubProjectMapper {
             ps.setInt(3, subProject.getSubProjectId());
             ps.executeUpdate();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void updateEstimatetWorkHours(SubProject subProject) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProjectEWH_Id = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProjectEWH_Id = ?";
+            ps = con.prepareStatement(SQL);
             ps.setDouble(1, subProject.getEstimatetWorkHours());
             ps.setInt(2, subProject.getSubProjectEWHId());
             ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void createSubProjectEstimatetWorkHours(SubProject subProject) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, subProject.getSubProjectId());
-            ps.setDouble(2, subProject.getEstimatetWorkHours());
-            ps.executeUpdate();
-
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            int id = ids.getInt(1);
-            subProject.setSubProjectEWHId(id);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -146,6 +132,4 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
     }
-
-
 }

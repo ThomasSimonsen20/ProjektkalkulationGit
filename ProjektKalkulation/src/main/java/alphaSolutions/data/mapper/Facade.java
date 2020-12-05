@@ -81,10 +81,13 @@ public class Facade {
         return taskMapper.getTaskDependencies(taskId);
     }
 
+
     public SubProject updateSubProject(SubProject subProject) {
         subProjectMapper.updateSubProject(subProject);
         return subProject;
     }
+
+
 
     public Task updateTask(Task task) {
         taskMapper.updateTask(task);
@@ -100,11 +103,6 @@ public class Facade {
         return subTaskMapper.getSubTask(id);
     }
 
-    public SubProject setSubProjectEstimatetWorkHours(SubProject subProject) {
-        subProjectMapper.createSubProjectEstimatetWorkHours(subProject);
-        return subProject;
-    }
-
     public Task setTaskEstimatetWorkHours(Task task) {
         taskMapper.setTaskEstimatetWorkHours(task);
         return task;
@@ -115,8 +113,4 @@ public class Facade {
         return subTask;
     }
 
-    public SubProject updateEstimatetWorkHours(SubProject subProject) {
-        subProjectMapper.updateEstimatetWorkHours(subProject);
-        return subProject;
-    }
 }

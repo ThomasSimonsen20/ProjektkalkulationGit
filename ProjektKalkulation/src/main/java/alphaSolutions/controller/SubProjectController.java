@@ -48,7 +48,6 @@ public class SubProjectController {
         subProject.setEstimatetWorkHours(Double.parseDouble(subProjectEstimatetWorkHours));
 
         systemController.createSubProject(subProject, project.getProjectId());
-        systemController.setSubProjectEstimatetWorkHours(subProject);
 
         model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
 
@@ -77,7 +76,6 @@ public class SubProjectController {
         subProject.setEstimatetWorkHours(Double.parseDouble(subProjectEstimatetWorkHours));
 
         systemController.updateSubProject(subProject);
-        systemController.updateEstimatetWorkHours(subProject);
 
         model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
 
