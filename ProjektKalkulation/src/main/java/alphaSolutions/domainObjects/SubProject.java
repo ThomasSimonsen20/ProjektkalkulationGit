@@ -15,7 +15,8 @@ public class SubProject {
     /*----------------------Constructors--------------------------------*/
     /*------------------------------------------------------------------*/
 
-    public SubProject(int projectId, String subProjectName, String subProjectDescription) {
+    public SubProject(int subProjectId, int projectId, String subProjectName, String subProjectDescription) {
+        this.subProjectId = subProjectId;
         this.projectId = projectId;
         this.subProjectName = subProjectName;
         this.subProjectDescription = subProjectDescription;

@@ -42,9 +42,9 @@ public class SubProjectMapper {
                 int projectId = rs.getInt("Project_Id");
                 String subProjectName = rs.getString("SubProject_Name");
                 String subProjectDescription = rs.getString("SubProject_Description");
-                SubProject subProject = new SubProject(projectId, subProjectName, subProjectDescription);
-                subProject.setSubProjectId(subProjectID);
+                SubProject subProject = new SubProject(subProjectID, projectId, subProjectName, subProjectDescription);
                 subProject.setEstimatetWorkHours(getSubProjectEstimatetWorkHours(subProject.getSubProjectId()));
+                subProject.setSubProjectEWHId(getSubProjectEWHId(subProject.getSubProjectId()));
                 subProjectList.add(subProject);
             }
 
@@ -73,6 +73,7 @@ public class SubProjectMapper {
                 subProject.setSubProjectName(subProjectName);
                 subProject.setSubProjectDescription(subProjectDescription);
                 subProject.setSubProjectEWHId(getSubProjectEWHId(subProjectID));
+                subProject.setEstimatetWorkHours(getSubProjectEstimatetWorkHours(subProjectID));
 
             }
         } catch (SQLException ex) {
