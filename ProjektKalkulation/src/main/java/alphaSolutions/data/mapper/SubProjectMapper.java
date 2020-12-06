@@ -17,6 +17,7 @@ public class SubProjectMapper {
             ps.setString(2, subProject.getSubProjectName());
             ps.setString(3, subProject.getSubProjectDescription());
             ps.executeUpdate();
+
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
             int id = ids.getInt(1);
@@ -116,9 +117,9 @@ public class SubProjectMapper {
     public void getSubprojectsEstimatetWorkHoursTable(SubProject subProject) throws SQLException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT SubprojectsEstimatetWorkHours.EstimatetWorkHours, SubprojectsEstimatetWorkHours.SubProjectEWH_Id\n" +
+            String SQL = "SELECT EstimatetWorkHours, SubProjectEWH_Id\n" +
                     "FROM SubprojectsEstimatetWorkHours\n" +
-                    "WHERE SubprojectsEstimatetWorkHours.SubProject_Id = ?;";
+                    "WHERE SubProject_Id = ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, subProject.getSubProjectId());
             ResultSet rs = ps.executeQuery();

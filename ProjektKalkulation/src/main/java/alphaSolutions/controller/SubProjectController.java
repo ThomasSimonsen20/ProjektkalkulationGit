@@ -36,7 +36,6 @@ public class SubProjectController {
 
     @PostMapping("/createSubProject/submit")
     public String createSubProjectSubmit(WebRequest request, SubProject subProject, Model model){
-
         Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
 
         String subProjectName = request.getParameter("subProjectName");
@@ -64,7 +63,6 @@ public class SubProjectController {
     @PostMapping("/updateSubProject/submit")
     public String updateSubProjectSubmit(WebRequest request, Model model) {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
         String subProjectName = request.getParameter("subProjectName");
