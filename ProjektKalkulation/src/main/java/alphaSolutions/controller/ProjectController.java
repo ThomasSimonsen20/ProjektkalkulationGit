@@ -46,6 +46,7 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
+
     @GetMapping("/updateProject")
     public String updateProject(@RequestParam("id") int idProject, WebRequest request) {
         Project currentProject = systemController.getProject(idProject);

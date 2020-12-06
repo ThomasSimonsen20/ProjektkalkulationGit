@@ -1,0 +1,77 @@
+* {box-sizing: content-box}
+
+/* Add padding to containers */
+.container {
+    padding: 100px;
+}
+
+h1 {
+    padding-left: 40%;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: bold;
+    color: #8A2BE2;
+}
+p {
+    font-family: Montserrat;
+    font-weight: lighter;
+    font-size: 18px;
+    color: black;
+
+}
+
+/* Description Field */
+.input1[type=text], input[type=text] {
+    width: 100%;
+    padding-right: 50px;
+    padding: 50px;
+    margin: 5px 0 22px 0;
+    display: block;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* Title Field*/
+
+.input2[type=text], input[type=text] {
+    width: 50%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+
+input[type=text]:focus, input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+    border: 2px solid #000000;
+    margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.saveBtn {
+    background-color: #8A2BE2;
+    color: white;
+    border-radius: 15px;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    opacity: 0.9;
+
+}
+
+.input:hover {
+    opacity: 10;
+}
+
+.saveBtn:hover {
+    background: cadetblue;
+}
