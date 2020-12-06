@@ -80,6 +80,7 @@ public class SubProjectMapper {
                 int projectId = rs.getInt("Project_Id");
                 String subProjectName = rs.getString("SubProject_Name");
                 String subProjectDescription = rs.getString("SubProject_Description");
+
                 subProject.setSubProjectId(subProjectID);
                 subProject.setProjectId(projectId);
                 subProject.setSubProjectName(subProjectName);
