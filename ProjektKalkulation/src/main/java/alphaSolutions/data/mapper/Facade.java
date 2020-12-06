@@ -103,11 +103,4 @@ public class Facade {
         return subTaskMapper.getSubTask(id);
     }
 
-    public SubTask setSubTaskEstimatetWorkHours(SubTask subTask) {
-        subTaskMapper.setSubTaskEstimatetWorkHours(subTask);
-        return subTask;
-    }
-
-
-
 }

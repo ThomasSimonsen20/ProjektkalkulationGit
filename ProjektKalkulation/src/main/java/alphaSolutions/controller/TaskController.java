@@ -52,7 +52,6 @@ public class TaskController {
         task.setEstimatetWorkHours(Double.parseDouble(taskEstimatetWorkHours));
 
         systemController.createTask(task);
-       // systemController.setTaskEstimatetWorkHours(task);
 
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 

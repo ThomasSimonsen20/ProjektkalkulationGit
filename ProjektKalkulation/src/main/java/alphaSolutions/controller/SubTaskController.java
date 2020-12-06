@@ -49,7 +49,6 @@ public class SubTaskController {
         subTask.setEstimatetWorkHours(Double.parseDouble(subTaskEstimatetWorkHours));
 
         systemController.createSubTask(subTask);
-        systemController.setSubTaskEstimatetWorkHours(subTask);
 
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(task.getTaskId()));
 
@@ -70,6 +69,9 @@ public class SubTaskController {
         SubTask subTask = (SubTask) request.getAttribute("subTask", WebRequest.SCOPE_SESSION);
 
         String subTaskDescription = request.getParameter("subTaskDescription");
+        String subTaskEstimatetWorkHours = request.getParameter("subTaskEstimatetWorkHours");
+
+        subTask.setEstimatetWorkHours(Double.parseDouble(subTaskEstimatetWorkHours));
         subTask.setSubTaskDescription(subTaskDescription);
 
         systemController.updateSubTask(subTask);

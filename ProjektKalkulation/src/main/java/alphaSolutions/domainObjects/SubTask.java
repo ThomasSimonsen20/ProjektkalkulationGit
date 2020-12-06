@@ -9,7 +9,8 @@ public class SubTask {
     private double EstimatetWorkHours;
     private int subtasksEWHId;
 
-    public SubTask(int projectId, int taskId, String subTaskDescription) {
+    public SubTask(int subTaskId, int projectId, int taskId, String subTaskDescription) {
+        this.subTaskId = subTaskId;
         this.projectId = projectId;
         this.taskId = taskId;
         this.subTaskDescription = subTaskDescription;
