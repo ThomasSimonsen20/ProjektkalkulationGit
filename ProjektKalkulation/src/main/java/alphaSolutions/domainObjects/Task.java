@@ -17,7 +17,8 @@ public class Task {
 
 
 
-    public Task(int projectId, int subProjectId, String taskName, String taskDescription) {
+    public Task(int taskId, int projectId, int subProjectId, String taskName, String taskDescription) {
+        this.taskId = taskId;
         this.projectId = projectId;
         this.subProjectId = subProjectId;
         this.taskName = taskName;

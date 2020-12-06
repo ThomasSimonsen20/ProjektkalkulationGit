@@ -25,7 +25,8 @@
     <th:block th:each="tasks : ${tasks}">
     <tr class="tr" >
 
-        <td><a class="td" th:href="@{/subTask(id=${tasks.getTaskId()})}" th:text="${tasks.getTaskName()}"></a></td>
+        <td><a class="td" th:href="@{/subTask(id=${tasks.getTaskId()})}" th:text="${tasks.getTaskName()}"></a>
+        </td>
         <td class="dependencies" th:each="dependentTasksNames : ${tasks.getTaskDependencies()}" th:text="${dependentTasksNames}"></td>
         <!--  <td th:text="${tasks.getTaskDescription()}"></td>  -->
     </tr>

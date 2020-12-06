@@ -52,7 +52,7 @@ public class TaskController {
         task.setEstimatetWorkHours(Double.parseDouble(taskEstimatetWorkHours));
 
         systemController.createTask(task);
-        systemController.setTaskEstimatetWorkHours(task);
+       // systemController.setTaskEstimatetWorkHours(task);
 
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
@@ -74,9 +74,11 @@ public class TaskController {
 
         String taskName = request.getParameter("taskName");
         String taskDescription = request.getParameter("taskDescription");
+        String taskEstimatetWorkHours = request.getParameter("taskEstimatetWorkHours");
 
         task.setTaskName(taskName);
         task.setTaskDescription(taskDescription);
+        task.setEstimatetWorkHours(Double.parseDouble(taskEstimatetWorkHours));
 
         systemController.updateTask(task);
 
