@@ -4,30 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>allProjects</title>
+    <link th:href="@{/styles/projectPage.css}" rel="stylesheet">
 </head>
 <body>
 
-
-<h1>ALLE PROJEKTER SIDEN</h1>
-<div>
-    <a href="/createProject">Create Project</a>
-</div>
-
-<div>
-    <a href="/staffOverview" >Staff Overview</a>
-</div>
-
-<br>
-
-<div th:each="project : ${Project}">
-    <div style="background: aqua; width: 75px;">
-        <a th:href="@{/subProject(id=${project.getProjectId()})}">
-    <p th:text="${project.getProjectName()}"><br></p>
-    <p th:text="${project.getProjectDescription()}"></p>
-        </a>
-        <a th:hwdref="@{/updateProject(id=${project.getProjectId()})}">ÆNDRE</a>
+<div class="header">
+    <img src="./main/resources/static/styles/logo.PNG">
+    <div>
+        <a class="header_button" href="/createProject">Create Project</a>
+        <a class="header_button" href="/staffOverview" >Staff Overview</a>
     </div>
 </div>
+
+<div class="project_body">
+    <h2 class="header_project_title">All Projects</h2>
+    <div class="project_container">
+        <div class="project_card_container" th:each="project : ${Project}">
+            <a class="project_card_link" th:href="@{/subProject(id=${project.getProjectId()})}">
+                <div class="project_card">
+                    <p class="project_title" th:text="${project.getProjectName()}"><br></p>
+                    <p class="project_description" th:text="${project.getProjectDescription()}"></p>
+                </div>
+            </a>
+             <a class="project_changebtn" th:href="@{/updateProject(id=${project.getProjectId()})}">CHANGE</a>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

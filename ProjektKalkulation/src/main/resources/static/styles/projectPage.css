@@ -1,0 +1,66 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+    align-items: center;
+}
+
+.header_project_title {
+    font-size: 30px;
+}
+
+.header_button {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: system-ui;
+    margin: 0 5px 0 5px;
+}
+
+.project_body {
+    margin: 0 30px 0 30px;
+}
+
+.project_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project_card_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project_card_link {
+    text-decoration: none;
+    color: black;
+}
+
+.project_card {
+    width: 300px;
+    height: 200px;
+    background: #b7c3c3;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.project_title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.project_description {
+
+}
+
+.project_changebtn {
+    margin: 15px 0 15px 0;
+    background: #4F758C;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+}

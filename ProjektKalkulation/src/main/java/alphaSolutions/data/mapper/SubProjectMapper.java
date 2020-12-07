@@ -9,8 +9,11 @@ import java.util.ArrayList;
 public class SubProjectMapper {
 
     public void createSubProject(SubProject subProject, int projectId) {
+        Connection con = DBManager.getConnection();
         try {
-            Connection con = DBManager.getConnection();
+            con.setAutoCommit(false);
+
+
             String SQL = "INSERT INTO subprojects (Project_Id, SubProject_Name, SubProject_Description) VALUES (?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, projectId);
@@ -34,8 +37,14 @@ public class SubProjectMapper {
             id = ids.getInt(1);
             subProject.setSubProjectEWHId(id);
 
+            con.commit();
+            con.setAutoCommit(true);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            try {
+                con.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

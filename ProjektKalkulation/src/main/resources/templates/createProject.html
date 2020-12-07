@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Project</title>
+    <link th:href="@{/styles/createForm.css}" rel="stylesheet">
 </head>
 <body>
 
-<form name="createProject" action="/createProject/submit" method="post">
-    <label>Project Name:</label>
-    <input type="text" name="projectName" required>
-    <label>Project Description:</label>
-    <input type="text" name="projectDescription" required>
-    <button type="submit">Create</button>
-</form>
-
+<div class="form_container">
+    <h1>CREATE PROJECT</h1>
+    <form class="add_form_style" name="createProject" action="/createProject/submit" method="post">
+        <div class="form_title">
+         <label>Project Name</label>
+            <input type="text" name="projectName" required>
+        </div>
+         <div class="form_description">
+             <textarea type="text" name="projectDescription" placeholder="Project Description" required cols="65" rows="13"></textarea>
+        </div>
+        <button class="form_button" type="submit">Create</button>
+    </form>
+</div>
 </body>
 </html>
