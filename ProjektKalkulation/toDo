@@ -5,3 +5,6 @@
 5. Visning af tid til rådighed på allStaff.html
 6. Lav en måde at editere subProject, Task og Subtask så man kan indsætte et tidsestimat. Skal både kunne gøre når man opretter (Default: 0) og efter man har oprettet.
 7. Ryd op i MyController - CHECK
+8. Check input i workhourds, int + format check - THOMAS
+9. top-nav - MIKKEL
+10. dropdown dependensies - SIMON

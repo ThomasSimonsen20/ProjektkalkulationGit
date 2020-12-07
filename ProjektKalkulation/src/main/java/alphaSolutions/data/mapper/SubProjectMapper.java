@@ -23,7 +23,6 @@ public class SubProjectMapper {
             int id = ids.getInt(1);
             subProject.setSubProjectId(id);
 
-
             SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
             ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, subProject.getSubProjectId());
