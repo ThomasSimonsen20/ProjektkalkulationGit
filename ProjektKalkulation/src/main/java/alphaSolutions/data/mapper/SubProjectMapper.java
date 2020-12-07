@@ -2,7 +2,6 @@ package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.SubProject;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,32 +12,15 @@ public class SubProjectMapper {
         try {
             con.setAutoCommit(false);
 
+            PreparedStatement psCreateSubProjectTable = createSubProjectTable(subProject,projectId);
+            subProject.setSubProjectId(getGeneratedKeys(psCreateSubProjectTable));
 
-            String SQL = "INSERT INTO subprojects (Project_Id, SubProject_Name, SubProject_Description) VALUES (?,?,?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, projectId);
-            ps.setString(2, subProject.getSubProjectName());
-            ps.setString(3, subProject.getSubProjectDescription());
-            ps.executeUpdate();
-
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            int id = ids.getInt(1);
-            subProject.setSubProjectId(id);
-
-            SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, subProject.getSubProjectId());
-            ps.setDouble(2, subProject.getEstimatetWorkHours());
-            ps.executeUpdate();
-
-            ids = ps.getGeneratedKeys();
-            ids.next();
-            id = ids.getInt(1);
-            subProject.setSubProjectEWHId(id);
+            PreparedStatement psCreateSubProjectsEstimatetWorkhoursTable = createSubProjectsEstimatetWorkhoursTable(subProject);
+            subProject.setSubProjectEWHId(getGeneratedKeys(psCreateSubProjectsEstimatetWorkhoursTable));
 
             con.commit();
             con.setAutoCommit(true);
+
         } catch (SQLException ex) {
             try {
                 con.rollback();
@@ -46,6 +28,52 @@ public class SubProjectMapper {
                 e.printStackTrace();
             }
         }
+    }
+
+    public PreparedStatement createSubProjectTable(SubProject subProject, int projectId)  {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subprojects (Project_Id, SubProject_Name, SubProject_Description) VALUES (?,?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, projectId);
+            ps.setString(2, subProject.getSubProjectName());
+            ps.setString(3, subProject.getSubProjectDescription());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
+
+    public PreparedStatement createSubProjectsEstimatetWorkhoursTable(SubProject subProject) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subProject.getSubProjectId());
+            ps.setDouble(2, subProject.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
+
+    public int getGeneratedKeys(PreparedStatement ps) {
+        int id = 0;
+        try {
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            id = ids.getInt(1);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return id;
     }
 
     public ArrayList<SubProject> getSubProjectsBasedOnProjectID(int id) {
@@ -103,6 +131,26 @@ public class SubProjectMapper {
 
 
     public void updateSubProject(SubProject subProject) {
+        Connection con = DBManager.getConnection();
+        try {
+            con.setAutoCommit(false);
+
+           updateSubProjectTable(subProject);
+           updateSubProjectsEstimatetWorkhours(subProject);
+
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException ex) {
+            try {
+                con.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateSubProjectTable (SubProject subProject){
         try {
             Connection con = DBManager.getConnection();
             String SQL = "UPDATE subprojects SET SubProject_Name = ?, SubProject_Description = ? WHERE SubProject_Id = ?";
@@ -112,8 +160,16 @@ public class SubProjectMapper {
             ps.setInt(3, subProject.getSubProjectId());
             ps.executeUpdate();
 
-            SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProjectEWH_Id = ?";
-            ps = con.prepareStatement(SQL);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateSubProjectsEstimatetWorkhours (SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProjectEWH_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setDouble(1, subProject.getEstimatetWorkHours());
             ps.setInt(2, subProject.getSubProjectEWHId());
             ps.executeUpdate();
