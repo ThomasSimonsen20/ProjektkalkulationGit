@@ -3,15 +3,41 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tasks</title>
+    <title>Subtasks</title>
+    <link th:href="@{/styles/home.css}" rel="stylesheet">
 </head>
 <body>
 
 <h1>ALLE SUBTASKS SIDEN</h1>
 
+<h1 th:each="task : ${task}" th:text="'Taskname: ' + ${task.getTaskName()}"></h1>
+
+<form name="dependency" action="/createDependency/submit" method="post">
+<label for="dependencies">Select Task to depend on: </label>
+<select name="dependency" id="dependencies" action="/createDependency/submit">
+    <option value="">Select Task</option>
+    <option th:each="task : ${tasks}" th:value="${task}" th:text="${task}"></option>
+</select>
+    <button type="submit">Submit</button>
+</form>
+
+
+
+
+<!-- Viser også currentTask :( -->
+<!--
 <div>
-    <a href="/createSubTask">Create subTask</a>
+    <h4>Andre tasks i dette projekt:</h4>
+    <h6 th:each="task : ${tasks}" th:text="${task.getTaskName()}"></h6>
 </div>
+-->
+
+
+
+<div>
+    <a class="tr" href="/createSubTask">Create subTask</a>
+</div>
+
 
 <div>
     <a href="/projects">Projects</a>

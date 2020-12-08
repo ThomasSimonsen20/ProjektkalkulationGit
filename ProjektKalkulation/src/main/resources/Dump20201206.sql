@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
--- Host: 127.0.0.1    Database: alphasolutions
+-- Host: 127.0.0.1    Database: AlphaSolutions
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -86,8 +86,8 @@ CREATE TABLE `projectparcipitants` (
   `ProjectEstimatetWorkHours` double DEFAULT NULL,
   PRIMARY KEY (`Project_Id`,`Employee_Id`,`Role`),
   KEY `Employee_Id_idx` (`Employee_Id`),
-  CONSTRAINT `Employee_Id_PP` FOREIGN KEY (`Employee_Id`) REFERENCES `employees` (`Employee_Id`),
-  CONSTRAINT `Project_Id` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
+  CONSTRAINT `Employee_Id_ProPar` FOREIGN KEY (`Employee_Id`) REFERENCES `employees` (`Employee_Id`),
+  CONSTRAINT `Project_Id_PP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -224,7 +224,7 @@ CREATE TABLE `subtaskestimatetworkhours` (
   UNIQUE KEY `SubTaskEWH_Id_UNIQUE` (`SubTaskEWH_Id`),
   KEY `SubTask_Id_idx` (`Subtask_Id`),
   CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,6 +233,7 @@ CREATE TABLE `subtaskestimatetworkhours` (
 
 LOCK TABLES `subtaskestimatetworkhours` WRITE;
 /*!40000 ALTER TABLE `subtaskestimatetworkhours` DISABLE KEYS */;
+INSERT INTO `subtaskestimatetworkhours` VALUES (1,8,0),(2,9,0);
 /*!40000 ALTER TABLE `subtaskestimatetworkhours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +255,7 @@ CREATE TABLE `subtasks` (
   KEY `Project_Id_ST_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`),
   CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +264,7 @@ CREATE TABLE `subtasks` (
 
 LOCK TABLES `subtasks` WRITE;
 /*!40000 ALTER TABLE `subtasks` DISABLE KEYS */;
-INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8),(6,10,'Subtask 3 Description',9),(7,10,'Subtask 3a Description',9);
+INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8),(6,10,'Subtask 3 Description',9),(7,10,'Subtask 3a Description',9),(8,8,'SubSUbSUB',7),(9,8,'Nyny subtask',7);
 /*!40000 ALTER TABLE `subtasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +291,7 @@ CREATE TABLE `taskdependencies` (
 
 LOCK TABLES `taskdependencies` WRITE;
 /*!40000 ALTER TABLE `taskdependencies` DISABLE KEYS */;
-INSERT INTO `taskdependencies` VALUES (8,17),(20,17),(8,18),(8,19);
+INSERT INTO `taskdependencies` VALUES (8,17),(20,17),(8,18),(8,20);
 /*!40000 ALTER TABLE `taskdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,10 +379,6 @@ LOCK TABLES `tasktakers` WRITE;
 /*!40000 ALTER TABLE `tasktakers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tasktakers` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'alphasolutions'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -392,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-06 15:48:56
+-- Dump completed on 2020-12-08 14:15:55

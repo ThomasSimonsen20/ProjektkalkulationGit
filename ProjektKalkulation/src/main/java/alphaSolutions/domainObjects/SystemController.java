@@ -40,9 +40,17 @@ public class SystemController {
         return subTask;
     }
 
+    public void createTaskDependency(int taskId, String dependency) {
+        facade.createTaskDependency(taskId, dependency);
+    }
+
     /*------------------------------------------------------------------*/
     /*----------------------Getters-------------------------------------*/
     /*------------------------------------------------------------------*/
+
+    public SubTask getSubTask(int id) {
+        return facade.getSubTask(id);
+    }
 
     public ArrayList<Project> getAllProjects() {
         return facade.getAllProjects();
@@ -64,6 +72,15 @@ public class SystemController {
         return facade.getTasksBasedOnSubProjectID(id);
     }
 
+    public ArrayList<Task> getTasksBasedOnSubProjectIdOmitCurrentTask(int idSubProject, int idTask) {
+        return facade.getTasksBasedOnSubProjectIdOmitCurrentTask(idSubProject, idTask);
+    }
+
+    public ArrayList<String> getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(int idSubProject, int idTask) {
+        return facade.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask);
+    }
+
+
     public Task getTask(int id) {
         return facade.getTask(id);
     }
@@ -84,15 +101,25 @@ public class SystemController {
         return facade.getSkillsForCertainEmployee(employeeId);
     }
 
-    public Project updateProject(Project project) {
-        facade.updateProject(project);
-        return project;
-    }
-
     public ArrayList<String> getTaskDependencies(int taskId) {
         return facade.getTaskDependencies(taskId);
     }
 
+    public int getSubProjectIdBasedOnTaskId(int taskId){
+        return facade.getSubProjectIdBasedOnTaskId(taskId);
+    }
+
+
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Update--------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+
+    public Project updateProject(Project project) {
+        facade.updateProject(project);
+        return project;
+    }
 
     public SubProject updateSubProject(SubProject subProject) {
         facade.updateSubProject(subProject);
@@ -109,7 +136,8 @@ public class SystemController {
         return subTask;
     }
 
-    public SubTask getSubTask(int id) {
-        return facade.getSubTask(id);
-    }
+
+
+
+
 }

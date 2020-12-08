@@ -22,9 +22,13 @@ public class SubTaskController {
     public String subTask(@RequestParam("id") int idTask, Model model, WebRequest request) {
         Task currentTask = systemController.getTask(idTask);
         sessionInfo.taskSessionInfo(request, currentTask);
+        int idSubProject = systemController.getSubProjectIdBasedOnTaskId(idTask);
 
         model.addAttribute("task", currentTask);
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(idTask));
+        //model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectIdOmitCurrentTask(idSubProject, idTask));
+        model.addAttribute("tasks", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
+
 
         return "subTasks";
     }
@@ -37,20 +41,23 @@ public class SubTaskController {
     @PostMapping("/createSubTask/submit")
     public String createSubTaskSubmit(WebRequest request, SubTask subTask, Model model){
 
+
         Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
-        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+        Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
 
         String subTaskDescription = request.getParameter("subTaskDescription");
         String subTaskEstimatetWorkHours = request.getParameter("subTaskEstimatetWorkHours");
 
         subTask.setProjectId(project.getProjectId());
-        subTask.setTaskId(task.getTaskId());
+        subTask.setTaskId(currentTask.getTaskId());
         subTask.setSubTaskDescription(subTaskDescription);
         subTask.setEstimatetWorkHours(Double.parseDouble(subTaskEstimatetWorkHours));
 
         systemController.createSubTask(subTask);
 
-        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(task.getTaskId()));
+        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
+        model.addAttribute("task", currentTask);
+
 
         return "subTasks";
     }
