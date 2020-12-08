@@ -26,6 +26,8 @@ public class TaskController {
 
         model.addAttribute("subproject", currentSubProject);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(idSubProject));
+        //model.addAttribute("taskNames", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
+
 
         return "tasks";
     }
@@ -70,7 +72,7 @@ public class TaskController {
 
 
         systemController.createTaskDependency(currentTask.getTaskId(), dependency);
-        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+        model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
 
 
