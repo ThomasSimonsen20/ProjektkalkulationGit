@@ -54,9 +54,10 @@ public class SubProjectController {
     }
 
     @GetMapping("/updateSubProject")
-    public String updateSubProject(@RequestParam("id") int idSubProject, WebRequest request) {
+    public String updateSubProject(@RequestParam("id") int idSubProject, WebRequest request, Model model) {
         SubProject currentSubProject = systemController.getSubProject(idSubProject);
         sessionInfo.subProjectSessionInfo(request, currentSubProject);
+        model.addAttribute("subProject", currentSubProject);
         return "updateSubProject";
     }
 
