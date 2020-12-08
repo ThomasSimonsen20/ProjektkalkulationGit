@@ -67,3 +67,15 @@
     color: white;
     text-decoration: none;
 }
+
+.project_body_selected_task {
+    margin: 0 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_project_title_dependencies {
+    font-size: 30px;
+    text-align: center;
+}

@@ -92,4 +92,14 @@ public class TaskController {
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
         return "tasks";
     }
+
+    @GetMapping("/taskDependencies")
+    public String taskDependencies(@RequestParam("id") int idTask, WebRequest request, Model model) {
+        Task currentTask = systemController.getTask(idTask);
+        sessionInfo.taskSessionInfo(request, currentTask);
+        model.addAttribute("tasks", currentTask);
+
+        return "taskDependencies";
+    }
+
 }
