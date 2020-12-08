@@ -9,7 +9,7 @@
 <body>
 
 <div class="header">
-    <img src="./main/resources/static/styles/logo.PNG">
+    <img src="/styles/logo.PNG">
     <div>
         <a class="header_button" href="/createProject">Create Project</a>
         <a class="header_button" href="/staffOverview" >Staff Overview</a>
@@ -22,8 +22,8 @@
         <div class="project_card_container" th:each="project : ${Project}">
             <a class="project_card_link" th:href="@{/subProject(id=${project.getProjectId()})}">
                 <div class="project_card">
-                    <p class="project_title" th:text="${project.getProjectName()}"><br></p>
-                    <p class="project_description" th:text="${project.getProjectDescription()}"></p>
+                    <p class="title" th:text="${project.getProjectName()}"><br></p>
+                    <p class="description" th:text="${project.getProjectDescription()}"></p>
                 </div>
             </a>
              <a class="project_changebtn" th:href="@{/updateProject(id=${project.getProjectId()})}">CHANGE</a>

@@ -4,29 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>subProjects</title>
+    <link th:href="@{/styles/projectPage.css}" rel="stylesheet">
 </head>
 <body>
 
-<h1>ALLE SUBPROJEKTER SIDEN</h1>
-
-<div>
-    <a href="/createSubProject">Create Subproject</a>
-</div>
-
-<div>
-    <a href="/projects">Projects</a>
-</div>
-
-<div th:each="subProject : ${subProject}">
-    <div style="background: aqua; width: 75px">
-        <a th:href="@{/task(id=${subProject.getSubProjectId})}">
-            <p th:text="${subProject.getSubProjectName()}"><br></p>
-            <p th:text="${subProject.getSubProjectDescription()}"></p>
-            <p th:text="${subProject.getEstimatetWorkHours()}"></p>
-        </a>
-        <a th:href="@{/updateSubProject(id=${subProject.getSubProjectId()})}">ÆNDRE</a>
+<div class="header">
+    <img src="/styles/logo.PNG">
+    <div>
+        <a class="header_button" href="/projects">Projects</a>
     </div>
-    <br>
+    <div>
+        <a class="header_button" href="/createSubProject">Create Subproject</a>
+    </div>
+
+</div>
+
+<div class="project_body">
+    <h2 class="header_project_title">All SubProjects</h2>
+        <div class="project_container">
+            <div class="project_card_container" th:each="subProject : ${subProject}">
+                <a class="project_card_link" th:href="@{/task(id=${subProject.getSubProjectId})}">
+                    <div class="project_card">
+                         <p class="title" th:text="${subProject.getSubProjectName()}"><br></p>
+                         <p class="description" th:text="${subProject.getSubProjectDescription()}"></p>
+                         <p th:text="${subProject.getEstimatetWorkHours()}">Total required time</p>
+                    </div>
+                </a>
+        <a class="project_changebtn" th:href="@{/updateSubProject(id=${subProject.getSubProjectId()})}">CHANGE</a>
+        </div>
+    </div>
 </div>
 
 

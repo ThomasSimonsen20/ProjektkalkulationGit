@@ -48,9 +48,10 @@ public class ProjectController {
 
 
     @GetMapping("/updateProject")
-    public String updateProject(@RequestParam("id") int idProject, WebRequest request) {
+    public String updateProject(@RequestParam("id") int idProject, WebRequest request, Model model) {
         Project currentProject = systemController.getProject(idProject);
         sessionInfo.projectSessionInfo(request, currentProject);
+        model.addAttribute("project", currentProject);
         return "updateProject";
     }
 

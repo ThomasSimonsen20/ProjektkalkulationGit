@@ -4,19 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Project</title>
+    <link th:href="@{/styles/createForm.css}" rel="stylesheet">
 </head>
 <body>
 
-<div class="divForm">
-    <h3>Skift infomation</h3>
-    <form name="update" action="/updateProject/submit" method="post">
-        Project Name:<br>
-        <input type="text" name="projectName">
-        <br>
-        Project Description:<br>
-        <input type="text" name="projectDescription">
-        <br>
-        <input type="submit" value="Skift">
+<div class="form_container">
+    <h1>Change infomation</h1>
+    <form class="add_form_style" name="update" action="/updateProject/submit" method="post">
+        <div class="form_title">
+            <label>Project Name</label>
+            <input type="text" name="projectName" th:placeholder="${project.getProjectName}">
+        </div>
+        <div class="form_description">
+            <textarea  type="text" name="projectDescription" th:placeholder="${project.getProjectDescription()}" cols="65" rows="13"></textarea>
+        </div>
+        <button  class="form_button" type="submit">Submit</button>
     </form>
 </div>
 

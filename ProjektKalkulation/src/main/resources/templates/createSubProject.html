@@ -4,18 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Project</title>
+    <link th:href="@{/styles/createForm.css}" rel="stylesheet">
 </head>
 <body>
 
-<form name="createSubProject" action="/createSubProject/submit" method="post">
-    <label>Subproject Name:</label>
-    <input type="text" name="subProjectName" required>
-    <label>Subproject Description:</label>
-    <input type="text" name="subProjectDescription" required>
-    <label>Subproject Estimatet Work Hours:</label>
-    <input type="number" name="subProjectEstimatetWorkHours" step="0.01" required th:value="${0}">
-    <button type="submit">Create</button>
+
+<div class="form_container">
+    <h1>Create SubProject</h1>
+        <form class="add_form_style" name="createSubProject" action="/createSubProject/submit" method="post">
+            <div class="form_title">
+                <label>Subproject Name:</label>
+                    <input type="text" name="subProjectName" required>
+            </div>
+            <div class="form_title">
+                <label>Subproject Estimatet Work Hours:</label>
+                <input type="number" name="subProjectEstimatetWorkHours" step="0.01" required th:value="${0}">
+            </div>
+            <div class="form_description">
+            <textarea  type="text" name="subProjectDescription" placeholder="subProject Description" required cols="65" rows="13"></textarea>
+            </div>
+            <button class="form_button" type="submit">Create</button>
 </form>
+</div>
 
 </body>
 </html>
