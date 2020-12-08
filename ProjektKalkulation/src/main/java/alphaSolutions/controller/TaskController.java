@@ -68,7 +68,6 @@ public class TaskController {
     @PostMapping("/updateTask/submit")
     public String updateTaskSubmit(WebRequest request, Model model) {
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
-
         Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
 
         String taskName = request.getParameter("taskName");
@@ -83,6 +82,14 @@ public class TaskController {
 
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
+        return "tasks";
+    }
+
+    @GetMapping("/backToTasks")
+    public String BacktoSubProject(WebRequest request, Model model) {
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
         return "tasks";
     }
 }

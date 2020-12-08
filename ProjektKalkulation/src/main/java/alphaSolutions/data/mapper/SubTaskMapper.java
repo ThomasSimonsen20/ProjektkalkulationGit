@@ -11,35 +11,72 @@ import java.util.ArrayList;
 public class SubTaskMapper {
 
     public void createSubTask(SubTask subTask) {
+        Connection con = DBManager.getConnection();
+        try {
+            con.setAutoCommit(false);
+
+            PreparedStatement psCreateSubTasksTable = createSubTasksTable(subTask);
+            subTask.setSubTaskId(getGeneratedKeys(psCreateSubTasksTable));
+
+            PreparedStatement psCreateSubTasksEstimatetWorkHours = createSubTasksEstimatetWorkHours(subTask);
+            subTask.setSubtasksEWHId(getGeneratedKeys(psCreateSubTasksEstimatetWorkHours));
+
+            con.commit();
+            con.setAutoCommit(true);
+        } catch (SQLException ex) {
+            try {
+                con.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public PreparedStatement createSubTasksTable(SubTask subTask) {
+        PreparedStatement ps = null;
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description) VALUES (?,?,?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, subTask.getProjectId());
             ps.setInt(2, subTask.getTaskId());
             ps.setString(3, subTask.getSubTaskDescription());
             ps.executeUpdate();
 
-            ResultSet ids = ps.getGeneratedKeys();
-            ids.next();
-            int id = ids.getInt(1);
-            subTask.setSubTaskId(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
 
-            SQL = "INSERT INTO subtaskestimatetworkhours (Subtask_Id, EstimatetWorkHours) VALUES (?,?)";
+    public PreparedStatement createSubTasksEstimatetWorkHours(SubTask subTask) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subtaskestimatetworkhours (Subtask_Id, EstimatetWorkHours) VALUES (?,?)";
             ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, subTask.getSubTaskId());
             ps.setDouble(2, subTask.getEstimatetWorkHours());
             ps.executeUpdate();
 
-            ids = ps.getGeneratedKeys();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
+
+    public int getGeneratedKeys(PreparedStatement ps) {
+        int id = 0;
+        try {
+            ResultSet ids = ps.getGeneratedKeys();
             ids.next();
             id = ids.getInt(1);
-            subTask.setSubtasksEWHId(id);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return id;
     }
+
 
     public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
         ArrayList<SubTask> subTasksList = new ArrayList<>();
@@ -95,6 +132,22 @@ public class SubTaskMapper {
     }
 
     public void updateSubTask(SubTask subTask) {
+        Connection con = DBManager.getConnection();
+        try {
+            con.setAutoCommit(false);
+
+            updateSubTaskTable(subTask);
+            updateSubTasksEstimatetWorkhours(subTask);
+
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateSubTaskTable(SubTask subTask) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "UPDATE subtasks SET SubTask_Description = ? WHERE SubTask_Id = ?";
@@ -103,8 +156,16 @@ public class SubTaskMapper {
             ps.setInt(2, subTask.getSubTaskId());
             ps.executeUpdate();
 
-            SQL = "UPDATE subtaskestimatetworkhours SET EstimatetWorkHours = ? WHERE SubTaskEWH_Id = ?";
-            ps = con.prepareStatement(SQL);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateSubTasksEstimatetWorkhours(SubTask subTask) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subtaskestimatetworkhours SET EstimatetWorkHours = ? WHERE SubTaskEWH_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
             ps.setDouble(1, subTask.getEstimatetWorkHours());
             ps.setInt(2, subTask.getSubtasksEWHId());
             ps.executeUpdate();

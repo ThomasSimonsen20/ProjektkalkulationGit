@@ -13,6 +13,10 @@
     <a href="/createSubProject">Create Subproject</a>
 </div>
 
+<div>
+    <a href="/projects">Projects</a>
+</div>
+
 <div th:each="subProject : ${subProject}">
     <div style="background: aqua; width: 75px">
         <a th:href="@{/task(id=${subProject.getSubProjectId})}">

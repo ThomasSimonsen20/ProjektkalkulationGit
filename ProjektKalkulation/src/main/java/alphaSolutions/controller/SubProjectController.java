@@ -81,4 +81,11 @@ public class SubProjectController {
 
     }
 
+    @GetMapping("/backToSubProject")
+    public String BacktoSubProject(WebRequest request, Model model) {
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
+        return "subProjects";
+    }
+
 }

@@ -65,8 +65,6 @@ public class ProjectMapper {
                 project.setProjectId(projectId);
                 project.setProjectName(projectName);
                 project.setProjectDescription(projectDescription);
-                //Project project = new Project(projectName, projectDescription);
-                //project.setProjectId(projectId);
 
             }
         } catch (SQLException ex) {

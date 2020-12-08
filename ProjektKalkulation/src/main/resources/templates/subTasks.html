@@ -13,6 +13,12 @@
     <a href="/createSubTask">Create subTask</a>
 </div>
 
+<div>
+    <a href="/projects">Projects</a>
+    <a href="/backToSubProject">SubProjects</a>
+    <a href="/backToTasks">Tasks</a>
+</div>
+
 <div th:each="subTasks : ${subTasks}">
     <div style="background: aqua; width: 75px">
         <p th:text="${subTasks.getSubTaskDescription()}"><br></p>
