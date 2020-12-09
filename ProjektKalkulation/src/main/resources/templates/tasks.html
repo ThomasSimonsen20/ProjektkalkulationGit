@@ -23,14 +23,14 @@
 <div class="project_body">
     <h2 class="header_project_title">All Tasks</h2>
     <div class="project_container">
-        <div class="project_card_container" th:each="tasks : ${tasks}">
-            <a class="project_card_link" th:href="@{/subTask(id=${tasks.getTaskId()})}">
+        <div class="project_card_container" th:each="task : ${tasks}">
+            <a class="project_card_link" th:href="@{/subTask(id=${task.getTaskId()})}">
                 <div class="project_card">
-                    <p class="title" th:text="${tasks.getTaskName}"><br></p>
-                   <p class="description" th:text="${tasks.getTaskDescription()}" th:unless="${tasks.getTaskDependencies().size > 0}"></p>
-                   <!-- <p th:text="${tasks.getEstimatetWorkHours()}">Total required time</p> -->
-                    <p class="title_dependencies" th:text="Dependencies" th:unless="${tasks.getTaskDependencies().size == 0}"></p>
-                    <div th:each="dependentTasksNames : ${tasks.getTaskDependencies()}" >
+                    <p class="title" th:text="${task.getTaskName}"><br></p>
+                   <p class="description" th:text="${task.getTaskDescription()}" th:unless="${task.getTaskDependencies().size > 0}"></p>
+                   <!-- <p th:text="${task.getEstimatetWorkHours()}">Total required time</p> -->
+                    <p class="title_dependencies" th:text="Dependencies" th:unless="${task.getTaskDependencies().size == 0}"></p>
+                    <div th:each="dependentTasksNames : ${task.getTaskDependencies()}" >
                         <p class="description_dependencies" th:text="${dependentTasksNames}"></p>
                     </div>
 
@@ -38,8 +38,8 @@
 
             </a>
             <div class="button_margin">
-                <a class="project_changebtn" th:href="@{/updateTask(id=${tasks.getTaskId()})}">CHANGE</a>
-                <!--  <a class="project_changebtn" th:href="@{/taskDependencies(id=${tasks.getTaskId()})}" th:unless="${tasks.getTaskDependencies().size == 0}">SE DEP</a> -->
+                <a class="project_changebtn" th:href="@{/updateTask(id=${task.getTaskId()})}">CHANGE</a>
+                <!--  <a class="project_changebtn" th:href="@{/taskDependencies(id=${task.getTaskId()})}" th:unless="${task.getTaskDependencies().size == 0}">SE DEP</a> -->
             </div>
             <div>
                 <form name="dependency" action="/createDependency/submit" method="post">
