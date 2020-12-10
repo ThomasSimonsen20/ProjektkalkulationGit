@@ -163,10 +163,12 @@ h5 p {
 
 .project_card {
     width: 300px;
-    height: 200px;
+    height: 230px;
     background: #b7c3c3;
     border-radius: 10px;
     padding: 5px 15px 5px 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
@@ -203,12 +205,24 @@ h5 p {
 
 .description_dependencies {
     text-align: center;
-    margin: 15px 0 15px 0;
-    background: #4F758C;
     padding: 5px;
-    border-radius: 10px;
     color: white;
-    width: 150px;
+}
+
+.description_dependencies_container {
+    background: #4F758C;
+    border-radius: 10px;
+    width: 135px;
+    padding: 5px;
+}
+
+.dependencies_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin: 20px 0 20px 0;
+    flex-grow: 1;
 }
 
 .button_margin {
@@ -219,4 +233,13 @@ h5 p {
     font-size: 18px;
     font-family: serif;
     margin: 5px;
+}
+
+.logo {
+    height: 115px;
+}
+
+.project_time_remaining {
+    align-self: center;
+    margin-bottom: 5px;
 }

@@ -39,12 +39,9 @@ public class SubTaskController {
 
         String dependency = request.getParameter("dependency");
 
-
         //systemController.createSubTaskDependency(currentTask.getTaskId(), dependency);
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
-
         model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
-
 
 
         return "subTasks";
@@ -80,9 +77,10 @@ public class SubTaskController {
     }
 
     @GetMapping("/updateSubTask")
-    public String updateSubTask(@RequestParam("id") int idSubTask, WebRequest request) {
+    public String updateSubTask(@RequestParam("id") int idSubTask, WebRequest request, Model model) {
         SubTask currentSubTask = systemController.getSubTask(idSubTask);
         sessionInfo.subTaskSessionInfo(request, currentSubTask);
+        model.addAttribute("subTask", currentSubTask);
         return "updateSubTask";
     }
 

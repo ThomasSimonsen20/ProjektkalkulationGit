@@ -9,7 +9,7 @@
 <body>
 
 <div class="header">
-    <img src="/styles/logo.PNG">
+    <img class="logo" src="/styles/logo.PNG">
     <div>
         <a class="header_button" href="/projects">Projects</a>
         <a class="header_button" href="/backToSubProject">SubProjects</a>
@@ -28,12 +28,15 @@
                 <div class="project_card">
                     <p class="title" th:text="${task.getTaskName}"><br></p>
                    <p class="description" th:text="${task.getTaskDescription()}" th:unless="${task.getTaskDependencies().size > 0}"></p>
-                   <!-- <p th:text="${task.getEstimatetWorkHours()}">Total required time</p> -->
                     <p class="title_dependencies" th:text="Dependencies" th:unless="${task.getTaskDependencies().size == 0}"></p>
-                    <div th:each="dependentTasksNames : ${task.getTaskDependencies()}" >
-                        <p class="description_dependencies" th:text="${dependentTasksNames}"></p>
+                    <div class="dependencies_container">
+                        <div class="description_dependencies_container" th:each="dependentTasksNames : ${task.getTaskDependencies()}" >
+                            <span class="description_dependencies" th:text="${dependentTasksNames}"></span>
+                        </div>
                     </div>
-
+                    <div class="project_time_remaining">
+                        <span th:text="${task.getEstimatetWorkHours()}">Total required time</span>
+                    </div>
                 </div>
 
             </a>
@@ -41,6 +44,7 @@
                 <a class="project_changebtn" th:href="@{/updateTask(id=${task.getTaskId()})}">CHANGE</a>
                 <!--  <a class="project_changebtn" th:href="@{/taskDependencies(id=${task.getTaskId()})}" th:unless="${task.getTaskDependencies().size == 0}">SE DEP</a> -->
             </div>
+            <!--
             <div style="margin-top: 20px;">
                 <form name="dependency" action="/createDependency/submit" method="post">
                     <label for="dependencies">Select Task to depend on: </label>
@@ -56,6 +60,7 @@
                     <button type="submit">Submit</button>
                 </form>
             </div>
+            -->
         </div>
     </div>
 </div>

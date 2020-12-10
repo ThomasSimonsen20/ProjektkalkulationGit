@@ -4,55 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Subtasks</title>
-    <link th:href="@{/styles/home.css}" rel="stylesheet">
+    <link th:href="@{/styles/projectPage.css}" rel="stylesheet">
 </head>
 <body>
 
-<h1>ALLE SUBTASKS SIDEN</h1>
-
-<h1 th:each="task : ${task}" th:text="'Taskname: ' + ${task.getTaskName()}"></h1>
-
-<form name="dependency" action="/createSubTaskDependency/submit" method="post">
-<label for="dependencies">Select SubTask to depend on: </label>
-<select name="dependency" id="dependencies" action="/createDependency/submit">
-    <option value="">Select Task</option>
-    <option th:each="subTask : ${subTasks}" th:value="${subTask.getSubTaskDescription()}" th:text="${subTask.getSubTaskDescription()}"></option>
-</select>
-    <button type="submit">Submit</button>
-</form>
-
-
-
-
-<!-- Viser også currentTask :( -->
-<!--
-<div>
-    <h4>Andre tasks i dette projekt:</h4>
-    <h6 th:each="task : ${tasks}" th:text="${task.getTaskName()}"></h6>
-</div>
--->
-
-
-
-<div>
-    <a class="tr" href="/createSubTask">Create subTask</a>
-</div>
-
-
-<div>
-    <a href="/projects">Projects</a>
-    <a href="/backToSubProject">SubProjects</a>
-    <a href="/backToTasks">Tasks</a>
-</div>
-
-<div th:each="subTasks : ${subTasks}">
-    <div style="background: aqua; width: 75px">
-        <p th:text="${subTasks.getSubTaskDescription()}"><br></p>
-        <p th:text="${subTasks.getEstimatetWorkHours()}"></p>
-        <a th:href="@{/updateSubTask(id=${subTasks.getSubTaskId()})}">ÆNDRE</a>
+<div class="header">
+    <img class="logo" src="/styles/logo.PNG">
+    <div>
+        <a class="header_button" href="/projects">Projects</a>
+        <a class="header_button" href="/backToSubProject">SubProjects</a>
+        <a class="header_button" href="/backToTasks">Tasks</a>
+    </div>
+    <div>
+        <a class="header_button" href="/createSubTask">Create subTask</a>
     </div>
 
-    <br>
+</div>
+
+
+<div class="project_body">
+    <h2 class="header_project_title">All subTasks</h2>
+    <div class="project_container">
+        <div class="project_card_container" th:each="subTasks : ${subTasks}">
+                <div class="project_card">
+                    <p class="description" th:text="${subTasks.getSubTaskDescription()}"></p>
+                    <p th:text="${subTasks.getEstimatetWorkHours()}">Total required time</p>
+                </div>
+            <a class="project_changebtn" th:href="@{/updateSubProject(id=${subTasks.getSubTaskId()})}">CHANGE</a>
+        </div>
+    </div>
 </div>
 
 

@@ -4,22 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>update Task</title>
+    <link th:href="@{/styles/createForm.css}" rel="stylesheet">
 </head>
 <body>
 
-<div class="divForm">
-    <h3>Skift infomation</h3>
-    <form name="update" action="/updateTask/submit" method="post">
-        Task Name:<br>
-        <input type="text" name="taskName">
-        <br>
-        Task Description:<br>
-        <input type="text" name="taskDescription">
-        <br>
-        SubProject EstimatetWorkHours:<br>
-        <input type="text" name="taskEstimatetWorkHours">
-        <br>
-        <input type="submit" value="Skift">
+
+<div class="form_container">
+    <h1>Change infomation</h1>
+    <form class="add_form_style" name="update" action="/updateTask/submit" method="post">
+
+        <div class="form_title">
+            <label>Tasks Name</label>
+            <input type="text" name="taskName" th:value="${task.getTaskName()}">
+        </div>
+
+        <div class="form_workHours">
+            <label>Task EstimatetWorkHours</label>
+            <input type="number" name="taskEstimatetWorkHours" step="0.01" required th:value="${task.getEstimatetWorkHours()}">
+        </div>
+
+        <div class="form_description">
+            <textarea type="text" name="taskDescription" th:text="${task.getTaskDescription()}" cols="65" rows="13"></textarea>
+        </div>
+
+        <button class="form_button" type="submit" value="Skift">Update</button>
     </form>
 </div>
 

@@ -83,9 +83,10 @@ public class TaskController {
 
 
     @GetMapping("/updateTask")
-    public String updateTask(@RequestParam("id") int idTask, WebRequest request) {
+    public String updateTask(@RequestParam("id") int idTask, WebRequest request, Model model) {
         Task currentTask = systemController.getTask(idTask);
         sessionInfo.taskSessionInfo(request, currentTask);
+        model.addAttribute("task", currentTask);
         return "updateTask";
     }
 
