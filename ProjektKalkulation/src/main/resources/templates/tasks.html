@@ -41,12 +41,12 @@
                 <a class="project_changebtn" th:href="@{/updateTask(id=${task.getTaskId()})}">CHANGE</a>
                 <!--  <a class="project_changebtn" th:href="@{/taskDependencies(id=${task.getTaskId()})}" th:unless="${task.getTaskDependencies().size == 0}">SE DEP</a> -->
             </div>
-            <div>
+            <div style="margin-top: 20px;">
                 <form name="dependency" action="/createDependency/submit" method="post">
                     <label for="dependencies">Select Task to depend on: </label>
                     <select name="dependency" id="dependencies" action="/createDependency/submit">
                         <option value="">Select Task</option>
-                        <option th:each="task : ${tasks}" th:value="${task.getTaskName}" th:text="${task.getTaskName}"></option>
+                        <option th:each="tasks : ${tasks}" th:value="${tasks.getTaskName}" th:text="${tasks.getTaskName}" th:unless="${task.getTaskName() == tasks.getTaskName}" ></option>
                     </select>
                     <button type="submit">Submit</button>
                 </form>
