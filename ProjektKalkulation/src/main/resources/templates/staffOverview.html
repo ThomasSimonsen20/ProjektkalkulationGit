@@ -28,6 +28,7 @@
     <tr class="tr" th:each="employee : ${Staff}">
         <th th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"> NAME & AGE </th>
         <td th:each="skills : ${employee.getSkills()}" th:text="${skills}"></td>
+        <td th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></td>
 
     </tr>
     </tbody>
