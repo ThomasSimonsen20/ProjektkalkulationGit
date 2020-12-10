@@ -30,7 +30,7 @@
                     <p class="description" th:text="${subTasks.getSubTaskDescription()}"></p>
                     <p th:text="${subTasks.getEstimatetWorkHours()}">Total required time</p>
                 </div>
-            <a class="project_changebtn" th:href="@{/updateSubProject(id=${subTasks.getSubTaskId()})}">CHANGE</a>
+            <a class="project_changebtn" th:href="@{/updateSubTask(id=${subTasks.getSubTaskId()})}">CHANGE</a>
         </div>
     </div>
 </div>
