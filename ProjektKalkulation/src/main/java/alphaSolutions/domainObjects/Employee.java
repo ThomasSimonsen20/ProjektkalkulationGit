@@ -10,6 +10,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private int employeeNumber;
+    private double workHoursAvailable;
     private ArrayList<String> skills = new ArrayList<>();
 
     private SystemController systemController = new SystemController(new Facade());
@@ -52,6 +53,11 @@ public class Employee {
     public ArrayList<String> getSkills(){
         return skills;
     }
+
+    public double getWorkHoursAvailable() {
+        return workHoursAvailable;
+    }
+
     /*------------------------------------------------------------------*/
     /*----------------------Setters-------------------------------------*/
     /*------------------------------------------------------------------*/
@@ -74,5 +80,9 @@ public class Employee {
 
     public void setSkills (int employeeId){
         this.skills = systemController.getSkillsForCertainEmployee(employeeId);
+    }
+
+    public void setWorkHoursAvailable(double workHoursAvailable) {
+        this.workHoursAvailable = workHoursAvailable;
     }
 }

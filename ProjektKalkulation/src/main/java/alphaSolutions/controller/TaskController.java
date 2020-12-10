@@ -26,6 +26,7 @@ public class TaskController {
 
         model.addAttribute("subproject", currentSubProject);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(idSubProject));
+
         //Hent liste over dependencies
         //model.addAttribute("taskNames", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
 
@@ -68,12 +69,11 @@ public class TaskController {
         Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
-        //Task dependency = (Task) request.getAttribute("dependency",  WebRequest.SCOPE_SESSION);
-        String dependency = request.getParameter("dependency");
+        Task dependency = (Task) request.getAttribute("dependency",  WebRequest.SCOPE_SESSION);
 
 
-        systemController.createTaskDependency(currentTask.getTaskId(), dependency);
-        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+        systemController.createTaskDependency(currentTask.getTaskId(), dependency.getTaskId());
+        model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
 
 

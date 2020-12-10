@@ -9,7 +9,7 @@
 <body>
 
 <div class="header">
-    <img class="logo" src="/styles/logo.PNG">
+    <img src="/styles/logo.PNG">
     <div>
         <a class="header_button" href="/projects">Projects</a>
         <a class="header_button" href="/backToSubProject">SubProjects</a>
@@ -31,7 +31,7 @@
                     <p class="title_dependencies" th:text="Dependencies" th:unless="${task.getTaskDependencies().size == 0}"></p>
                     <div class="dependencies_container">
                         <div class="description_dependencies_container" th:each="dependentTasksNames : ${task.getTaskDependencies()}" >
-                            <span class="description_dependencies" th:text="${dependentTasksNames}"></span>
+                            <span class="description_dependencies" th:text="${dependentTasksNames.getTaskName()}"></span>
                         </div>
                     </div>
                     <div class="project_time_remaining">
@@ -44,23 +44,21 @@
                 <a class="project_changebtn" th:href="@{/updateTask(id=${task.getTaskId()})}">CHANGE</a>
                 <!--  <a class="project_changebtn" th:href="@{/taskDependencies(id=${task.getTaskId()})}" th:unless="${task.getTaskDependencies().size == 0}">SE DEP</a> -->
             </div>
-            <!--
             <div style="margin-top: 20px;">
-                <form name="dependency" action="/createDependency/submit" method="post">
+                <form name="dependency" action="/createTaskDependency/submit" method="post">
                     <label for="dependencies">Select Task to depend on: </label>
-                    <select name="dependency" id="dependencies" action="/createDependency/submit">
+                    <select  id="dependencies">
                         <option value="">Select Task</option>
-                        <div th:each="dependency : ${tasks}" >
-                            <div th:each="dependencies : ${task.getTaskDependencies()}">
-                        <option th:value="${dependency.getTaskName()}" th:text="${dependency.getTaskName()}"
-                                th:unless="${dependencies == dependency.getTaskName() }"></option>
+
+                        <div th:each="actualDependency : ${task.getTaskDependencies()}">
+                        <option th:each="possibleDependancy : ${tasks}"   th:value="${possibleDependancy.getTaskName()}" th:text="${possibleDependancy.getTaskName()}"
+                                th:if="${possibleDependancy.getTaskId() != actualDependency.getTaskId() and possibleDependancy.getTaskId() != task.getTaskId()}"></option>
                         </div>
-                        </div>
+
                     </select>
                     <button type="submit">Submit</button>
                 </form>
             </div>
-            -->
         </div>
     </div>
 </div>

@@ -52,7 +52,7 @@ public class Task {
         return projectId;
     }
 
-    public ArrayList<String> getTaskDependencies(){
+    public ArrayList<Task> getTaskDependencies(){
         return systemController.getTaskDependencies(this.taskId);
     }
 

@@ -10,7 +10,7 @@ public class Facade {
     private SubProjectMapper subProjectMapper = new SubProjectMapper();
     private TaskMapper taskMapper = new TaskMapper();
     private SubTaskMapper subTaskMapper = new SubTaskMapper();
-    private EmployeesMapper employeesMapper = new EmployeesMapper();
+    private EmployeeMapper employeeMapper = new EmployeeMapper();
 
     public Project createProject(Project project) {
         projectMapper.createProject(project);
@@ -69,15 +69,15 @@ public class Facade {
     }
 
     public ArrayList<Employee> getAllStaff() {
-        return employeesMapper.getAllStaff();
+        return employeeMapper.getAllStaff();
     }
 
     public Employee getEmployee(int employeeId) {
-        return employeesMapper.getEmployee(employeeId);
+        return employeeMapper.getEmployee(employeeId);
     }
 
     public ArrayList<String> getSkillsForCertainEmployee(int employeeId) {
-        return employeesMapper.getSkillsForCertainEmployee(employeeId);
+        return employeeMapper.getSkillsForCertainEmployee(employeeId);
     }
 
     public Project updateProject(Project project) {
@@ -85,7 +85,7 @@ public class Facade {
         return project;
     }
 
-    public ArrayList<String> getTaskDependencies(int taskId) {
+    public ArrayList<Task> getTaskDependencies(int taskId) {
         return taskMapper.getTaskDependencies(taskId);
     }
 
@@ -116,8 +116,8 @@ public class Facade {
     }
 
 
-    public void createTaskDependency(int taskId, String dependency) {
-        taskMapper.createTaskDependency(taskId, dependency);
+    public void createTaskDependency(int taskId, int dependencyId) {
+        taskMapper.createTaskDependency(taskId, dependencyId);
     }
 
     public void createSubTaskDependency(int subTaskId, String dependency) {

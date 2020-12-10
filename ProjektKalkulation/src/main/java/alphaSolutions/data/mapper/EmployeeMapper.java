@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class EmployeesMapper {
+public class EmployeeMapper {
 
     public ArrayList<Employee> getAllStaff() {
         ArrayList<Employee> employeeList = new ArrayList<>();
@@ -25,9 +25,11 @@ public class EmployeesMapper {
                 int employeeNumber = rs.getInt("Employee_Number");
                 String firstName = rs.getString("First_Name");
                 String lastName = rs.getString("Last_Name");
+                double workHoursAvailable = rs.getDouble("WorkHoursAvailable");
                 Employee employee = new Employee(firstName, lastName, employeeNumber);
                 employee.setEmployeeId(employeeId);
                 employee.setSkills(employeeId);
+                employee.setWorkHoursAvailable(workHoursAvailable);
                 employeeList.add(employee);
             }
 
