@@ -14,16 +14,16 @@
 
         <div class="form_title">
             <label>SubProject Name</label>
-            <input type="text" name="subProjectName" th:placeholder="${subProject.getSubProjectName()}">
+            <input type="text" name="subProjectName" th:value="${subProject.getSubProjectName()}">
         </div>
 
         <div class="form_workHours">
             <label>SubProject EstimatetWorkHours</label>
-            <input type="text" name="subProjectEstimatetWorkHours" step="0.01" required th:value="${subProject.getEstimatetWorkHours()}">
+            <input type="number" name="subProjectEstimatetWorkHours" step="0.01" required th:value="${subProject.getEstimatetWorkHours()}">
         </div>
 
         <div class="form_description">
-        <textarea type="text" name="subProjectDescription" th:placeholder="${subProject.getSubProjectDescription()}" cols="65" rows="13"></textarea>
+            <textarea type="text" name="subProjectDescription" th:text="${subProject.getSubProjectDescription()}" cols="65" rows="13"></textarea>
         </div>
 
         <button class="form_button" type="submit">Create</button>

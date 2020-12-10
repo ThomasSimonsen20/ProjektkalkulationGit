@@ -73,7 +73,7 @@ public class TaskController {
 
 
         systemController.createTaskDependency(currentTask.getTaskId(), dependency);
-        model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
 
 

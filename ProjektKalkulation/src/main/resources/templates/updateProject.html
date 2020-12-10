@@ -13,10 +13,10 @@
     <form class="add_form_style" name="update" action="/updateProject/submit" method="post">
         <div class="form_title">
             <label>Project Name</label>
-            <input type="text" name="projectName" th:placeholder="${project.getProjectName}">
+            <input type="text" name="projectName" th:value="${project.getProjectName}">
         </div>
         <div class="form_description">
-            <textarea  type="text" name="projectDescription" th:placeholder="${project.getProjectDescription()}" cols="65" rows="13"></textarea>
+            <textarea  type="text" name="projectDescription" th:text="${project.getProjectDescription()}" cols="65" rows="13"></textarea>
         </div>
         <button  class="form_button" type="submit">Submit</button>
     </form>
