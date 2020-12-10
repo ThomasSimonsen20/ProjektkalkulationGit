@@ -80,10 +80,9 @@ public class TaskMapper {
     }
 
 
-    public void createTaskDependency(int taskId, String dependency) {
+    public void createTaskDependency(int taskId, int dependencyId) {
 
         try {
-            int dependencyId = getDependencyIdFromDependencyName(dependency);
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO taskdependencies (Task_Id, TaskDependency_Id) VALUES (?, ?);";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -99,6 +98,9 @@ public class TaskMapper {
     }
 
 
+    /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
+    /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
+    /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
     private int getDependencyIdFromDependencyName(String dependencyName){
         int dependency_id = 0;
         try {
@@ -304,6 +306,7 @@ public class TaskMapper {
         }
     }
 
+    /*
     public ArrayList<String> getTaskDependencies(int id) {
         ArrayList<String> tasksList = new ArrayList<>();
         try {
@@ -320,6 +323,37 @@ public class TaskMapper {
                 //int taskId = rs.getInt("Task_Id");
                 String taskName = rs.getString("Task_Name");
                 tasksList.add(taskName);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return tasksList;
+    }
+
+     */
+
+    public ArrayList<Task> getTaskDependencies(int taskId) {
+        ArrayList<Task> tasksList = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT Tasks.Project_Id, Tasks.Task_Id, Tasks.SubProject_Id, Tasks.Task_Name, Tasks.Task_Description\n" +
+                    "FROM TaskDependencies\n" +
+                    "LEFT JOIN Tasks ON TaskDependencies.TaskDependency_Id = Tasks.Task_Id\n" +
+                    "WHERE TaskDependencies.Task_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, taskId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int dependencyTaskId = rs.getInt("Task_Id");
+                int projectId = rs.getInt("Project_Id");
+                int subProjectId = rs.getInt("SubProject_Id");
+                String taskName = rs.getString("Task_Name");
+                String taskDescription = rs.getString("Task_Description");
+                Task task = new Task(dependencyTaskId, projectId, subProjectId, taskName, taskDescription);
+                tasksList.add(task);
 
             }
 

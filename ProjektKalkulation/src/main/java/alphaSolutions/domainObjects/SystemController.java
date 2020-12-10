@@ -40,8 +40,8 @@ public class SystemController {
         return subTask;
     }
 
-    public void createTaskDependency(int taskId, String dependency) {
-        facade.createTaskDependency(taskId, dependency);
+    public void createTaskDependency(int taskId, int dependencyId) {
+        facade.createTaskDependency(taskId, dependencyId);
     }
 
     public void createSubTaskDependency(int subTaskId, String dependency) {
@@ -105,7 +105,7 @@ public class SystemController {
         return facade.getSkillsForCertainEmployee(employeeId);
     }
 
-    public ArrayList<String> getTaskDependencies(int taskId) {
+    public ArrayList<Task> getTaskDependencies(int taskId) {
         return facade.getTaskDependencies(taskId);
     }
 

@@ -85,7 +85,7 @@ public class Facade {
         return project;
     }
 
-    public ArrayList<String> getTaskDependencies(int taskId) {
+    public ArrayList<Task> getTaskDependencies(int taskId) {
         return taskMapper.getTaskDependencies(taskId);
     }
 
@@ -116,8 +116,8 @@ public class Facade {
     }
 
 
-    public void createTaskDependency(int taskId, String dependency) {
-        taskMapper.createTaskDependency(taskId, dependency);
+    public void createTaskDependency(int taskId, int dependencyId) {
+        taskMapper.createTaskDependency(taskId, dependencyId);
     }
 
     public void createSubTaskDependency(int subTaskId, String dependency) {
