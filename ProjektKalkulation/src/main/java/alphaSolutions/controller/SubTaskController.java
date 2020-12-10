@@ -1,10 +1,7 @@
 package alphaSolutions.controller;
 
 import alphaSolutions.data.mapper.Facade;
-import alphaSolutions.domainObjects.Project;
-import alphaSolutions.domainObjects.SubTask;
-import alphaSolutions.domainObjects.SystemController;
-import alphaSolutions.domainObjects.Task;
+import alphaSolutions.domainObjects.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +25,26 @@ public class SubTaskController {
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(idTask));
         //model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectIdOmitCurrentTask(idSubProject, idTask));
         model.addAttribute("tasks", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
+
+
+        return "subTasks";
+    }
+
+    @PostMapping("/createSubTaskDependency/submit")
+    public String createSubTaskDependencySubmit(WebRequest request, Model model){
+
+        Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+
+
+        String dependency = request.getParameter("dependency");
+
+
+        //systemController.createSubTaskDependency(currentTask.getTaskId(), dependency);
+        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
+
+        model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+
 
 
         return "subTasks";

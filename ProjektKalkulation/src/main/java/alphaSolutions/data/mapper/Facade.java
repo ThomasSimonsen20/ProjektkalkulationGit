@@ -120,5 +120,9 @@ public class Facade {
         taskMapper.createTaskDependency(taskId, dependency);
     }
 
+    public void createSubTaskDependency(int subTaskId, String dependency) {
+        subTaskMapper.createSubTaskDependency(subTaskId, dependency);
+    }
+
 
 }

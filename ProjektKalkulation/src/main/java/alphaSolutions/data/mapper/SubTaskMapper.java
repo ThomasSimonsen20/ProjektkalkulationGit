@@ -10,6 +10,10 @@ import java.util.ArrayList;
 
 public class SubTaskMapper {
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Creators------------------------------------*/
+    /*------------------------------------------------------------------*/
+
     public void createSubTask(SubTask subTask) {
         Connection con = DBManager.getConnection();
         try {
@@ -62,6 +66,45 @@ public class SubTaskMapper {
             ex.printStackTrace();
         }
         return ps;
+    }
+
+    public void createSubTaskDependency(int subTaskId, String dependency) {
+
+        try {
+            int dependencyId = getDependencyIdFromDependencyName(dependency);
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subTaskDependencies (SubTask_Id, SubTaskDependency_Id) VALUES (?, ?);";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subTaskId);
+            ps.setInt(2, dependencyId);
+            ps.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    private int getDependencyIdFromDependencyName(String dependencyName){
+        int dependency_id = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT SubTasks.Task_Id FROM SubTasks WHERE SubTasks.Task_Name = ?;";
+
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, dependencyName);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                dependency_id = rs.getInt("Task_Id");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return dependency_id;
     }
 
     public int getGeneratedKeys(PreparedStatement ps) {

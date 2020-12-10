@@ -44,6 +44,10 @@ public class SystemController {
         facade.createTaskDependency(taskId, dependency);
     }
 
+    public void createSubTaskDependency(int subTaskId, String dependency) {
+        facade.createSubTaskDependency(subTaskId, dependency);
+    }
+
     /*------------------------------------------------------------------*/
     /*----------------------Getters-------------------------------------*/
     /*------------------------------------------------------------------*/

@@ -12,11 +12,11 @@
 
 <h1 th:each="task : ${task}" th:text="'Taskname: ' + ${task.getTaskName()}"></h1>
 
-<form name="dependency" action="/createDependency/submit" method="post">
-<label for="dependencies">Select Task to depend on: </label>
+<form name="dependency" action="/createSubTaskDependency/submit" method="post">
+<label for="dependencies">Select SubTask to depend on: </label>
 <select name="dependency" id="dependencies" action="/createDependency/submit">
     <option value="">Select Task</option>
-    <option th:each="task : ${tasks}" th:value="${task}" th:text="${task}"></option>
+    <option th:each="subTask : ${subTasks}" th:value="${subTask.getSubTaskDescription()}" th:text="${subTask.getSubTaskDescription()}"></option>
 </select>
     <button type="submit">Submit</button>
 </form>

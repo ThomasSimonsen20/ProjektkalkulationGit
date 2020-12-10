@@ -46,7 +46,11 @@
                     <label for="dependencies">Select Task to depend on: </label>
                     <select name="dependency" id="dependencies" action="/createDependency/submit">
                         <option value="">Select Task</option>
-                        <option th:each="tasks : ${tasks}" th:value="${tasks.getTaskName}" th:text="${tasks.getTaskName}" th:unless="${task.getTaskName() == tasks.getTaskName}" ></option>
+                        <div th:each="dependencies : ${task.getTaskDependencies()}">
+                        <option th:each="dependency : ${tasks}"  th:value="${dependency.getTaskName}" th:text="${dependency.getTaskName}"
+                                th:unless="${task.getTaskName() == dependency.getTaskName()}" th:if="${dependencies != dependency.getTaskName()}"></option>
+                        </div>
+
                     </select>
                     <button type="submit">Submit</button>
                 </form>
