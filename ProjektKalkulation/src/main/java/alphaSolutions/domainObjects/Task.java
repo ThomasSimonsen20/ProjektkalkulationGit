@@ -13,6 +13,7 @@ public class Task {
     private String taskDescription;
     private double EstimatetWorkHours;
     private int tasksEWHId;
+    //Arraylist dependencies
     private SystemController systemController = new SystemController(new Facade());
 
 

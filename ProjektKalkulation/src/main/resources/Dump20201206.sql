@@ -68,7 +68,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Søren','Sørensen',NULL,1234,NULL),(2,'Mike','Jensen',NULL,3411,NULL),(3,'Sean','Pearsen',NULL,5622,NULL),(4,'Ole','Henriksen',NULL,7611,NULL),(5,'Michael','Henningensen',NULL,6533,NULL),(6,'Ulla','Mogensen',NULL,8766,NULL),(7,'Sabine','Sleif',NULL,1223,NULL),(8,'Trine','Poulsen',NULL,4352,NULL),(9,'Magrethe','Egebo',NULL,3244,NULL),(10,'Stine','Arresø',NULL,4322,NULL);
+INSERT INTO `employees` VALUES (1,'Søren','Sørensen',NULL,1234,37),(2,'Mike','Jensen',NULL,3411,37),(3,'Sean','Pearsen',NULL,5622,37),(4,'Ole','Henriksen',NULL,7611,37),(5,'Michael','Henningensen',NULL,6533,37),(6,'Ulla','Mogensen',NULL,8766,37),(7,'Sabine','Sleif',NULL,1223,37),(8,'Trine','Poulsen',NULL,4352,37),(9,'Magrethe','Egebo',NULL,3244,37),(10,'Stine','Arresø',NULL,4322,37);
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,6 +153,32 @@ INSERT INTO `skills` VALUES (1,'Mac IOS'),(2,'BackEnd'),(3,'FrontEnd'),(4,'Andro
 UNLOCK TABLES;
 
 --
+-- Table structure for table `subProjectDependencies`
+--
+
+DROP TABLE IF EXISTS `subProjectDependencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `subProjectDependencies` (
+  `subProjectDependency_Id` int NOT NULL,
+  `subProject_Id` int NOT NULL,
+  PRIMARY KEY (`subProjectDependency_Id`,`subProject_Id`),
+  KEY `subProject_Id_SPD_idx` (`subProject_Id`),
+  CONSTRAINT `subProject_Id_SPD` FOREIGN KEY (`subProject_Id`) REFERENCES `subprojects` (`SubProject_Id`),
+  CONSTRAINT `subProjectDependency_Id_SPD` FOREIGN KEY (`subProjectDependency_Id`) REFERENCES `subprojects` (`SubProject_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subProjectDependencies`
+--
+
+LOCK TABLES `subProjectDependencies` WRITE;
+/*!40000 ALTER TABLE `subProjectDependencies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subProjectDependencies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `subprojects`
 --
 
@@ -210,6 +236,32 @@ INSERT INTO `subprojectsestimatetworkhours` VALUES (1,22,12),(2,22,11),(3,22,222
 UNLOCK TABLES;
 
 --
+-- Table structure for table `subtaskdependencies`
+--
+
+DROP TABLE IF EXISTS `subtaskdependencies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `subtaskdependencies` (
+  ` subtaskdependency_Id` int NOT NULL,
+  `subtask_Id` int NOT NULL,
+  PRIMARY KEY (` subtaskdependency_Id`,`subtask_Id`),
+  KEY `subTask_Id_STD_idx` (`subtask_Id`),
+  CONSTRAINT `subTask_Id_STD` FOREIGN KEY (`subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`),
+  CONSTRAINT `subTaskDependency_Id_STD` FOREIGN KEY (` subtaskdependency_Id`) REFERENCES `subtasks` (`SubTask_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subtaskdependencies`
+--
+
+LOCK TABLES `subtaskdependencies` WRITE;
+/*!40000 ALTER TABLE `subtaskdependencies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `subtaskdependencies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `subtaskestimatetworkhours`
 --
 
@@ -249,6 +301,7 @@ CREATE TABLE `subtasks` (
   `Task_Id` int NOT NULL,
   `SubTask_Description` varchar(500) DEFAULT NULL,
   `Project_Id` int NOT NULL,
+  `SubTask_Name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`SubTask_Id`),
   UNIQUE KEY `SubTask_Id_UNIQUE` (`SubTask_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
@@ -264,7 +317,7 @@ CREATE TABLE `subtasks` (
 
 LOCK TABLES `subtasks` WRITE;
 /*!40000 ALTER TABLE `subtasks` DISABLE KEYS */;
-INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8),(6,10,'Subtask 3 Description',9),(7,10,'Subtask 3a Description',9),(8,8,'SubSUbSUB',7),(9,8,'Nyny subtask',7);
+INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7,'Lav Login'),(5,9,'Subtask 2 Description',8,'ST2'),(6,10,'Subtask 3 Description',9,'ST3'),(7,10,'Subtask 3a Description',9,'ST3a'),(8,8,'SubSUbSUB',7,'Subtask'),(9,8,'Nyny subtask',7,'nySubtask');
 /*!40000 ALTER TABLE `subtasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,7 +344,7 @@ CREATE TABLE `taskdependencies` (
 
 LOCK TABLES `taskdependencies` WRITE;
 /*!40000 ALTER TABLE `taskdependencies` DISABLE KEYS */;
-INSERT INTO `taskdependencies` VALUES (8,17),(20,17),(8,18),(8,20);
+INSERT INTO `taskdependencies` VALUES (8,17),(20,18),(8,20);
 /*!40000 ALTER TABLE `taskdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,4 +442,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-08 14:15:55
+-- Dump completed on 2020-12-11 13:32:27

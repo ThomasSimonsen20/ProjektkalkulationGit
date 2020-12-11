@@ -8,6 +8,29 @@
 8. Check input i workhourds, int + format check - THOMAS
 9. top-nav - MIKKEL
 10. dropdown dependensies - SIMON
+11. Lav Name på subTask. Ret DB og kode
+12. Style dropdown
+13. NICE TO HAVE: Style den store task knap til at synke ned når man trykker på den
+13. Style topnav
+14. Subtask og subproject dependencies
+15. Dropdown (tasks): Vise alle task inden for subprojectet
+16. Erstat extra dependencies med 3 prikker hvis der er mere end 6 pr task
+17. Style allStaff siden
+
+
+
+
+
+
+
+
+
+
+Inden Aflevering:
+
+a) ret DB scriptet. Tine: "Jeg vil anbefale at I som del af sql script får schema oprettelse med, så tabeller ikke bare oprettes i det schema, som default er åben i workbench. Se mere her: https://dev.mysql.com/doc/workbench/en/wb-forward-engineering-sql-scripts.html#wb-export-script-create-sql"
+b) Ret table navne i DB til at være ordentligt formatteret
+c) Ret sprog i hele appen
 
 
 

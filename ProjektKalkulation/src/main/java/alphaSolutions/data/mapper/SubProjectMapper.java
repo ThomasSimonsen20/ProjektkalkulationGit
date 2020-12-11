@@ -198,4 +198,23 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
     }
-}
+
+    public void createSubProjectDependency(int subprojectId, int dependencyId) {
+
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subProjectDependencies (SubProject_Id, SubProjectDependency_Id) VALUES (?, ?);";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subprojectId);
+            ps.setInt(2, dependencyId);
+            ps.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    }
+
