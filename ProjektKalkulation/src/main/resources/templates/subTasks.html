@@ -25,12 +25,12 @@
 <div class="project_body">
     <h2 class="header_project_title">All subTasks</h2>
     <div class="project_container">
-        <div class="project_card_container" th:each="subTasks : ${subTasks}">
+        <div class="project_card_container" th:each="subTask : ${subTasks}">
                 <div class="project_card">
-                    <p class="description" th:text="${subTasks.getSubTaskDescription()}"></p>
-                    <p th:text="${subTasks.getEstimatetWorkHours()}">Total required time</p>
+                    <p class="description" th:text="${subTask.getSubTaskDescription()}"></p>
+                    <p th:text="${subTask.getEstimatetWorkHours()}">Total required time</p>
                 </div>
-            <a class="project_changebtn" th:href="@{/updateSubTask(id=${subTasks.getSubTaskId()})}">CHANGE</a>
+            <a class="project_changebtn" th:href="@{/updateSubTask(id=${subTask.getSubTaskId()})}">CHANGE</a>
         </div>
     </div>
 </div>

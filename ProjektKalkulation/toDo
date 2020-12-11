@@ -28,7 +28,7 @@
 
 Inden Aflevering:
 
-a) ret DB scriptet.
+a) ret DB scriptet. Tine: "Jeg vil anbefale at I som del af sql script får schema oprettelse med, så tabeller ikke bare oprettes i det schema, som default er åben i workbench. Se mere her: https://dev.mysql.com/doc/workbench/en/wb-forward-engineering-sql-scripts.html#wb-export-script-create-sql"
 b) Ret table navne i DB til at være ordentligt formatteret
 c) Ret sprog i hele appen
 

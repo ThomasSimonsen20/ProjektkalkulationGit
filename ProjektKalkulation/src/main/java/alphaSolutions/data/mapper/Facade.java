@@ -17,18 +17,52 @@ public class Facade {
         return project;
     }
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Creators-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public SubProject createSubProject(SubProject subProject, int projectId) {
+        subProjectMapper.createSubProject(subProject, projectId);
+        return subProject;
+    }
+
+    public Task createTask(Task task) {
+        taskMapper.createTask(task);
+        return task;
+    }
+
+    public SubTask createSubTask(SubTask subTask) {
+        subTaskMapper.createSubTask(subTask);
+        return subTask;
+    }
+
+    public void createTaskDependency(int taskId, int dependencyId) {
+        taskMapper.createTaskDependency(taskId, dependencyId);
+    }
+
+    public void createSubTaskDependency(int subTaskId, String dependency) {
+        subTaskMapper.createSubTaskDependency(subTaskId, dependency);
+    }
+
+
+    public void createSubProjectDependency(int subprojectId, int dependencyId) {
+        subProjectMapper.createSubProjectDependency(subprojectId, dependencyId);
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+
     public ArrayList<Project> getAllProjects() {
-       return projectMapper.getAllProjects();
+        return projectMapper.getAllProjects();
     }
 
     public Project getProject(int id) {
         return projectMapper.getProject(id);
     }
 
-    public SubProject createSubProject(SubProject subProject, int projectId) {
-        subProjectMapper.createSubProject(subProject, projectId);
-        return subProject;
-    }
+
 
     public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
         return subProjectMapper.getSubProjectsBasedOnProjectID(id);
@@ -38,10 +72,7 @@ public class Facade {
         return subProjectMapper.getSubProject(id);
     }
 
-    public Task createTask(Task task) {
-        taskMapper.createTask(task);
-        return task;
-    }
+
 
     public ArrayList<Task> getTasksBasedOnSubProjectID(int id) {
         return taskMapper.getTasksBasedOnSubProjectID(id);
@@ -57,11 +88,6 @@ public class Facade {
 
     public Task getTask(int id) {
         return taskMapper.getTask(id);
-    }
-
-    public SubTask createSubTask(SubTask subTask) {
-        subTaskMapper.createSubTask(subTask);
-        return subTask;
     }
 
     public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
@@ -80,31 +106,8 @@ public class Facade {
         return employeeMapper.getSkillsForCertainEmployee(employeeId);
     }
 
-    public Project updateProject(Project project) {
-        projectMapper.updateProject(project);
-        return project;
-    }
-
     public ArrayList<Task> getTaskDependencies(int taskId) {
         return taskMapper.getTaskDependencies(taskId);
-    }
-
-
-    public SubProject updateSubProject(SubProject subProject) {
-        subProjectMapper.updateSubProject(subProject);
-        return subProject;
-    }
-
-
-
-    public Task updateTask(Task task) {
-        taskMapper.updateTask(task);
-        return task;
-    }
-
-    public SubTask updateSubTask(SubTask subTask) {
-        subTaskMapper.updateSubTask(subTask);
-        return subTask;
     }
 
     public SubTask getSubTask(int id) {
@@ -116,13 +119,33 @@ public class Facade {
     }
 
 
-    public void createTaskDependency(int taskId, int dependencyId) {
-        taskMapper.createTaskDependency(taskId, dependencyId);
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Updaters-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+
+    public Project updateProject(Project project) {
+        projectMapper.updateProject(project);
+        return project;
     }
 
-    public void createSubTaskDependency(int subTaskId, String dependency) {
-        subTaskMapper.createSubTaskDependency(subTaskId, dependency);
+    public SubProject updateSubProject(SubProject subProject) {
+        subProjectMapper.updateSubProject(subProject);
+        return subProject;
     }
+
+    public Task updateTask(Task task) {
+        taskMapper.updateTask(task);
+        return task;
+    }
+
+    public SubTask updateSubTask(SubTask subTask) {
+        subTaskMapper.updateSubTask(subTask);
+        return subTask;
+    }
+
+
 
 
 }

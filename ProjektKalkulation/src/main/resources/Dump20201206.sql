@@ -301,6 +301,7 @@ CREATE TABLE `subtasks` (
   `Task_Id` int NOT NULL,
   `SubTask_Description` varchar(500) DEFAULT NULL,
   `Project_Id` int NOT NULL,
+  `SubTask_Name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`SubTask_Id`),
   UNIQUE KEY `SubTask_Id_UNIQUE` (`SubTask_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
@@ -316,7 +317,7 @@ CREATE TABLE `subtasks` (
 
 LOCK TABLES `subtasks` WRITE;
 /*!40000 ALTER TABLE `subtasks` DISABLE KEYS */;
-INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7),(5,9,'Subtask 2 Description',8),(6,10,'Subtask 3 Description',9),(7,10,'Subtask 3a Description',9),(8,8,'SubSUbSUB',7),(9,8,'Nyny subtask',7);
+INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7,'Lav Login'),(5,9,'Subtask 2 Description',8,'ST2'),(6,10,'Subtask 3 Description',9,'ST3'),(7,10,'Subtask 3a Description',9,'ST3a'),(8,8,'SubSUbSUB',7,'Subtask'),(9,8,'Nyny subtask',7,'nySubtask');
 /*!40000 ALTER TABLE `subtasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,4 +442,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-11 13:16:02
+-- Dump completed on 2020-12-11 13:32:27

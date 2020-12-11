@@ -40,6 +40,11 @@ public class SystemController {
         return subTask;
     }
 
+    public void createSubProjectDependency(int subprojectId, int dependencyId){
+        facade.createSubProjectDependency(subprojectId, dependencyId);
+
+    }
+
     public void createTaskDependency(int taskId, int dependencyId) {
         facade.createTaskDependency(taskId, dependencyId);
     }
