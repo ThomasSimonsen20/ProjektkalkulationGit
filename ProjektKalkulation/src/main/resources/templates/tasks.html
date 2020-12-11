@@ -49,14 +49,10 @@
                     <label for="dependencies">Select Task to depend on: </label>
                     <select  id="dependencies">
                         <option value="">Select Task</option>
-
-                        <div th:each="actualDependency : ${task.getTaskDependencies()}">
-                        <option th:each="possibleDependancy : ${tasks}"   th:value="${possibleDependancy.getTaskName()}" th:text="${possibleDependancy.getTaskName()}"
-                                th:if="${possibleDependancy.getTaskId() != actualDependency.getTaskId() and possibleDependancy.getTaskId() != task.getTaskId()}"></option>
-                        </div>
-
+                        <option th:each="dependency : ${tasks}"   th:value="${dependency.getTaskName()}" th:text="${dependency.getTaskName()}"
+                                th:if="${dependency.getTaskId() != task.getTaskId()}"></option>
                     </select>
-                    <button type="submit">Submit</button>
+                    <a class="project_changebtn" th:href="@{/createTaskDependency/submit(id=${task.getTaskId()})}" class="btn btn-detail">Submit</a>
                 </form>
             </div>
         </div>
