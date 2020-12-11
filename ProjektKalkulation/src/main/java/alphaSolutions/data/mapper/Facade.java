@@ -40,8 +40,8 @@ public class Facade {
         taskMapper.createTaskDependency(taskId, dependencyId);
     }
 
-    public void createSubTaskDependency(int subTaskId, String dependency) {
-        subTaskMapper.createSubTaskDependency(subTaskId, dependency);
+    public void createSubTaskDependency(int subTaskId, int dependencyId) {
+        subTaskMapper.createSubTaskDependency(subTaskId, dependencyId);
     }
 
 

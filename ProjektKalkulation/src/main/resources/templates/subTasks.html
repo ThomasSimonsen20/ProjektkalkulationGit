@@ -27,10 +27,22 @@
     <div class="project_container">
         <div class="project_card_container" th:each="subTask : ${subTasks}">
                 <div class="project_card">
+                    <p class="title" th:text="${subTask.getSubTaskName}"><br></p>
                     <p class="description" th:text="${subTask.getSubTaskDescription()}"></p>
                     <p th:text="${subTask.getEstimatetWorkHours()}">Total required time</p>
                 </div>
             <a class="project_changebtn" th:href="@{/updateSubTask(id=${subTask.getSubTaskId()})}">CHANGE</a>
+            <div style="margin-top: 20px;">
+                <form name="dependency" action="/createSubTaskDependency/submit" method="post">
+                    <label for="dependencies">Select subtask to depend on: </label>
+                    <select  id="dependencies">
+                        <option value="">Select Task</option>
+                        <option th:each="dependency : ${subTasks}"   th:value="${dependency.getSubTaskName()}" th:text="${dependency.getSubTaskName()}"
+                                th:if="${dependency.getSubTaskId() != subTask.getTaskId()}"></option>
+                    </select>
+                    <!-- <a class="project_changebtn" th:href="@{/createTaskDependency/submit(id=${task.getTaskId()})}" class="btn btn-detail">Submit</a> -->
+                </form>
+            </div>
         </div>
     </div>
 </div>

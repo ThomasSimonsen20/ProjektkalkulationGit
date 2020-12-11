@@ -37,9 +37,9 @@ public class SubTaskController {
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
 
-        String dependency = request.getParameter("dependency");
+        Task dependency = (Task) request.getAttribute("dependency",  WebRequest.SCOPE_SESSION);
 
-        //systemController.createSubTaskDependency(currentTask.getTaskId(), dependency);
+        systemController.createSubTaskDependency(currentTask.getTaskId(), dependency.getTaskId());
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
         model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 

@@ -52,7 +52,7 @@
                         <option th:each="dependency : ${tasks}"   th:value="${dependency.getTaskName()}" th:text="${dependency.getTaskName()}"
                                 th:if="${dependency.getTaskId() != task.getTaskId()}"></option>
                     </select>
-                    <a class="project_changebtn" th:href="@{/createTaskDependency/submit(id=${task.getTaskId()})}" class="btn btn-detail">Submit</a>
+                    <!-- <a class="project_changebtn" th:href="@{/createTaskDependency/submit(id=${task.getTaskId()})}" class="btn btn-detail">Submit</a> -->
                 </form>
             </div>
         </div>

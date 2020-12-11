@@ -40,11 +40,12 @@ public class SubTaskMapper {
         PreparedStatement ps = null;
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description) VALUES (?,?,?)";
+            String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description) VALUES (?,?,?,?)";
             ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, subTask.getProjectId());
             ps.setInt(2, subTask.getTaskId());
             ps.setString(3, subTask.getSubTaskDescription());
+            ps.setString(4, subTask.getSubTaskName());
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -69,10 +70,9 @@ public class SubTaskMapper {
         return ps;
     }
 
-    public void createSubTaskDependency(int subTaskId, String dependency) {
+    public void createSubTaskDependency(int subTaskId, int dependencyId) {
 
         try {
-            int dependencyId = getDependencyIdFromDependencyName(dependency);
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO subTaskDependencies (SubTask_Id, SubTaskDependency_Id) VALUES (?, ?);";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -87,6 +87,10 @@ public class SubTaskMapper {
 
     }
 
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     private int getDependencyIdFromDependencyName(String dependencyName){
         int dependency_id = 0;
@@ -135,8 +139,9 @@ public class SubTaskMapper {
                 int subTaskId = rs.getInt("SubTask_Id");
                 int projectId = rs.getInt("Project_Id");
                 int taskId = rs.getInt("Task_Id");
+                String subTaskName = rs.getString("SubTask_Name");
                 String subTaskDescription = rs.getString("SubTask_Description");
-                SubTask subTask = new SubTask(subTaskId, projectId, taskId, subTaskDescription);
+                SubTask subTask = new SubTask(subTaskId, projectId, taskId, subTaskName, subTaskDescription);
                 getSubTasksEstimatetWorkHoursTable(subTask);
                 subTasksList.add(subTask);
             }
@@ -160,11 +165,13 @@ public class SubTaskMapper {
                 int subTaskId = rs.getInt("SubTask_Id");
                 int taskId = rs.getInt("Task_Id");
                 int projectId = rs.getInt("Project_Id");
+                String subTaskName = rs.getString("SubTask_Name");
                 String subTaskDescription = rs.getString("SubTask_Description");
 
                 subTask.setSubTaskId(subTaskId);
                 subTask.setTaskId(taskId);
                 subTask.setProjectId(projectId);
+                subTask.setSubTaskName(subTaskName);
                 subTask.setSubTaskDescription(subTaskDescription);
                 getSubTasksEstimatetWorkHoursTable(subTask);
 
@@ -174,6 +181,10 @@ public class SubTaskMapper {
         }
         return subTask;
     }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Updaters------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public void updateSubTask(SubTask subTask) {
         Connection con = DBManager.getConnection();
