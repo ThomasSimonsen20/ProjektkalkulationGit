@@ -101,7 +101,7 @@ public class TaskMapper {
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
-    private int getDependencyIdFromDependencyName(String dependencyName){
+    public int getDependencyIdFromDependencyName(String dependencyName){
         int dependency_id = 0;
         try {
             Connection con = DBManager.getConnection();

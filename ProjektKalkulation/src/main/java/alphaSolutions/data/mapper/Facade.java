@@ -118,6 +118,10 @@ public class Facade {
         return taskMapper.getSubProjectIdBasedOnTaskId(taskId);
     }
 
+    public int getDependencyIdFromDependencyName(String dependencyName){
+       return taskMapper.getDependencyIdFromDependencyName(dependencyName);
+    }
+
 
 
     /*------------------------------------------------------------------*/

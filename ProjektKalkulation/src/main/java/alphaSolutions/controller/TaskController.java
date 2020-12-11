@@ -64,15 +64,16 @@ public class TaskController {
 
 
     @PostMapping("/createTaskDependency/submit")
-    public String createDependencySubmit(WebRequest request, Model model){
+    public String createDependencySubmit(@RequestParam("id") int idTask,WebRequest request, Model model){
 
-        Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
-        Task dependency = (Task) request.getAttribute("dependency",  WebRequest.SCOPE_SESSION);
+        String test = request.getParameter("dependency");
+        int dependency = systemController.getDependencyIdFromDependencyName(test);
+        systemController.createTaskDependency(idTask, dependency);
 
-        systemController.createTaskDependency(currentTask.getTaskId(), dependency.getTaskId());
-        model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+        model.addAttribute("subproject", subProject);
+        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
 
         return "tasks";

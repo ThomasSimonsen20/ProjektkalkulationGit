@@ -118,6 +118,10 @@ public class SystemController {
         return facade.getSubProjectIdBasedOnTaskId(taskId);
     }
 
+    public int getDependencyIdFromDependencyName(String dependencyName){
+        return facade.getDependencyIdFromDependencyName(dependencyName);
+    }
+
 
 
     /*------------------------------------------------------------------*/
