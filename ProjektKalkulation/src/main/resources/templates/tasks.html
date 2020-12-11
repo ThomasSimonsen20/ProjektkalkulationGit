@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
     <link th:href="@{/styles/projectPage.css}" rel="stylesheet">
 </head>
@@ -20,12 +21,19 @@
 
 </div>
 
+<div class="project_description">
+    <h3 class="project_description_title" th:text="${subproject.getSubProjectName()}"></h3>
+    <p class="project_description_description" th:text="${subproject.getSubProjectDescription()}"></p>
+</div>
+
 <div class="project_body">
-    <h2 class="header_project_title">All Tasks</h2>
-    <div class="project_container">
+   <div class="project_container">
         <div class="project_card_container" th:each="task : ${tasks}">
             <a class="project_card_link" th:href="@{/subTask(id=${task.getTaskId()})}">
                 <div class="project_card">
+                    <div class="project_time_remaining">
+                        <span>Estimeret tid: <span th:text="${task.getEstimatetWorkHours()}"></span> timer</span>
+                    </div>
                     <p class="title" th:text="${task.getTaskName}"><br></p>
                    <p class="description" th:text="${task.getTaskDescription()}" th:unless="${task.getTaskDependencies().size > 0}"></p>
                     <p class="title_dependencies" th:text="Dependencies" th:unless="${task.getTaskDependencies().size == 0}"></p>
@@ -34,9 +42,7 @@
                             <span class="description_dependencies" th:text="${dependentTasksNames.getTaskName()}"></span>
                         </div>
                     </div>
-                    <div class="project_time_remaining">
-                        <span th:text="${task.getEstimatetWorkHours()}">Total required time</span>
-                    </div>
+
                 </div>
 
             </a>

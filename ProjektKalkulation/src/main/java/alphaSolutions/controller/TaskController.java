@@ -71,16 +71,12 @@ public class TaskController {
 
         Task dependency = (Task) request.getAttribute("dependency",  WebRequest.SCOPE_SESSION);
 
-
         systemController.createTaskDependency(currentTask.getTaskId(), dependency.getTaskId());
         model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
 
-
         return "tasks";
     }
-
-
 
     @GetMapping("/updateTask")
     public String updateTask(@RequestParam("id") int idTask, WebRequest request, Model model) {
