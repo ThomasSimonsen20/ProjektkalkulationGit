@@ -12,15 +12,20 @@
     <img class="logo" src="/styles/logo.PNG">
     <div>
         <a class="header_button" href="/projects">Projects</a>
+        <span>⇢</span>
+        <a class="header_button_active" href="/backToSubProject">SubProjects</a>
     </div>
     <div>
-        <a class="header_button" href="/createSubProject">Create Subproject</a>
+        <a class="project_btn" href="/createSubProject">Create Subproject</a>
     </div>
+</div>
 
+<div class="project_description">
+    <h3 class="project_description_title" th:text="${project.getProjectName()}"></h3>
+    <p class="project_description_description" th:text="${project.getProjectDescription()}"></p>
 </div>
 
 <div class="project_body">
-    <h2 class="header_project_title">All SubProjects</h2>
         <div class="project_container">
             <div class="project_card_container" th:each="subProject : ${subProject}">
                 <a class="project_card_link" th:href="@{/task(id=${subProject.getSubProjectId})}">
@@ -30,7 +35,7 @@
                          <p th:text="${subProject.getEstimatetWorkHours()}">Total required time</p>
                     </div>
                 </a>
-        <a class="project_changebtn" th:href="@{/updateSubProject(id=${subProject.getSubProjectId()})}">CHANGE</a>
+        <a class="project_btn" th:href="@{/updateSubProject(id=${subProject.getSubProjectId()})}">Edit</a>
         </div>
     </div>
 </div>

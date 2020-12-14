@@ -138,6 +138,15 @@ h5 p {
     margin: 0 5px 0 5px;
 }
 
+.header_button_active {
+    border-bottom: #FF325A 2px solid;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 5px 0 5px;
+}
+
 .project_body {
     margin: 0 20px 0 20px;
 }
@@ -196,7 +205,7 @@ h5 p {
 
 }
 
-.project_changebtn {
+.project_btn {
     margin: 15px 0 15px 0;
     background: #4F758C;
     padding: 15px;
@@ -266,11 +275,13 @@ h5 p {
 }
 
 .project_description {
-    margin: 20px;
-    width: 250px;
+    margin: 40px;
+    width: auto;
+    text-align: center;
 }
 
 .project_description_title {
+
     color: #4F758C;
     margin-bottom: 10px;
 }

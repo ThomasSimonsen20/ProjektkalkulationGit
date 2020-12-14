@@ -24,7 +24,7 @@ public class SubProjectController {
         sessionInfo.projectSessionInfo(request, currentProject);
 
         model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(idProject));
-        model.addAttribute("Project", currentProject);
+        model.addAttribute("project", currentProject);
 
         return "subProjects";
     }

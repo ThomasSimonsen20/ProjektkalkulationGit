@@ -12,11 +12,15 @@
     <img class="logo" src="/styles/logo.PNG">
     <div>
         <a class="header_button" href="/projects">Projects</a>
+        <span>⇢</span>
         <a class="header_button" href="/backToSubProject">SubProjects</a>
+        <span>⇢</span>
         <a class="header_button" href="/backToTasks">Tasks</a>
+        <span>⇢</span>
+        <a class="header_button_active" href="/backToTasks">Subtasks</a>
     </div>
     <div>
-        <a class="header_button" href="/createSubTask">Create subTask</a>
+        <a class="project_btn" href="/createSubTask">Create subTask</a>
     </div>
 
 </div>
@@ -46,7 +50,7 @@
             </div>
 
             <div class="button_margin">
-                <a class="project_changebtn" th:href="@{/updateSubTask(id=${subTask.getSubTaskId()})}">CHANGE</a>
+                <a class="project_btn" th:href="@{/updateSubTask(id=${subTask.getSubTaskId()})}">Edit</a>
             </div>
 
             <div class="project_form_container">
@@ -82,7 +86,7 @@
                     <p class="description" th:text="${subTask.getSubTaskDescription()}"></p>
                     <p th:text="${subTask.getEstimatetWorkHours()}">Total required time</p>
                 </div>
-            <a class="project_changebtn" th:href="@{/updateSubTask(id=${subTask.getSubTaskId()})}">CHANGE</a>
+            <a class="project_btn" th:href="@{/updateSubTask(id=${subTask.getSubTaskId()})}">CHANGE</a>
             <div style="margin-top: 20px;">
                 <form name="dependency" action="/createSubTaskDependency/submit" method="post">
                     <label for="dependencies">Select subtask to depend on: </label>
@@ -91,7 +95,7 @@
                         <option th:each="dependency : ${subTasks}"   th:value="${dependency.getSubTaskName()}" th:text="${dependency.getSubTaskName()}"
                                 th:if="${dependency.getSubTaskId() != subTask.getTaskId()}"></option>
                     </select>
-                     <a class="project_changebtn" th:href="@{/createTaskDependency/submit(id=${task.getTaskId()})}" class="btn btn-detail">Submit</a>
+                     <a class="project_btn" th:href="@{/createTaskDependency/submit(id=${task.getTaskId()})}" class="btn btn-detail">Submit</a>
                 </form>
             </div>
         </div>

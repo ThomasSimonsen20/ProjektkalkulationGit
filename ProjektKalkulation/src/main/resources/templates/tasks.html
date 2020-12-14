@@ -13,10 +13,13 @@
     <img class="logo" src="/styles/logo.PNG">
     <div>
         <a class="header_button" href="/projects">Projects</a>
+        <span>⇢</span>
         <a class="header_button" href="/backToSubProject">SubProjects</a>
+        <span>⇢</span>
+        <a class="header_button_active" href="/backToTasks">Tasks</a>
     </div>
     <div>
-        <a class="header_button" href="/createTask">Create Task</a>
+        <a class="project_btn" href="/createTask">Create Task</a>
     </div>
 
 </div>
@@ -46,8 +49,8 @@
 
             </a>
             <div class="button_margin">
-                <a class="project_changebtn" th:href="@{/updateTask(id=${task.getTaskId()})}">CHANGE</a>
-                <!--  <a class="project_changebtn" th:href="@{/taskDependencies(id=${task.getTaskId()})}" th:unless="${task.getTaskDependencies().size == 0}">SE DEP</a> -->
+                <a class="project_btn" th:href="@{/updateTask(id=${task.getTaskId()})}">Edit</a>
+                <!--  <a class="project_btn" th:href="@{/taskDependencies(id=${task.getTaskId()})}" th:unless="${task.getTaskDependencies().size == 0}">SE DEP</a> -->
             </div>
             <div class="project_form_container">
                 <form name="dependency" th:action="@{/createTaskDependency/submit(id=${task.getTaskId()})}"  method="post">
