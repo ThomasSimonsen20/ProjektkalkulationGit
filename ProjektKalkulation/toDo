@@ -8,7 +8,7 @@
 8. Check input i workhourds, int + format check - THOMAS
 9. top-nav - MIKKEL
 10. dropdown dependensies - SIMON
-11. Lav Name på subTask. Ret DB og kode
+11. Lav Name på subTask. Ret DB og kode SIMON TJEK
 12. Style dropdown
 13. NICE TO HAVE: Style den store task knap til at synke ned når man trykker på den
 13. Style topnav
@@ -20,6 +20,9 @@
 19. fix tilbage til tasks - CHECK
 20. clean op i mapperen
 21. fix så man kan lave en task
+
+
+DEPENDENCIES I SUBPROJECT
 
 
 
