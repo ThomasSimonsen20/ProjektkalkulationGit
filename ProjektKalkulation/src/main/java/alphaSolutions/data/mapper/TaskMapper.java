@@ -79,6 +79,27 @@ public class TaskMapper {
         return id;
     }
 
+    public int getDependencyIdFromDependencyName(String dependencyName){
+        int dependency_id = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT Tasks.Task_Id FROM Tasks WHERE Tasks.Task_Name = ?;";
+            //String SQLDepName = "'" + dependencyName + "'";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, dependencyName);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                dependency_id = rs.getInt("Task_Id");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return dependency_id;
+    }
+
+
 
     public void createTaskDependency(int taskId, int dependencyId) {
 
@@ -228,33 +249,7 @@ public class TaskMapper {
         }
     }
 
-    /*
-    public ArrayList<String> getTaskDependencies(int id) {
-        ArrayList<String> tasksList = new ArrayList<>();
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT TaskDependencies.TaskDependency_Id, Tasks.Task_Name\n" +
-                    "FROM TaskDependencies\n" +
-                    "LEFT JOIN Tasks ON TaskDependencies.TaskDependency_Id = Tasks.Task_Id\n" +
-                    "WHERE TaskDependencies.Task_Id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
-                //int taskId = rs.getInt("Task_Id");
-                String taskName = rs.getString("Task_Name");
-                tasksList.add(taskName);
-
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return tasksList;
-    }
-
-     */
 
     public ArrayList<Task> getTaskDependencies(int taskId) {
         ArrayList<Task> tasksList = new ArrayList<>();
@@ -335,25 +330,6 @@ public class TaskMapper {
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
-    public int getDependencyIdFromDependencyName(String dependencyName){
-        int dependency_id = 0;
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT Tasks.Task_Id FROM Tasks WHERE Tasks.Task_Name = ?;";
-            //String SQLDepName = "'" + dependencyName + "'";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, dependencyName);
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()) {
-                dependency_id = rs.getInt("Task_Id");
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return dependency_id;
-    }
 
     public ArrayList<Task> getTasksBasedOnSubProjectIdOmitCurrentTask(int idSubProject, int idTask) {
         ArrayList<Task> tasksList = new ArrayList<>();
