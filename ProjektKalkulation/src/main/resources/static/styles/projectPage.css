@@ -118,6 +118,8 @@ h5 p {
     h5 p {
         font-size: 16px; } }
 
+
+
 .header {
     position: -webkit-sticky; /* Safari */
     position: sticky;
@@ -128,6 +130,15 @@ h5 p {
     justify-content: space-between;
     margin: 30px;
     align-items: center;
+}
+
+.header #topnav_path {
+    position: absolute;
+    margin-left: 150px;
+}
+
+. a:hover {
+    text-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 
 .header_project_title {
@@ -165,7 +176,7 @@ h5 p {
 }
 
 @media (min-width: 900px ) {
-   .project_container { grid-template-columns: 1fr 1fr; }
+    .project_container { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 1350px ) {
@@ -253,7 +264,7 @@ h5 p {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
-   /* margin: 20px 0 20px 0; */
+    /* margin: 20px 0 20px 0; */
 }
 
 .button_margin {
@@ -281,12 +292,7 @@ h5 p {
 
 
 
-.topnav_path{
-    position: relative;
-    left: 30px;
-    width: 40%;
 
-}
 
 .project_description {
     margin: 40px;
