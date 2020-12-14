@@ -70,7 +70,9 @@ public class TaskController {
 
         String test = request.getParameter("dependency");
         int dependency = systemController.getDependencyIdFromDependencyName(test);
+
         systemController.createTaskDependency(idTask, dependency);
+
 
         model.addAttribute("subproject", subProject);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));

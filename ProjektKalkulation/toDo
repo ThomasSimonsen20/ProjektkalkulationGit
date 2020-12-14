@@ -37,6 +37,9 @@ c) Ret sprog i hele appen
 
 
 Thomas todo:
-vis navn på det man har klikket ind på samt vise description
+tilføj nyt layout til alle sider
+fjern description på alt uden despendencies
+lav boxen større så når længere task navne bliver tilføjet ryger det ikk ud af boxen....
+fix dropdown submits
 
 
