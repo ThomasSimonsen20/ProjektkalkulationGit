@@ -63,7 +63,6 @@ public class Facade {
     }
 
 
-
     public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
         return subProjectMapper.getSubProjectsBasedOnProjectID(id);
     }
@@ -71,7 +70,6 @@ public class Facade {
     public SubProject getSubProject(int id) {
         return subProjectMapper.getSubProject(id);
     }
-
 
 
     public ArrayList<Task> getTasksBasedOnSubProjectID(int id) {
@@ -122,13 +120,22 @@ public class Facade {
         return taskMapper.getSubProjectIdBasedOnTaskId(taskId);
     }
 
-    public int getDependencyIdFromDependencyName(String dependencyName){
-       return taskMapper.getDependencyIdFromDependencyName(dependencyName);
+    public int getSubProjectDependencyIdFromDependencyName(String dependencyName){
+        return subProjectMapper.getSubProjectDependencyIdFromDependencyName(dependencyName);
+    }
+
+    public int getTaskDependencyIdFromDependencyName(String dependencyName){
+       return taskMapper.getTaskDependencyIdFromDependencyName(dependencyName);
     }
 
     public int getSubTaskDependencyIdFromDependencyName(String dependencyName){
         return subTaskMapper.getSubTaskDependencyIdFromDependencyName(dependencyName);
     }
+
+    public ArrayList<SubProject> getSubProjectDependencies(int subProjectId) {
+        return subProjectMapper.getSubProjectDependencies(subProjectId);
+    }
+
 
 
 

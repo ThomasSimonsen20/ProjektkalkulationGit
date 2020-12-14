@@ -79,7 +79,7 @@ public class TaskMapper {
         return id;
     }
 
-    public int getDependencyIdFromDependencyName(String dependencyName){
+    public int getTaskDependencyIdFromDependencyName(String dependencyName){
         int dependency_id = 0;
         try {
             Connection con = DBManager.getConnection();

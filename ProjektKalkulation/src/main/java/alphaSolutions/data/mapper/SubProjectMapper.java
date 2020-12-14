@@ -2,10 +2,16 @@ package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.SubProject;
+import alphaSolutions.domainObjects.Task;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class SubProjectMapper {
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Creators------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public void createSubProject(SubProject subProject, int projectId) {
         Connection con = DBManager.getConnection();
@@ -30,38 +36,27 @@ public class SubProjectMapper {
         }
     }
 
-    public PreparedStatement createSubProjectTable(SubProject subProject, int projectId)  {
-        PreparedStatement ps = null;
+    public void createSubProjectDependency(int subprojectId, int dependencyId) {
+
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subprojects (Project_Id, SubProject_Name, SubProject_Description) VALUES (?,?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, projectId);
-            ps.setString(2, subProject.getSubProjectName());
-            ps.setString(3, subProject.getSubProjectDescription());
+            String SQL = "INSERT INTO subProjectDependencies (SubProject_Id, SubProjectDependency_Id) VALUES (?, ?);";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subprojectId);
+            ps.setInt(2, dependencyId);
             ps.executeUpdate();
+
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return ps;
+
     }
 
-    public PreparedStatement createSubProjectsEstimatetWorkhoursTable(SubProject subProject) {
-        PreparedStatement ps = null;
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, subProject.getSubProjectId());
-            ps.setDouble(2, subProject.getEstimatetWorkHours());
-            ps.executeUpdate();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return ps;
-    }
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public int getGeneratedKeys(PreparedStatement ps) {
         int id = 0;
@@ -129,6 +124,77 @@ public class SubProjectMapper {
         return subProject;
     }
 
+    public ArrayList<SubProject> getSubProjectDependencies(int subProject_Id) {
+        ArrayList<SubProject> subProjectDependenciesList = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT Subprojects.Project_Id, Subprojects.Subproject_Id, Subprojects.Subproject_Name, Subprojects.Subproject_Description\n" +
+                    "FROM Subprojectdependencies\n" +
+                    "LEFT JOIN Subprojects ON Subprojectdependencies.SubprojectDependency_Id = Subprojects.Subproject_Id\n" +
+                    "WHERE Subprojectdependencies.Subproject_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subProject_Id);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int dependencySubProjectId = rs.getInt("SubProject_Id");
+                int projectId = rs.getInt("Project_Id");
+                String subProjectName = rs.getString("SubProject_Name");
+                String subProjectDescription = rs.getString("SubProject_Description");
+                SubProject subProject = new SubProject(dependencySubProjectId, projectId, subProjectName, subProjectDescription);
+                subProjectDependenciesList.add(subProject);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return subProjectDependenciesList;
+    }
+
+    public int getSubProjectDependencyIdFromDependencyName(String dependencyName){
+        int dependency_id = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT SubProjects.SubProject_Id FROM SubProjects WHERE SubProjects.SubProject_Name = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, dependencyName);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                dependency_id = rs.getInt("SubProject_Id");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return dependency_id;
+    }
+
+    public void getSubprojectsEstimatetWorkHoursTable(SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT EstimatetWorkHours, SubProjectEWH_Id\n" +
+                    "FROM SubprojectsEstimatetWorkHours\n" +
+                    "WHERE SubProject_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subProject.getSubProjectId());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                subProject.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
+                subProject.setSubProjectEWHId(rs.getInt("SubProjectEWH_Id"));
+            }
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Updaters------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public void updateSubProject(SubProject subProject) {
         Connection con = DBManager.getConnection();
@@ -179,41 +245,43 @@ public class SubProjectMapper {
         }
     }
 
-    public void getSubprojectsEstimatetWorkHoursTable(SubProject subProject) throws SQLException {
+
+
+    /*------------------------------------------------------------------*/
+    /*----------------Prepared Statement Generators---------------------*/
+    /*------------------------------------------------------------------*/
+
+    public PreparedStatement createSubProjectTable(SubProject subProject, int projectId)  {
+        PreparedStatement ps = null;
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT EstimatetWorkHours, SubProjectEWH_Id\n" +
-                    "FROM SubprojectsEstimatetWorkHours\n" +
-                    "WHERE SubProject_Id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, subProject.getSubProjectId());
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()) {
-                subProject.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
-                subProject.setSubProjectEWHId(rs.getInt("SubProjectEWH_Id"));
-            }
-        }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void createSubProjectDependency(int subprojectId, int dependencyId) {
-
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subProjectDependencies (SubProject_Id, SubProjectDependency_Id) VALUES (?, ?);";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, subprojectId);
-            ps.setInt(2, dependencyId);
+            String SQL = "INSERT INTO subprojects (Project_Id, SubProject_Name, SubProject_Description) VALUES (?,?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, projectId);
+            ps.setString(2, subProject.getSubProjectName());
+            ps.setString(3, subProject.getSubProjectDescription());
             ps.executeUpdate();
-
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return ps;
+    }
 
+    public PreparedStatement createSubProjectsEstimatetWorkhoursTable(SubProject subProject) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subprojectsestimatetworkhours (SubProject_Id, EstimatetWorkHours) VALUES (?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subProject.getSubProjectId());
+            ps.setDouble(2, subProject.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
     }
 
     }

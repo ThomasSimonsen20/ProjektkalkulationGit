@@ -70,7 +70,7 @@ public class TaskController {
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
         String test = request.getParameter("dependency");
-        int dependency = systemController.getDependencyIdFromDependencyName(test);
+        int dependency = systemController.getTaskDependencyIdFromDependencyName(test);
 
         systemController.createTaskDependency(idTask, dependency);
 
