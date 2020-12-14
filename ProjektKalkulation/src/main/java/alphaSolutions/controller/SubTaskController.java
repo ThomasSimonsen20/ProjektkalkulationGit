@@ -24,25 +24,24 @@ public class SubTaskController {
         model.addAttribute("task", currentTask);
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(idTask));
         //model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectIdOmitCurrentTask(idSubProject, idTask));
-        model.addAttribute("tasks", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
+        //model.addAttribute("tasks", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
 
 
         return "subTasks";
     }
 
     @PostMapping("/createSubTaskDependency/submit")
-    public String createSubTaskDependencySubmit(WebRequest request, Model model){
+    public String createSubTaskDependencySubmit(@RequestParam("id") int idSubTask, WebRequest request, Model model){
 
         Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
-        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
+        String getDependency = request.getParameter("dependency");
+        int dependency = systemController.getSubTaskDependencyIdFromDependencyName(getDependency);
 
-        Task dependency = (Task) request.getAttribute("dependency",  WebRequest.SCOPE_SESSION);
+        systemController.createSubTaskDependency(idSubTask, dependency);
 
-        systemController.createSubTaskDependency(currentTask.getTaskId(), dependency.getTaskId());
+        model.addAttribute("task", currentTask);
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
-        model.addAttribute("taskNames", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
-
 
         return "subTasks";
     }
@@ -59,9 +58,11 @@ public class SubTaskController {
         Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
         Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
 
+        String subTaskName = request.getParameter("subTaskName");
         String subTaskDescription = request.getParameter("subTaskDescription");
         String subTaskEstimatetWorkHours = request.getParameter("subTaskEstimatetWorkHours");
 
+        subTask.setSubTaskName(subTaskName);
         subTask.setProjectId(project.getProjectId());
         subTask.setTaskId(currentTask.getTaskId());
         subTask.setSubTaskDescription(subTaskDescription);
@@ -86,7 +87,7 @@ public class SubTaskController {
 
     @PostMapping("/updateSubTask/submit")
     public String updateSubTaskSubmit(WebRequest request, Model model) {
-        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+        Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
 
         SubTask subTask = (SubTask) request.getAttribute("subTask", WebRequest.SCOPE_SESSION);
 
@@ -98,7 +99,8 @@ public class SubTaskController {
 
         systemController.updateSubTask(subTask);
 
-        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(task.getTaskId()));
+        model.addAttribute("task", currentTask);
+        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
 
         return "subTasks";
     }

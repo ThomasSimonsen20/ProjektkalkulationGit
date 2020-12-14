@@ -14,7 +14,7 @@ public class Task {
     private double EstimatetWorkHours;
     private int tasksEWHId;
     //Arraylist dependencies
-    private SystemController systemController = new SystemController(new Facade());
+    private final SystemController systemController = new SystemController(new Facade());
 
 
 

@@ -89,6 +89,9 @@ public class SystemController {
         return facade.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask);
     }
 
+    public ArrayList<SubTask> getSubTaskDependencies(int subTaskId) {
+        return  facade.getSubTaskDependencies(subTaskId);
+    }
 
     public Task getTask(int id) {
         return facade.getTask(id);
@@ -120,6 +123,10 @@ public class SystemController {
 
     public int getDependencyIdFromDependencyName(String dependencyName){
         return facade.getDependencyIdFromDependencyName(dependencyName);
+    }
+
+    public int getSubTaskDependencyIdFromDependencyName(String dependencyName){
+        return facade.getSubTaskDependencyIdFromDependencyName(dependencyName);
     }
 
 

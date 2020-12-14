@@ -110,6 +110,10 @@ public class Facade {
         return taskMapper.getTaskDependencies(taskId);
     }
 
+    public ArrayList<SubTask> getSubTaskDependencies(int subTaskId) {
+        return  subTaskMapper.getSubTaskDependencies(subTaskId);
+    }
+
     public SubTask getSubTask(int id) {
         return subTaskMapper.getSubTask(id);
     }
@@ -120,6 +124,10 @@ public class Facade {
 
     public int getDependencyIdFromDependencyName(String dependencyName){
        return taskMapper.getDependencyIdFromDependencyName(dependencyName);
+    }
+
+    public int getSubTaskDependencyIdFromDependencyName(String dependencyName){
+        return subTaskMapper.getSubTaskDependencyIdFromDependencyName(dependencyName);
     }
 
 

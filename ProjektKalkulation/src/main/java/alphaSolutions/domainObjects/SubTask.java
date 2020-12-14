@@ -1,5 +1,9 @@
 package alphaSolutions.domainObjects;
 
+import alphaSolutions.data.mapper.Facade;
+
+import java.util.ArrayList;
+
 public class SubTask {
 
     private int subTaskId;
@@ -9,6 +13,7 @@ public class SubTask {
     private String subTaskDescription;
     private double EstimatetWorkHours;
     private int subtasksEWHId;
+    private final SystemController systemController = new SystemController(new Facade());
 
     public SubTask(int subTaskId, int projectId, int taskId, String subTaskName, String subTaskDescription) {
         this.subTaskId = subTaskId;
@@ -51,6 +56,10 @@ public class SubTask {
 
     public int getSubtasksEWHId() {
         return subtasksEWHId;
+    }
+
+    public ArrayList<SubTask> getSubTaskDependencies(){
+        return systemController.getSubTaskDependencies(this.subTaskId);
     }
 
 

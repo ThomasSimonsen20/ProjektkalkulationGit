@@ -11,6 +11,10 @@
 <div class="form_container">
     <h1>Create SubTask</h1>
         <form class="add_form_style" name="createSubTask" action="/createSubTask/submit" method="post">
+            <div class="form_title">
+                <label>Task Name:</label>
+                <input type="text" name="subTaskName" required>
+            </div>
             <div class="form_workHours">
                 <label>Subproject Estimatet Work Hours:</label>
                 <input type="number" name="subTaskEstimatetWorkHours" step="0.01" placeholder="Enter a number" required th:value="${0}">

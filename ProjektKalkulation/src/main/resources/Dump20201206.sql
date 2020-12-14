@@ -243,12 +243,12 @@ DROP TABLE IF EXISTS `subtaskdependencies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subtaskdependencies` (
-  ` subtaskdependency_Id` int NOT NULL,
+  `subtaskdependency_Id` int NOT NULL,
   `subtask_Id` int NOT NULL,
-  PRIMARY KEY (` subtaskdependency_Id`,`subtask_Id`),
+  PRIMARY KEY (`subtaskdependency_Id`,`subtask_Id`),
   KEY `subTask_Id_STD_idx` (`subtask_Id`),
   CONSTRAINT `subTask_Id_STD` FOREIGN KEY (`subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`),
-  CONSTRAINT `subTaskDependency_Id_STD` FOREIGN KEY (` subtaskdependency_Id`) REFERENCES `subtasks` (`SubTask_Id`)
+  CONSTRAINT `subTaskDependency_Id_STD` FOREIGN KEY (`subtaskdependency_Id`) REFERENCES `subtasks` (`SubTask_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

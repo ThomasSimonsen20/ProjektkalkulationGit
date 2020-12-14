@@ -287,3 +287,7 @@ h5 p {
     color: white;
     text-decoration: none;
 }
+
+.project_form_container {
+    margin-top: 20px;
+}

@@ -40,7 +40,7 @@ public class SubTaskMapper {
         PreparedStatement ps = null;
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description) VALUES (?,?,?,?)";
+            String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description, SubTask_Name) VALUES (?,?,?,?)";
             ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, subTask.getProjectId());
             ps.setInt(2, subTask.getTaskId());
@@ -92,24 +92,54 @@ public class SubTaskMapper {
     /*----------------------Getters-------------------------------------*/
     /*------------------------------------------------------------------*/
 
-    private int getDependencyIdFromDependencyName(String dependencyName){
+    public int getSubTaskDependencyIdFromDependencyName(String dependencyName){
         int dependency_id = 0;
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT SubTasks.Task_Id FROM SubTasks WHERE SubTasks.Task_Name = ?;";
+            String SQL = "SELECT SubTasks.SubTask_Id FROM SubTasks WHERE SubTasks.SubTask_Name = ?;";
 
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, dependencyName);
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
-                dependency_id = rs.getInt("Task_Id");
+                dependency_id = rs.getInt("SubTask_Id");
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return dependency_id;
+    }
+
+    public ArrayList<SubTask> getSubTaskDependencies(int subTaskId) {
+        ArrayList<SubTask> subtasksList = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT subtasks.Project_Id, subtasks.Task_Id, subtasks.SubTask_Id, subtasks.SubTask_Name, subtasks.SubTask_Description\n" +
+                    "FROM subtaskdependencies\n" +
+                    "LEFT JOIN subtasks ON subtaskdependencies. subtaskdependency_Id = subtasks.subtask_Id\n" +
+                    "WHERE subtaskdependencies.SubTask_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subTaskId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                int projectId = rs.getInt("Project_Id");
+                int taskId = rs.getInt("Task_Id");
+                int dependencySubTaskId = rs.getInt("SubTask_Id");
+                String subTaskName = rs.getString("SubTask_Name");
+                String subTaskDescription = rs.getString("SubTask_Description");
+
+                SubTask subTask = new SubTask(dependencySubTaskId,projectId,taskId,subTaskName,subTaskDescription);
+                subtasksList.add(subTask);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return subtasksList;
     }
 
     public int getGeneratedKeys(PreparedStatement ps) {
