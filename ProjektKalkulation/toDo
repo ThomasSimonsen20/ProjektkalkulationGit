@@ -16,7 +16,10 @@
 15. Dropdown (tasks): Vise alle task inden for subprojectet
 16. Erstat extra dependencies med 3 prikker hvis der er mere end 6 pr task
 17. Style allStaff siden
-
+18. Slet knap
+19. fix tilbage til tasks - CHECK
+20. clean op i mapperen
+21. fix så man kan lave en task
 
 
 
@@ -38,8 +41,8 @@ c) Ret sprog i hele appen
 
 Thomas todo:
 tilføj nyt layout til alle sider
-fjern description på alt uden despendencies
-lav boxen større så når længere task navne bliver tilføjet ryger det ikk ud af boxen....
-fix dropdown submits
+fjern description på alt uden despendencies - CHECK
+lav boxen større så når længere task navne bliver tilføjet ryger det ikk ud af boxen.... evt.. gør så den ikk viser det hele så vi kan beholde vores nuværende størrelse. CHECK
+fix dropdown submits - CHECK
 
 

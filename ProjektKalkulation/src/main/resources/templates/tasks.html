@@ -35,7 +35,6 @@
                         <span>Estimeret tid: <span th:text="${task.getEstimatetWorkHours()}"></span> timer</span>
                     </div>
                     <p class="title" th:text="${task.getTaskName}"><br></p>
-                   <p class="description" th:text="${task.getTaskDescription()}" th:unless="${task.getTaskDependencies().size > 0}"></p>
                     <p class="title_dependencies" th:text="Dependencies" th:unless="${task.getTaskDependencies().size == 0}"></p>
                     <div class="dependencies_container">
                         <div class="description_dependencies_container" th:each="dependentTasksNames : ${task.getTaskDependencies()}" >
@@ -60,7 +59,7 @@
                         </option>
 
                     </select>
-                    <input type="submit"  class="project_changebtn">Submit</input>
+                    <input type="submit" class="project_submitbtn"/>
                 </form>
             </div>
         </div>

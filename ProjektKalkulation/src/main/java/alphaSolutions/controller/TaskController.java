@@ -57,6 +57,7 @@ public class TaskController {
 
         systemController.createTask(task);
 
+        model.addAttribute("subproject", subProject);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
         return "tasks";
@@ -104,6 +105,7 @@ public class TaskController {
 
         systemController.updateTask(task);
 
+        model.addAttribute("subproject", subProject);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
 
         return "tasks";
@@ -112,8 +114,8 @@ public class TaskController {
     @GetMapping("/backToTasks")
     public String BacktoSubProject(WebRequest request, Model model) {
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
-        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+        model.addAttribute("subproject", subProject);
         return "tasks";
     }
 

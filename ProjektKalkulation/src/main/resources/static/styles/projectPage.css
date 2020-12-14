@@ -228,6 +228,10 @@ h5 p {
     border-radius: 10px;
     width: 115px;
     padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: white;
 }
 
 .dependencies_container {
@@ -273,4 +277,13 @@ h5 p {
 
 .project_description_description {
     font-size: 14px;
+}
+
+.project_submitbtn {
+    margin: 15px 0 15px 0;
+    background: #4F758C;
+    padding: 2px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
 }
