@@ -36,7 +36,7 @@ public class SubProjectController {
 
     @PostMapping("/createSubProject/submit")
     public String createSubProjectSubmit(WebRequest request, SubProject subProject, Model model){
-        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
+        Project currentProject = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
 
         String subProjectName = request.getParameter("subProjectName");
         String subProjectDescription = request.getParameter("subProjectDescription");
@@ -46,9 +46,11 @@ public class SubProjectController {
         subProject.setSubProjectDescription(subProjectDescription);
         subProject.setEstimatetWorkHours(Double.parseDouble(subProjectEstimatetWorkHours));
 
-        systemController.createSubProject(subProject, project.getProjectId());
+        systemController.createSubProject(subProject, currentProject.getProjectId());
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("project", currentProject);
+
 
         return "subProjects";
     }
@@ -63,7 +65,7 @@ public class SubProjectController {
 
     @PostMapping("/updateSubProject/submit")
     public String updateSubProjectSubmit(WebRequest request, Model model) {
-        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+        Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
 
         String subProjectName = request.getParameter("subProjectName");
@@ -76,16 +78,35 @@ public class SubProjectController {
 
         systemController.updateSubProject(subProject);
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("project", currentProject);
 
         return "subProjects";
 
     }
 
+    @PostMapping("/createSubProjectDependency/submit")
+    public String createDependencySubmit(@RequestParam("id") int idSubProject,WebRequest request, Model model){
+
+        Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        String getDependency = request.getParameter("dependency");
+        int dependency = systemController.getSubProjectDependencyIdFromDependencyName(getDependency);
+
+        systemController.createSubProjectDependency(idSubProject, dependency);
+
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("project", currentProject);
+
+        return "subProjects";
+    }
+
+
     @GetMapping("/backToSubProject")
     public String BacktoSubProject(WebRequest request, Model model) {
-        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(project.getProjectId()));
+        Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("project", currentProject);
         return "subProjects";
     }
 

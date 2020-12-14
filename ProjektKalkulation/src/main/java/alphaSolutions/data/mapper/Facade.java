@@ -112,6 +112,8 @@ public class Facade {
         return  subTaskMapper.getSubTaskDependencies(subTaskId);
     }
 
+
+
     public SubTask getSubTask(int id) {
         return subTaskMapper.getSubTask(id);
     }

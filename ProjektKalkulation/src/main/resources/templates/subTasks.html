@@ -17,7 +17,7 @@
         <span>⇢</span>
         <a class="header_button" href="/backToTasks">Tasks</a>
         <span>⇢</span>
-        <a class="header_button_active" href="/backToTasks">Subtasks</a>
+        <a class="header_button_active">Subtasks</a>
     </div>
     <div>
         <a class="project_btn" href="/createSubTask">Create subTask</a>
@@ -41,6 +41,7 @@
                         <span>Estimeret tid: <span th:text="${subTask.getEstimatetWorkHours()}"></span> timer</span>
                     </div>
                     <p class="title" th:text="${subTask.getSubTaskName}"><br></p>
+                    <p class="title_dependencies" th:text="Dependencies" th:unless="${subTask.getSubTaskDependencies().size == 0}"></p>
                     <div class="dependencies_container">
                         <div class="description_dependencies_container" th:each="dependentTasksNames : ${subTask.getSubTaskDependencies()}" >
                             <span class="description_dependencies" th:text="${dependentTasksNames.getSubTaskName()}"></span>

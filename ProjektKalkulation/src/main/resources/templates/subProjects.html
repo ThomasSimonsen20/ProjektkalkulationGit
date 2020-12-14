@@ -25,17 +25,42 @@
     <p class="project_description_description" th:text="${project.getProjectDescription()}"></p>
 </div>
 
+
 <div class="project_body">
-        <div class="project_container">
-            <div class="project_card_container" th:each="subProject : ${subProject}">
-                <a class="project_card_link" th:href="@{/task(id=${subProject.getSubProjectId})}">
-                    <div class="project_card">
-                         <p class="title" th:text="${subProject.getSubProjectName()}"><br></p>
-                         <p class="description" th:text="${subProject.getSubProjectDescription()}"></p>
-                         <p th:text="${subProject.getEstimatetWorkHours()}">Total required time</p>
+    <div class="project_container">
+        <div class="project_card_container" th:each="subProjects : ${subProject}">
+            <a class="project_card_link" th:href="@{/task(id=${subProjects.getSubProjectId()})}">
+                <div class="project_card">
+                    <div class="project_time_remaining">
+                        <span>Estimeret tid: <span th:text="${subProjects.getEstimatetWorkHours()}"></span> timer</span>
                     </div>
-                </a>
-        <a class="project_btn" th:href="@{/updateSubProject(id=${subProject.getSubProjectId()})}">Edit</a>
+                    <p class="title" th:text="${subProjects.getSubProjectName()}"><br></p>
+                    <p class="title_dependencies" th:text="Dependencies" th:unless="${subProjects.getSubProjectDependencies() == 0}"></p>
+                    <div class="dependencies_container">
+                        <div class="description_dependencies_container" th:each="dependentTasksNames : ${subProjects.getSubProjectDependencies()}" >
+                            <span class="description_dependencies" th:text="${dependentTasksNames.getSubProjectName()}"></span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="button_margin">
+                <a class="project_btn" th:href="@{/updateSubProject(id=${subProjects.getSubProjectId()})}">Edit</a>
+            </div>
+
+            <div class="project_form_container">
+                <form name="dependency" th:action="@{/createSubProjectDependency/submit(id=${subProjects.getSubProjectId})}"  method="post">
+                    <label for="dependencies">Select subProject to depend on: </label>
+                    <select  id="dependencies" name="dependency">
+                        <option value="">Select subProject</option>
+                        <option th:each="dependency : ${subProject}" th:value="${dependency.getSubProjectName()}" th:text="${dependency.getSubProjectName()}"
+                                th:if="${dependency.getSubProjectId() != subProjects.getSubProjectId()}">
+                        </option>
+
+                    </select>
+                    <input type="submit" class="project_submitbtn"/>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

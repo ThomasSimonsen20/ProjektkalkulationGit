@@ -17,17 +17,4 @@ class TaskMapperTest {
 
     }
 
-    @Test
-    void getTasksBySubProjectIdOmitCurrentAndDependentTasks() {
-        TaskMapper taskMapper = new TaskMapper();
-        ArrayList<String> tasksList = taskMapper.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(22,8);
-        for (String s: tasksList
-             ) {
-            System.out.println(s);
-
-        }
-
-
-
-    }
 }

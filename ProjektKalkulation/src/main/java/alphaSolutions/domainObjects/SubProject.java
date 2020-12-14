@@ -1,5 +1,9 @@
 package alphaSolutions.domainObjects;
 
+import alphaSolutions.data.mapper.Facade;
+
+import java.util.ArrayList;
+
 public class SubProject {
 
     private int subProjectId;
@@ -8,7 +12,7 @@ public class SubProject {
     private String subProjectDescription;
     private double EstimatetWorkHours;
     private int subProjectEWHId;
-
+    private final SystemController systemController = new SystemController(new Facade());
 
 
     /*------------------------------------------------------------------*/
@@ -51,6 +55,10 @@ public class SubProject {
 
     public int getSubProjectEWHId() {
         return subProjectEWHId;
+    }
+
+    public ArrayList<SubProject> getSubProjectDependencies(){
+        return systemController.getSubProjectDependencies(this.subProjectId);
     }
 
     /*------------------------------------------------------------------*/
