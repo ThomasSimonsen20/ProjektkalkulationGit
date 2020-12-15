@@ -121,6 +121,7 @@ public class SubTaskMapper {
         return id;
     }
 
+
     public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
         ArrayList<SubTask> subTasksList = new ArrayList<>();
         try {
@@ -285,6 +286,23 @@ public class SubTaskMapper {
             ex.printStackTrace();
         }
         return ps;
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------------Deletes-------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void deleteSubTask(SubTask subTask) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "DELETE FROM alphasolutions.subtasks WHERE subtasks.SubTask_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subTask.getSubTaskId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

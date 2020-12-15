@@ -165,5 +165,29 @@ public class SystemController {
     }
 
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Deletes-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+
+    public Project deleteProject(Project project) {
+        facade.deleteProject(project);
+        return project;
+    }
+
+    public SubProject deleteSubProject(SubProject subProject) {
+        facade.deleteSubProject(subProject);
+        return subProject;
+    }
+
+    public Task deleteTask(Task task) {
+        facade.deleteTask(task);
+        return task;
+    }
+
+    public SubTask deleteSubTask(SubTask subTask) {
+        facade.deleteSubTask(subTask);
+        return subTask;
+    }
 
 }

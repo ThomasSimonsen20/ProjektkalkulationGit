@@ -8,6 +8,15 @@
 </head>
 <body>
 
+<div class="header">
+<img class="logo" src="/styles/logo.PNG">
+<div id="topnav_path">
+    <a class="header_button" href="/projects">Projects</a>
+    <span>⇢</span>
+    <a class="header_button_active">Edit Project</a>
+</div>
+</div>
+
 <div class="form_container">
     <h1>Change infomation</h1>
     <form class="add_form_style" name="update" action="/updateProject/submit" method="post">
@@ -18,7 +27,10 @@
         <div class="form_description">
             <textarea  type="text" name="projectDescription" th:text="${project.getProjectDescription()}" cols="65" rows="13"></textarea>
         </div>
+        <div class="button_container">
         <button  class="form_button" type="submit">Update</button>
+        <a class="project_btn" th:href="@{/deleteProject/submit}">Delete</a>
+        </div>
     </form>
 </div>
 

@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<div class="header">
+    <img class="logo" src="/styles/logo.PNG">
+    <div id="topnav_path">
+        <a class="header_button" href="/projects">Projects</a>
+        <span>⇢</span>
+        <a class="header_button" href="/backToSubProject">SubProjects</a>
+        <span>⇢</span>
+        <a class="header_button" href="/backToTasks">Tasks</a>
+        <span>⇢</span>
+        <a class="header_button_active">Edit Task</a>
+    </div>
+</div>
+
 
 <div class="form_container">
     <h1>Change infomation</h1>
@@ -27,7 +40,11 @@
             <textarea type="text" name="taskDescription" th:text="${task.getTaskDescription()}" cols="65" rows="13"></textarea>
         </div>
 
-        <button class="form_button" type="submit" value="Skift">Update</button>
+        <div class="button_container">
+            <button  class="form_button" type="submit">Update</button>
+            <a class="project_btn" th:href="@{/deleteTask/submit}">Delete</a>
+        </div>
+
     </form>
 </div>
 

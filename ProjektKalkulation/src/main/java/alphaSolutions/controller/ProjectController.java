@@ -70,4 +70,14 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
+    @GetMapping("/deleteProject/submit")
+    public String deleteProjectSubmit(WebRequest request) {
+        Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
+
+        systemController.deleteProject(project);
+
+        return "redirect:/projects";
+    }
+
+
 }

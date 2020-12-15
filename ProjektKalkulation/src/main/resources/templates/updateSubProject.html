@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<div class="header">
+    <img class="logo" src="/styles/logo.PNG">
+    <div id="topnav_path">
+        <a class="header_button" href="/projects">Projects</a>
+        <span>⇢</span>
+        <a class="header_button" href="/backToSubProject">SubProjects</a>
+        <span>⇢</span>
+        <a class="header_button_active">Edit subProject</a>
+    </div>
+</div>
+
 <div class="form_container">
     <h1>Change infomation</h1>
     <form class="add_form_style" name="update" action="/updateSubProject/submit" method="post">
@@ -26,7 +37,11 @@
             <textarea type="text" name="subProjectDescription" th:text="${subProject.getSubProjectDescription()}" cols="65" rows="13"></textarea>
         </div>
 
-        <button class="form_button" type="submit">Update</button>
+        <div class="button_container">
+            <button  class="form_button" type="submit">Update</button>
+            <a class="project_btn" th:href="@{/deleteSubProject/submit}">Delete</a>
+        </div>
+
     </form>
 </div>
 

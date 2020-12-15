@@ -1,6 +1,7 @@
 package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
+import alphaSolutions.domainObjects.Project;
 import alphaSolutions.domainObjects.SubProject;
 import alphaSolutions.domainObjects.Task;
 
@@ -18,7 +19,7 @@ public class SubProjectMapper {
         try {
             con.setAutoCommit(false);
 
-            PreparedStatement psCreateSubProjectTable = createSubProjectTable(subProject,projectId);
+            PreparedStatement psCreateSubProjectTable = createSubProjectTable(subProject, projectId);
             subProject.setSubProjectId(getGeneratedKeys(psCreateSubProjectTable));
 
             PreparedStatement psCreateSubProjectsEstimatetWorkhoursTable = createSubProjectsEstimatetWorkhoursTable(subProject);
@@ -78,10 +79,10 @@ public class SubProjectMapper {
             String SQL = "SELECT * FROM subprojects WHERE Project_Id = ?";
 
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 int subProjectID = rs.getInt("SubProject_Id");
                 int projectId = rs.getInt("Project_Id");
                 String subProjectName = rs.getString("SubProject_Name");
@@ -103,10 +104,10 @@ public class SubProjectMapper {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM subprojects WHERE SubProject_Id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 int subProjectID = rs.getInt("SubProject_Id");
                 int projectId = rs.getInt("Project_Id");
                 String subProjectName = rs.getString("SubProject_Name");
@@ -137,7 +138,7 @@ public class SubProjectMapper {
             ps.setInt(1, subProject_Id);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 int dependencySubProjectId = rs.getInt("SubProject_Id");
                 int projectId = rs.getInt("Project_Id");
                 String subProjectName = rs.getString("SubProject_Name");
@@ -153,7 +154,7 @@ public class SubProjectMapper {
         return subProjectDependenciesList;
     }
 
-    public int getSubProjectDependencyIdFromDependencyName(String dependencyName){
+    public int getSubProjectDependencyIdFromDependencyName(String dependencyName) {
         int dependency_id = 0;
         try {
             Connection con = DBManager.getConnection();
@@ -162,7 +163,7 @@ public class SubProjectMapper {
             ps.setString(1, dependencyName);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 dependency_id = rs.getInt("SubProject_Id");
             }
 
@@ -182,12 +183,11 @@ public class SubProjectMapper {
             ps.setInt(1, subProject.getSubProjectId());
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 subProject.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
                 subProject.setSubProjectEWHId(rs.getInt("SubProjectEWH_Id"));
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
@@ -225,8 +225,8 @@ public class SubProjectMapper {
         try {
             con.setAutoCommit(false);
 
-           updateSubProjectTable(subProject);
-           updateSubProjectsEstimatetWorkhours(subProject);
+            updateSubProjectTable(subProject);
+            updateSubProjectsEstimatetWorkhours(subProject);
 
             con.commit();
             con.setAutoCommit(true);
@@ -240,7 +240,7 @@ public class SubProjectMapper {
         }
     }
 
-    public void updateSubProjectTable (SubProject subProject){
+    public void updateSubProjectTable(SubProject subProject) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "UPDATE subprojects SET SubProject_Name = ?, SubProject_Description = ? WHERE SubProject_Id = ?";
@@ -255,7 +255,7 @@ public class SubProjectMapper {
         }
     }
 
-    public void updateSubProjectsEstimatetWorkhours (SubProject subProject) {
+    public void updateSubProjectsEstimatetWorkhours(SubProject subProject) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProjectEWH_Id = ?";
@@ -275,7 +275,7 @@ public class SubProjectMapper {
     /*----------------Prepared Statement Generators---------------------*/
     /*------------------------------------------------------------------*/
 
-    public PreparedStatement createSubProjectTable(SubProject subProject, int projectId)  {
+    public PreparedStatement createSubProjectTable(SubProject subProject, int projectId) {
         PreparedStatement ps = null;
         try {
             Connection con = DBManager.getConnection();
@@ -308,5 +308,23 @@ public class SubProjectMapper {
         return ps;
     }
 
+
+    /*------------------------------------------------------------------*/
+    /*----------------------------Deletes-------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void deleteSubProject(SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "DELETE FROM alphasolutions.subprojects WHERE subprojects.SubProject_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subProject.getSubProjectId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
+
+}

@@ -142,7 +142,7 @@ public class Facade {
 
 
     /*------------------------------------------------------------------*/
-    /*----------------------Updaters------------------------------------*/
+    /*----------------------Updaters-------------------------------------*/
     /*------------------------------------------------------------------*/
 
 
@@ -167,5 +167,28 @@ public class Facade {
     }
 
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Deletes-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
+
+    public Project deleteProject(Project project) {
+        projectMapper.deleteProject(project);
+        return project;
+    }
+
+    public SubProject deleteSubProject(SubProject subProject) {
+        subProjectMapper.deleteSubProject(subProject);
+        return subProject;
+    }
+
+    public Task deleteTask(Task task) {
+        taskMapper.deleteTask(task);
+        return task;
+    }
+
+    public SubTask deleteSubTask(SubTask subTask) {
+        subTaskMapper.deleteSubTask(subTask);
+        return subTask;
+    }
 }
