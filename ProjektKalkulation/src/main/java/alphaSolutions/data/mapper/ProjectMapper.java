@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 public class ProjectMapper {
 // Creates project in DB with pojos from Project.
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Creators------------------------------------*/
+    /*------------------------------------------------------------------*/
+
     public void createProject(Project project) {
         try {
             Connection con = DBManager.getConnection();
@@ -25,6 +30,10 @@ public class ProjectMapper {
             ex.printStackTrace();
         }
     }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public ArrayList<Project> getAllProjects() {
         ArrayList<Project> projectList = new ArrayList<>();
@@ -73,6 +82,33 @@ public class ProjectMapper {
         return project;
     }
 
+    public double getProjectEstimatetWorkHoursSum(int projectId) {
+        double sum = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT Sum(SubprojectsEstimatetWorkHours.EstimatetWorkHours) AS Sum\n" +
+                    "FROM SubprojectsEstimatetWorkHours\n" +
+                    "LEFT JOIN Subprojects ON SubprojectsEstimatetWorkHours.Subproject_Id = Subprojects.Subproject_Id\n" +
+                    "WHERE Subprojects.Project_Id= ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                sum = rs.getDouble("Sum");
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sum;
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Updaters------------------------------------*/
+    /*------------------------------------------------------------------*/
+
     public void updateProject(Project project) {
         try {
             Connection con = DBManager.getConnection();
@@ -88,6 +124,9 @@ public class ProjectMapper {
         }
     }
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Deleters------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public void deleteProject(Project project) {
         try {
@@ -101,6 +140,7 @@ public class ProjectMapper {
         ex.printStackTrace();
     }
     }
+
 
 
 }

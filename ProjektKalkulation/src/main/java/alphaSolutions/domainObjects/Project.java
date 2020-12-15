@@ -1,5 +1,7 @@
 package alphaSolutions.domainObjects;
 
+import alphaSolutions.data.mapper.Facade;
+
 import java.util.ArrayList;
 
 public class Project {
@@ -7,6 +9,8 @@ public class Project {
     private int projectId;
     private String projectName;
     private String projectDescription;
+    private final SystemController systemController = new SystemController(new Facade());
+
 
 
     /*------------------------------------------------------------------*/
@@ -35,6 +39,10 @@ public class Project {
 
     public String getProjectName() {
         return projectName;
+    }
+
+    public double getEstimatetWorkHours() {
+        return systemController.getProjectEstimatetWorkHoursSum(this.projectId);
     }
 
     /*------------------------------------------------------------------*/

@@ -199,7 +199,7 @@ public class SubProjectMapper {
             String SQL = "SELECT Sum(TasksEstimatetWorkHours.EstimatetWorkHours) AS Sum\n" +
                     "FROM TasksEstimatetWorkHours\n" +
                     "LEFT JOIN Tasks ON TasksEstimatetWorkHours.Task_Id = Tasks.Task_Id\n" +
-                    "WHERE Tasks.SubProject_Id= ?;";
+                    "WHERE Tasks.SubProject_Id= ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, subProjectId);
             ResultSet rs = ps.executeQuery();

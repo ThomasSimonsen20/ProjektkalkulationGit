@@ -139,6 +139,12 @@ public class SystemController {
         return facade.getSubProjectEstimatetWorkHoursSum(subProjectId);
     }
 
+    public double getProjectEstimatetWorkHoursSum(int projectId) {
+        return facade.getProjectEstimatetWorkHoursSum(projectId);
+    }
+
+
+
     /*------------------------------------------------------------------*/
     /*----------------------Update--------------------------------------*/
     /*------------------------------------------------------------------*/
@@ -189,5 +195,6 @@ public class SystemController {
         facade.deleteSubTask(subTask);
         return subTask;
     }
+
 
 }

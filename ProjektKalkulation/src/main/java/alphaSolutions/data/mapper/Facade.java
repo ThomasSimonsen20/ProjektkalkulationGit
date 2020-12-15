@@ -139,6 +139,10 @@ public class Facade {
         return subProjectMapper.getSubProjectEstimatetWorkHoursSum(subProjectId);
     }
 
+    public double getProjectEstimatetWorkHoursSum(int projectId) {
+        return projectMapper.getProjectEstimatetWorkHoursSum(projectId);
+    }
+
 
 
     /*------------------------------------------------------------------*/
@@ -191,4 +195,6 @@ public class Facade {
         subTaskMapper.deleteSubTask(subTask);
         return subTask;
     }
+
+
 }
