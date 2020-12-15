@@ -1,3 +1,7 @@
+/*------------------------------------------------------------------*/
+/*----------------------Fonts---------------------------------------*/
+/*------------------------------------------------------------------*/
+
 h1, h2, h3, h4, h5, p, a {
     font-family: Montserrat, sans-serif; }
 
@@ -118,6 +122,9 @@ h5 p {
     h5 p {
         font-size: 16px; } }
 
+/*------------------------------------------------------------------*/
+/*----------------------Topnav/Header-------------------------------*/
+/*------------------------------------------------------------------*/
 
 
 .header {
@@ -135,10 +142,14 @@ h5 p {
 .header #topnav_path {
     position: absolute;
     margin-left: 150px;
+
+
+
 }
 
-. a:hover {
-    text-shadow: 0 0 11px rgba(33,33,33,.2);
+.header #topnav_path a:hover {
+    border-bottom: rgba(255, 50, 90, 0.54) 2px solid;
+    transition: 0.3s;
 }
 
 .header_project_title {
@@ -146,7 +157,6 @@ h5 p {
 }
 
 .header_button {
-
     text-decoration: none;
     color: black;
     font-weight: bold;
@@ -162,6 +172,13 @@ h5 p {
     font-size: 20px;
     margin: 0 5px 0 5px;
 }
+
+
+/*------------------------------------------------------------------*/
+/*----------------------Body----------------------------------------*/
+/*------------------------------------------------------------------*/
+
+
 
 .project_body {
     margin: 0 20px 0 20px;
@@ -219,15 +236,6 @@ h5 p {
 
 .description {
 
-}
-
-.project_btn {
-    margin: 15px 0 15px 0;
-    background: #4F758C;
-    padding: 15px;
-    border-radius: 15px;
-    color: white;
-    text-decoration: none;
 }
 
 .project_body_selected_task {
@@ -290,10 +298,6 @@ h5 p {
     font-size: 16px;
 }
 
-
-
-
-
 .project_description {
     margin: 40px;
     width: auto;
@@ -310,15 +314,39 @@ h5 p {
     font-size: 14px;
 }
 
+.project_form_container {
+    margin-top: 20px;
+}
+
+/*------------------------------------------------------------------*/
+/*----------------------Buttons-------------------------------------*/
+/*------------------------------------------------------------------*/
+
 .project_submitbtn {
     margin: 15px 0 15px 0;
     background: #4F758C;
-    padding: 2px;
-    border-radius: 8px;
+    padding: 4px;
+    border-radius: 9px;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+
+.project_btn {
+    margin: 15px 0 15px 0;
+    background: #4F758C;
+    padding: 15px;
+    border-radius: 15px;
     color: white;
     text-decoration: none;
 }
 
-.project_form_container {
-    margin-top: 20px;
+.project_btn:hover{
+    border-bottom: #d3d3d3 3px solid;
+    transition: 0.2s;
+}
+
+.project_submitbtn:hover{
+    border-bottom: #d3d3d3 3px solid;
+    transition: 0.2s;
 }

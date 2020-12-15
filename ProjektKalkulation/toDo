@@ -3,23 +3,24 @@
 3. Lav visning af afhængigheder imellem tasks i html'en. SIMON
 4. Indsæt tid på Employees i DB. (så vi kan se hvor meget tid de har til rådighed). Opdater evt struktur i DB. SIMON. TJEK
 5. Visning af tid til rådighed på allStaff.html TJEK
-6. Lav en måde at editere subProject, Task og Subtask så man kan indsætte et tidsestimat. Skal både kunne gøre når man opretter (Default: 0) og efter man har oprettet.
+6. Lav en måde at editere subProject, Task og Subtask så man kan indsætte et tidsestimat. Skal både kunne gøre når man opretter (Default: 0) og efter man har oprettet. THOMAS TJEK
 7. Ryd op i MyController - CHECK
-8. Check input i workhourds, int + format check - THOMAS
-9. top-nav - MIKKEL
-10. dropdown dependensies - SIMON
+8. Check input i workhourds, int + format check - THOMAS TJEK
+9. top-nav - MIKKEL TJEK
+10. dropdown dependensies - SIMON TJEK
 11. Lav Name på subTask. Ret DB og kode SIMON TJEK
-12. Style dropdown
+12. NICE TO HAVE: Style dropdown
 13. NICE TO HAVE: Style den store task knap til at synke ned når man trykker på den
-13. Style topnav
-14. Subtask og subproject dependencies
-15. Dropdown (tasks): Vise alle task inden for subprojectet
+13. Style topnav SIMON TJEK
+14. Subtask og subproject dependencies SIMON TJEK
+15. Dropdown (tasks): Vise alle task inden for subprojectet SIMON TJEK
 16. NICE TO HAVE: Erstat extra dependencies med 3 prikker hvis der er mere end 6 pr task
 17. Style allStaff siden
-18. Slet knap
+18. Slet knapper THOMAS
 19. fix tilbage til tasks - CHECK
 20. clean op i mapperen
-21. fix så man kan lave en task
+21. fix så man kan lave en task THOMAS TJEK
+22. Auto Udregning af Estimatet work hours på alle niveauer SIMON
 
 
 
