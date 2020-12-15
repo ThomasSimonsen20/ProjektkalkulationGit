@@ -11,7 +11,7 @@ public class Task {
     private int subProjectId;
     private String taskName;
     private String taskDescription;
-    private double EstimatetWorkHours;
+    private double estimatetWorkHours;
     private int tasksEWHId;
     private final SystemController systemController = new SystemController(new Facade());
 
@@ -57,7 +57,8 @@ public class Task {
     }
 
     public double getEstimatetWorkHours() {
-        return EstimatetWorkHours;
+        double subTasksOfCurrentTaskEWHSum = systemController.getTaskEstimatetWorkHoursSum(this.taskId);
+        return Math.max(subTasksOfCurrentTaskEWHSum, estimatetWorkHours);
     }
 
     public int getTasksEWHId() {
@@ -89,7 +90,7 @@ public class Task {
     }
 
     public void setEstimatetWorkHours(double estimatetWorkHours) {
-        EstimatetWorkHours = estimatetWorkHours;
+        this.estimatetWorkHours = estimatetWorkHours;
     }
 
     public void setTasksEWHId(int tasksEWHId) {

@@ -87,7 +87,7 @@ public class SubProjectMapper {
                 String subProjectName = rs.getString("SubProject_Name");
                 String subProjectDescription = rs.getString("SubProject_Description");
                 SubProject subProject = new SubProject(subProjectID, projectId, subProjectName, subProjectDescription);
-                getSubprojectsEstimatetWorkHoursTable(subProject);
+                setSubprojectsEstimatetWorkHoursTable(subProject);
                 subProjectList.add(subProject);
             }
 
@@ -116,7 +116,8 @@ public class SubProjectMapper {
                 subProject.setProjectId(projectId);
                 subProject.setSubProjectName(subProjectName);
                 subProject.setSubProjectDescription(subProjectDescription);
-                getSubprojectsEstimatetWorkHoursTable(subProject);
+
+                setSubprojectsEstimatetWorkHoursTable(subProject);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -171,7 +172,7 @@ public class SubProjectMapper {
         return dependency_id;
     }
 
-    public void getSubprojectsEstimatetWorkHoursTable(SubProject subProject) {
+    public void setSubprojectsEstimatetWorkHoursTable(SubProject subProject) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT EstimatetWorkHours, SubProjectEWH_Id\n" +
@@ -189,6 +190,29 @@ public class SubProjectMapper {
         catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public double getSubProjectEstimatetWorkHoursSum(int subProjectId) {
+        double sum = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT Sum(TasksEstimatetWorkHours.EstimatetWorkHours) AS Sum\n" +
+                    "FROM TasksEstimatetWorkHours\n" +
+                    "LEFT JOIN Tasks ON TasksEstimatetWorkHours.Task_Id = Tasks.Task_Id\n" +
+                    "WHERE Tasks.SubProject_Id= ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subProjectId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                sum = rs.getDouble("Sum");
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sum;
     }
 
 

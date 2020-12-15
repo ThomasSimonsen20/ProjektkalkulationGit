@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class TaskMapper {
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Creators------------------------------------*/
+    /*------------------------------------------------------------------*/
+
     public void createTask(Task task) {
         Connection con = DBManager.getConnection();
         try {
@@ -32,39 +36,27 @@ public class TaskMapper {
         }
     }
 
-    public PreparedStatement createTaskTable (Task task) {
-        PreparedStatement ps = null;
+    public void createTaskDependency(int taskId, int dependencyId) {
+
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO tasks (Project_Id, SubProject_Id, Task_Name, Task_Description) VALUES (?,?,?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, task.getProjectId());
-            ps.setInt(2, task.getSubProjectId());
-            ps.setString(3, task.getTaskName());
-            ps.setString(4, task.getTaskDescription());
+            String SQL = "INSERT INTO taskdependencies (Task_Id, TaskDependency_Id) VALUES (?, ?);";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, taskId);
+            ps.setInt(2, dependencyId);
             ps.executeUpdate();
 
-        } catch (SQLException ex) {
-        ex.printStackTrace();
-    }
-        return ps;
-    }
-
-    public PreparedStatement createTasksEstimatetWorkHoursTable (Task task) {
-        PreparedStatement ps = null;
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO tasksestimatetworkhours (Task_Id, EstimatetWorkHours) VALUES (?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, task.getTaskId());
-            ps.setDouble(2, task.getEstimatetWorkHours());
-            ps.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return ps;
+
     }
+
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public int getGeneratedKeys(PreparedStatement ps) {
         int id = 0;
@@ -99,30 +91,6 @@ public class TaskMapper {
         return dependency_id;
     }
 
-
-
-    public void createTaskDependency(int taskId, int dependencyId) {
-
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO taskdependencies (Task_Id, TaskDependency_Id) VALUES (?, ?);";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, taskId);
-            ps.setInt(2, dependencyId);
-            ps.executeUpdate();
-
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-
-
-
-
-
     public ArrayList<Task> getTasksBasedOnSubProjectID(int id) {
         ArrayList<Task> tasksList = new ArrayList<>();
         try {
@@ -139,7 +107,7 @@ public class TaskMapper {
                 String taskName = rs.getString("Task_Name");
                 String taskDescription = rs.getString("Task_Description");
                 Task task = new Task(taskId, projectId, subProjectId, taskName, taskDescription);
-                getTasksEstimatetWorkHoursTable(task);
+                setTasksEstimatetWorkHoursTable(task);
                 tasksList.add(task);
             }
         } catch (SQLException ex) {
@@ -147,8 +115,6 @@ public class TaskMapper {
         }
         return tasksList;
     }
-
-
 
     public Task getTask(int id) {
         Task task = new Task();
@@ -171,7 +137,7 @@ public class TaskMapper {
                 task.setSubProjectId(subProjectID);
                 task.setTaskName(taskName);
                 task.setTaskDescription(taskDescription);
-                getTasksEstimatetWorkHoursTable(task);
+                setTasksEstimatetWorkHoursTable(task);
 
             }
         } catch (SQLException ex) {
@@ -179,6 +145,57 @@ public class TaskMapper {
         }
         return task;
     }
+
+    public double getSubTasksEstimatetWorkHoursSum(int taskId) {
+        double sum = 0;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT Sum(SubTaskEstimatetWorkHours.EstimatetWorkHours) AS Sum\n" +
+                    "FROM SubTaskEstimatetWorkHours\n" +
+                    "LEFT JOIN SubTasks ON SubTaskEstimatetWorkHours.SubTask_Id = SubTasks.Subtask_Id\n" +
+                    "WHERE Subtasks.Task_Id= ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, taskId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                sum = rs.getDouble("Sum");
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return sum;
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Setters-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void setTasksEstimatetWorkHoursTable(Task task) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT EstimatetWorkHours, TasksEWH_Id\n" +
+                    "FROM tasksestimatetworkhours\n" +
+                    "WHERE Task_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, task.getTaskId());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                task.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
+                task.setTasksEWHId(rs.getInt("TasksEWH_Id"));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Updaters------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public void updateTask(Task task) {
      Connection con = DBManager.getConnection();
@@ -228,28 +245,6 @@ public class TaskMapper {
             ex.printStackTrace();
         }
     }
-
-    public void getTasksEstimatetWorkHoursTable(Task task) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT EstimatetWorkHours, TasksEWH_Id\n" +
-                    "FROM tasksestimatetworkhours\n" +
-                    "WHERE Task_Id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, task.getTaskId());
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()) {
-                task.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
-                task.setTasksEWHId(rs.getInt("TasksEWH_Id"));
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
 
     public ArrayList<Task> getTaskDependencies(int taskId) {
         ArrayList<Task> tasksList = new ArrayList<>();
@@ -324,6 +319,45 @@ public class TaskMapper {
 
 
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Generate PP's-------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public PreparedStatement createTaskTable (Task task) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO tasks (Project_Id, SubProject_Id, Task_Name, Task_Description) VALUES (?,?,?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, task.getProjectId());
+            ps.setInt(2, task.getSubProjectId());
+            ps.setString(3, task.getTaskName());
+            ps.setString(4, task.getTaskDescription());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
+
+    public PreparedStatement createTasksEstimatetWorkHoursTable (Task task) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO tasksestimatetworkhours (Task_Id, EstimatetWorkHours) VALUES (?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, task.getTaskId());
+            ps.setDouble(2, task.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
+
+
 
 
 
@@ -331,6 +365,7 @@ public class TaskMapper {
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
     /////////////BLIVER IKKE BRUGT////////////////////////////////////////BLIVER IKKE BRUGT///////////////////////////
 
+    /*
     public ArrayList<Task> getTasksBasedOnSubProjectIdOmitCurrentTask(int idSubProject, int idTask) {
         ArrayList<Task> tasksList = new ArrayList<>();
         try {
@@ -389,6 +424,9 @@ public class TaskMapper {
         }
         return tasksList;
     }
+
+     */
+
 
 
 }

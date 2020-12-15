@@ -12,8 +12,8 @@ class TaskMapperTest {
     @Test
     void getTasksBasedOnSubProjectIdOmitCurrentTask() {
         TaskMapper taskMapper = new TaskMapper();
-        ArrayList<Task> tasksList = taskMapper.getTasksBasedOnSubProjectIdOmitCurrentTask(22,8);
-        System.out.println(tasksList.size());
+        //ArrayList<Task> tasksList = taskMapper.getTasksBasedOnSubProjectIdOmitCurrentTask(22,8);
+        //System.out.println(tasksList.size());
 
     }
 

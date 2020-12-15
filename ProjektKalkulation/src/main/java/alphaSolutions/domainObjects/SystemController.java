@@ -81,13 +81,7 @@ public class SystemController {
         return facade.getTasksBasedOnSubProjectID(id);
     }
 
-    public ArrayList<Task> getTasksBasedOnSubProjectIdOmitCurrentTask(int idSubProject, int idTask) {
-        return facade.getTasksBasedOnSubProjectIdOmitCurrentTask(idSubProject, idTask);
-    }
 
-    public ArrayList<String> getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(int idSubProject, int idTask) {
-        return facade.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask);
-    }
 
     public ArrayList<SubTask> getSubTaskDependencies(int subTaskId) {
         return  facade.getSubTaskDependencies(subTaskId);
@@ -137,8 +131,13 @@ public class SystemController {
         return facade.getSubProjectDependencies(subProjectId);
     }
 
+    public double getTaskEstimatetWorkHoursSum(int taskId) {
+        return facade.getTaskEstimatetWorkHoursSum(taskId);
+    }
 
-
+    public double getSubProjectEstimatetWorkHoursSum(int subProjectId) {
+        return facade.getSubProjectEstimatetWorkHoursSum(subProjectId);
+    }
 
     /*------------------------------------------------------------------*/
     /*----------------------Update--------------------------------------*/
@@ -164,8 +163,6 @@ public class SystemController {
         facade.updateSubTask(subTask);
         return subTask;
     }
-
-
 
 
 

@@ -36,40 +36,6 @@ public class SubTaskMapper {
         }
     }
 
-    public PreparedStatement createSubTasksTable(SubTask subTask) {
-        PreparedStatement ps = null;
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description, SubTask_Name) VALUES (?,?,?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, subTask.getProjectId());
-            ps.setInt(2, subTask.getTaskId());
-            ps.setString(3, subTask.getSubTaskDescription());
-            ps.setString(4, subTask.getSubTaskName());
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return ps;
-    }
-
-    public PreparedStatement createSubTasksEstimatetWorkHours(SubTask subTask) {
-        PreparedStatement ps = null;
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO subtaskestimatetworkhours (Subtask_Id, EstimatetWorkHours) VALUES (?,?)";
-            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, subTask.getSubTaskId());
-            ps.setDouble(2, subTask.getEstimatetWorkHours());
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return ps;
-    }
-
     public void createSubTaskDependency(int subTaskId, int dependencyId) {
 
         try {
@@ -155,7 +121,6 @@ public class SubTaskMapper {
         return id;
     }
 
-
     public ArrayList<SubTask> getSubTasksBasedOnTaskId(int id) {
         ArrayList<SubTask> subTasksList = new ArrayList<>();
         try {
@@ -172,7 +137,7 @@ public class SubTaskMapper {
                 String subTaskName = rs.getString("SubTask_Name");
                 String subTaskDescription = rs.getString("SubTask_Description");
                 SubTask subTask = new SubTask(subTaskId, projectId, taskId, subTaskName, subTaskDescription);
-                getSubTasksEstimatetWorkHoursTable(subTask);
+                setSubTasksEstimatetWorkHoursTable(subTask);
                 subTasksList.add(subTask);
             }
 
@@ -203,7 +168,7 @@ public class SubTaskMapper {
                 subTask.setProjectId(projectId);
                 subTask.setSubTaskName(subTaskName);
                 subTask.setSubTaskDescription(subTaskDescription);
-                getSubTasksEstimatetWorkHoursTable(subTask);
+                setSubTasksEstimatetWorkHoursTable(subTask);
 
             }
         } catch (SQLException ex) {
@@ -211,6 +176,7 @@ public class SubTaskMapper {
         }
         return subTask;
     }
+
 
     /*------------------------------------------------------------------*/
     /*----------------------Updaters------------------------------------*/
@@ -260,7 +226,11 @@ public class SubTaskMapper {
         }
     }
 
-    public void getSubTasksEstimatetWorkHoursTable(SubTask subTask) {
+    /*------------------------------------------------------------------*/
+    /*----------------------Setters-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void setSubTasksEstimatetWorkHoursTable(SubTask subTask) {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT EstimatetWorkHours, SubTaskEWH_Id\n" +
@@ -277,6 +247,44 @@ public class SubTaskMapper {
         } catch (SQLException ex) {
             ex.printStackTrace();
       }
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Gererate PP's-------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public PreparedStatement createSubTasksTable(SubTask subTask) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subtasks (Project_Id, Task_Id, SubTask_Description, SubTask_Name) VALUES (?,?,?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subTask.getProjectId());
+            ps.setInt(2, subTask.getTaskId());
+            ps.setString(3, subTask.getSubTaskDescription());
+            ps.setString(4, subTask.getSubTaskName());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
+    }
+
+    public PreparedStatement createSubTasksEstimatetWorkHours(SubTask subTask) {
+        PreparedStatement ps = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO subtaskestimatetworkhours (Subtask_Id, EstimatetWorkHours) VALUES (?,?)";
+            ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, subTask.getSubTaskId());
+            ps.setDouble(2, subTask.getEstimatetWorkHours());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return ps;
     }
 
 }

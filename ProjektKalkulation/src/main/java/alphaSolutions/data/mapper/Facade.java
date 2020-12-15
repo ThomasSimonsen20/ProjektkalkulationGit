@@ -76,13 +76,6 @@ public class Facade {
         return taskMapper.getTasksBasedOnSubProjectID(id);
     }
 
-    public ArrayList<Task> getTasksBasedOnSubProjectIdOmitCurrentTask(int idSubProject, int idTask) {
-        return taskMapper.getTasksBasedOnSubProjectIdOmitCurrentTask(idSubProject, idTask);
-    }
-
-    public ArrayList<String> getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(int idSubProject, int idTask) {
-        return taskMapper.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask);
-    }
 
     public Task getTask(int id) {
         return taskMapper.getTask(id);
@@ -138,11 +131,18 @@ public class Facade {
         return subProjectMapper.getSubProjectDependencies(subProjectId);
     }
 
+    public double getTaskEstimatetWorkHoursSum(int taskId) {
+        return taskMapper.getSubTasksEstimatetWorkHoursSum(taskId);
+    }
+
+    public double getSubProjectEstimatetWorkHoursSum(int subProjectId) {
+        return subProjectMapper.getSubProjectEstimatetWorkHoursSum(subProjectId);
+    }
 
 
 
     /*------------------------------------------------------------------*/
-    /*----------------------Updaters-------------------------------------*/
+    /*----------------------Updaters------------------------------------*/
     /*------------------------------------------------------------------*/
 
 
@@ -165,7 +165,6 @@ public class Facade {
         subTaskMapper.updateSubTask(subTask);
         return subTask;
     }
-
 
 
 
