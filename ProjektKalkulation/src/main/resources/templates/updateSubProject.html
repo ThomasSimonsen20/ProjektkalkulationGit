@@ -26,7 +26,11 @@
             <textarea type="text" name="subProjectDescription" th:text="${subProject.getSubProjectDescription()}" cols="65" rows="13"></textarea>
         </div>
 
-        <button class="form_button" type="submit">Update</button>
+        <div class="button_container">
+            <button  class="form_button" type="submit">Update</button>
+            <a class="project_btn" th:href="@{/deleteSubProject/submit}">Delete</a>
+        </div>
+
     </form>
 </div>
 

@@ -172,8 +172,23 @@ public class Facade {
     /*------------------------------------------------------------------*/
 
 
-    public Project deteleProject(Project project) {
-        projectMapper.deteleProject(project);
+    public Project deleteProject(Project project) {
+        projectMapper.deleteProject(project);
         return project;
+    }
+
+    public SubProject deleteSubProject(SubProject subProject) {
+        subProjectMapper.deleteSubProject(subProject);
+        return subProject;
+    }
+
+    public Task deleteTask(Task task) {
+        taskMapper.deleteTask(task);
+        return task;
+    }
+
+    public SubTask deleteSubTask(SubTask subTask) {
+        subTaskMapper.deleteSubTask(subTask);
+        return subTask;
     }
 }

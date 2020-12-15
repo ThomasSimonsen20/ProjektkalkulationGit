@@ -74,7 +74,7 @@ public class ProjectController {
     public String deleteProjectSubmit(WebRequest request) {
         Project project = (Project) request.getAttribute("project",WebRequest.SCOPE_SESSION);
 
-        systemController.deteleProject(project);
+        systemController.deleteProject(project);
 
         return "redirect:/projects";
     }

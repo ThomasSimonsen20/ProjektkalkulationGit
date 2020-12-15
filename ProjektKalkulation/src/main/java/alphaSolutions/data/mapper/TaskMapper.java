@@ -322,7 +322,18 @@ public class TaskMapper {
 
     }
 
+    public void deleteTask(Task task) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "DELETE FROM alphasolutions.tasks WHERE tasks.Task_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, task.getTaskId());
+            ps.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
 
 

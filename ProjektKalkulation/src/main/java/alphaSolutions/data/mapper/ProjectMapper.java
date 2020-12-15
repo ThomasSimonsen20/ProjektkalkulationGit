@@ -89,7 +89,7 @@ public class ProjectMapper {
     }
 
 
-    public void deteleProject(Project project) {
+    public void deleteProject(Project project) {
         try {
         Connection con = DBManager.getConnection();
         String SQL = "DELETE FROM alphasolutions.projects WHERE projects.Project_Id = ?";
@@ -100,7 +100,6 @@ public class ProjectMapper {
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
-
     }
 
 

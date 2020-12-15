@@ -88,7 +88,6 @@ public class SubTaskController {
     @PostMapping("/updateSubTask/submit")
     public String updateSubTaskSubmit(WebRequest request, Model model) {
         Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
-
         SubTask subTask = (SubTask) request.getAttribute("subTask", WebRequest.SCOPE_SESSION);
 
         String subTaskDescription = request.getParameter("subTaskDescription");
@@ -98,6 +97,19 @@ public class SubTaskController {
         subTask.setSubTaskDescription(subTaskDescription);
 
         systemController.updateSubTask(subTask);
+
+        model.addAttribute("task", currentTask);
+        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
+
+        return "subTasks";
+    }
+
+    @GetMapping("/deleteSubTask/submit")
+    public String deleteSubTaskSubmit(WebRequest request, Model model) {
+        Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+        SubTask subTask = (SubTask) request.getAttribute("subTask", WebRequest.SCOPE_SESSION);
+
+        systemController.deleteSubTask(subTask);
 
         model.addAttribute("task", currentTask);
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));

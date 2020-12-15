@@ -111,6 +111,19 @@ public class TaskController {
         return "tasks";
     }
 
+    @GetMapping("/deleteTask/submit")
+    public String deleteTaskSubmit(WebRequest request, Model model) {
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+        Task task = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+
+        systemController.deleteTask(task);
+
+        model.addAttribute("subproject", subProject);
+        model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
+
+        return "tasks";
+    }
+
     @GetMapping("/backToTasks")
     public String BacktoSubProject(WebRequest request, Model model) {
         SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);

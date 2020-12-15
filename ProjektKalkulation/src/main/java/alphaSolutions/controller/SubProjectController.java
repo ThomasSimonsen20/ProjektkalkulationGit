@@ -102,6 +102,19 @@ public class SubProjectController {
     }
 
 
+    @GetMapping("/deleteSubProject/submit")
+    public String deleteSubProjectSubmit(WebRequest request, Model model) {
+        Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+        SubProject subProject = (SubProject) request.getAttribute("subProject", WebRequest.SCOPE_SESSION);
+
+        systemController.deleteSubProject(subProject);
+
+        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("project", currentProject);
+        return "subProjects";
+    }
+
+
     @GetMapping("/backToSubProject")
     public String BacktoSubProject(WebRequest request, Model model) {
         Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
