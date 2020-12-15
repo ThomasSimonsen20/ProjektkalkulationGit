@@ -116,4 +116,12 @@ public class SubTaskController {
 
         return "subTasks";
     }
+
+    @GetMapping("/backToSubTasks")
+    public String BacktoSubProject(WebRequest request, Model model) {
+        Task currentTask = (Task) request.getAttribute("task", WebRequest.SCOPE_SESSION);
+        model.addAttribute("task", currentTask);
+        model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));
+        return "subTasks";
+    }
 }
