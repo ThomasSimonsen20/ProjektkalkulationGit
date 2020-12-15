@@ -167,6 +167,13 @@ public class Facade {
     }
 
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Deletes-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
 
+    public Project deteleProject(Project project) {
+        projectMapper.deteleProject(project);
+        return project;
+    }
 }

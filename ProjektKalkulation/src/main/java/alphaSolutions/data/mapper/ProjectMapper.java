@@ -89,4 +89,19 @@ public class ProjectMapper {
     }
 
 
+    public void deteleProject(Project project) {
+        try {
+        Connection con = DBManager.getConnection();
+        String SQL = "DELETE FROM alphasolutions.projects WHERE projects.Project_Id = ?";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ps.setInt(1, project.getProjectId());
+        ps.executeUpdate();
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    }
+
+
 }

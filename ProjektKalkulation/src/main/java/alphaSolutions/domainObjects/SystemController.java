@@ -166,7 +166,15 @@ public class SystemController {
     }
 
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Deletes-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
+
+    public Project deteleProject(Project project) {
+        facade.deteleProject(project);
+        return project;
+    }
 
 
 }
