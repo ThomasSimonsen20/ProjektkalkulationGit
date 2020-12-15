@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ProjectMapper {
-
+// Creates project in DB with pojos from Project.
     public void createProject(Project project) {
         try {
             Connection con = DBManager.getConnection();
