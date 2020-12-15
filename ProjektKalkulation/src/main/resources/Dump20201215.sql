@@ -1,6 +1,6 @@
--- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: AlphaSolutions
+-- Host: 127.0.0.1    Database: alphasolutions
 -- ------------------------------------------------------
 -- Server version	8.0.21
 
@@ -113,7 +113,7 @@ CREATE TABLE `projects` (
   `Project_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Project_Id`),
   UNIQUE KEY `Project_Id_UNIQUE` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,30 +153,30 @@ INSERT INTO `skills` VALUES (1,'Mac IOS'),(2,'BackEnd'),(3,'FrontEnd'),(4,'Andro
 UNLOCK TABLES;
 
 --
--- Table structure for table `subProjectDependencies`
+-- Table structure for table `subprojectdependencies`
 --
 
-DROP TABLE IF EXISTS `subProjectDependencies`;
+DROP TABLE IF EXISTS `subprojectdependencies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `subProjectDependencies` (
+CREATE TABLE `subprojectdependencies` (
   `subProjectDependency_Id` int NOT NULL,
   `subProject_Id` int NOT NULL,
   PRIMARY KEY (`subProjectDependency_Id`,`subProject_Id`),
   KEY `subProject_Id_SPD_idx` (`subProject_Id`),
-  CONSTRAINT `subProject_Id_SPD` FOREIGN KEY (`subProject_Id`) REFERENCES `subprojects` (`SubProject_Id`),
-  CONSTRAINT `subProjectDependency_Id_SPD` FOREIGN KEY (`subProjectDependency_Id`) REFERENCES `subprojects` (`SubProject_Id`)
+  CONSTRAINT `subProject_Id_SPD` FOREIGN KEY (`subProject_Id`) REFERENCES `subprojects` (`SubProject_Id`) ON DELETE CASCADE,
+  CONSTRAINT `subProjectDependency_Id_SPD` FOREIGN KEY (`subProjectDependency_Id`) REFERENCES `subprojects` (`SubProject_Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subProjectDependencies`
+-- Dumping data for table `subprojectdependencies`
 --
 
-LOCK TABLES `subProjectDependencies` WRITE;
-/*!40000 ALTER TABLE `subProjectDependencies` DISABLE KEYS */;
-INSERT INTO `subProjectDependencies` VALUES (28,22),(22,27),(28,29);
-/*!40000 ALTER TABLE `subProjectDependencies` ENABLE KEYS */;
+LOCK TABLES `subprojectdependencies` WRITE;
+/*!40000 ALTER TABLE `subprojectdependencies` DISABLE KEYS */;
+INSERT INTO `subprojectdependencies` VALUES (28,22),(22,27),(28,29);
+/*!40000 ALTER TABLE `subprojectdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -194,8 +194,8 @@ CREATE TABLE `subprojects` (
   PRIMARY KEY (`SubProject_Id`),
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   KEY `Project_Id_idx` (`Project_Id`),
-  CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,8 +222,8 @@ CREATE TABLE `subprojectsestimatetworkhours` (
   PRIMARY KEY (`SubProjectEWH_Id`),
   UNIQUE KEY `SubProjectEWH_Id_UNIQUE` (`SubProjectEWH_Id`),
   KEY `SubProject_Id` (`SubProject_Id`),
-  CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,8 +248,8 @@ CREATE TABLE `subtaskdependencies` (
   `subtask_Id` int NOT NULL,
   PRIMARY KEY (`subtaskdependency_Id`,`subtask_Id`),
   KEY `subTask_Id_STD_idx` (`subtask_Id`),
-  CONSTRAINT `subTask_Id_STD` FOREIGN KEY (`subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`),
-  CONSTRAINT `subTaskDependency_Id_STD` FOREIGN KEY (`subtaskdependency_Id`) REFERENCES `subtasks` (`SubTask_Id`)
+  CONSTRAINT `subTask_Id_STD` FOREIGN KEY (`subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`) ON DELETE CASCADE,
+  CONSTRAINT `subTaskDependency_Id_STD` FOREIGN KEY (`subtaskdependency_Id`) REFERENCES `subtasks` (`SubTask_Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -259,6 +259,7 @@ CREATE TABLE `subtaskdependencies` (
 
 LOCK TABLES `subtaskdependencies` WRITE;
 /*!40000 ALTER TABLE `subtaskdependencies` DISABLE KEYS */;
+INSERT INTO `subtaskdependencies` VALUES (8,4);
 /*!40000 ALTER TABLE `subtaskdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,8 +277,8 @@ CREATE TABLE `subtaskestimatetworkhours` (
   PRIMARY KEY (`SubTaskEWH_Id`),
   UNIQUE KEY `SubTaskEWH_Id_UNIQUE` (`SubTaskEWH_Id`),
   KEY `SubTask_Id_idx` (`Subtask_Id`),
-  CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,9 +308,9 @@ CREATE TABLE `subtasks` (
   UNIQUE KEY `SubTask_Id_UNIQUE` (`SubTask_Id`),
   KEY `Task_Id_idx` (`Task_Id`),
   KEY `Project_Id_ST_idx` (`Project_Id`),
-  CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`),
-  CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`) ON DELETE CASCADE,
+  CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,8 +335,8 @@ CREATE TABLE `taskdependencies` (
   `TaskDependency_Id` int NOT NULL,
   PRIMARY KEY (`Task_Id`,`TaskDependency_Id`),
   KEY `Task_Dependency_Id_idx` (`TaskDependency_Id`),
-  CONSTRAINT `Task_Dependency_Id_TD` FOREIGN KEY (`TaskDependency_Id`) REFERENCES `tasks` (`Task_Id`),
-  CONSTRAINT `Task_Id_TD` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
+  CONSTRAINT `Task_Dependency_Id_TD` FOREIGN KEY (`TaskDependency_Id`) REFERENCES `tasks` (`Task_Id`) ON DELETE CASCADE,
+  CONSTRAINT `Task_Id_TD` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -366,9 +367,9 @@ CREATE TABLE `tasks` (
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
   KEY `SubProject_Id_idx` (`SubProject_Id`),
   KEY `Project_Id_Tasks_idx` (`Project_Id`),
-  CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`),
-  CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`) ON DELETE CASCADE,
+  CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -395,8 +396,8 @@ CREATE TABLE `tasksestimatetworkhours` (
   PRIMARY KEY (`TasksEWH_Id`),
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
   UNIQUE KEY `TasksEWH_Id_UNIQUE` (`TasksEWH_Id`),
-  CONSTRAINT `Task_Id` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Task_Id` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -434,6 +435,10 @@ LOCK TABLES `tasktakers` WRITE;
 /*!40000 ALTER TABLE `tasktakers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tasktakers` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'alphasolutions'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -444,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-15 14:47:38
+-- Dump completed on 2020-12-15 17:21:25
