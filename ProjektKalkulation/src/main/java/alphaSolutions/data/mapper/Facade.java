@@ -170,6 +170,14 @@ public class Facade {
         return subTask;
     }
 
+    public void updateSubProjectsEstimatetWorkhours(int subProjectId, double eWH) {
+        subProjectMapper.updateSubProjectsEstimatetWorkhours(subProjectId, eWH);
+    }
+
+    public void updateTasksEstimatetWorkhours(int taskId, double eWH) {
+        taskMapper.updateTasksEstimatetWorkhours(taskId, eWH);
+    }
+
 
     /*------------------------------------------------------------------*/
     /*----------------------Deletes-------------------------------------*/
@@ -195,6 +203,7 @@ public class Facade {
         subTaskMapper.deleteSubTask(subTask);
         return subTask;
     }
+
 
 
 }

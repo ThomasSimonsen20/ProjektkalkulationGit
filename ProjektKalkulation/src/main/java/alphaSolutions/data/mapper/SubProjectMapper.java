@@ -270,6 +270,21 @@ public class SubProjectMapper {
     }
 
 
+    public void updateSubProjectsEstimatetWorkhours(int subProjectId, double eWH) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subprojectsestimatetworkhours SET EstimatetWorkHours = ? WHERE SubProject_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setDouble(1, eWH);
+            ps.setInt(2, subProjectId);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 
     /*------------------------------------------------------------------*/
     /*----------------Prepared Statement Generators---------------------*/
@@ -325,6 +340,7 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
     }
+
 
 
 }

@@ -25,6 +25,7 @@
 </div>
 
 <div class="project_description">
+    <span>Estimated Work Hours: <span th:text="${subproject.getEstimatetWorkHours()}"></span></span>
     <h3 class="project_description_title" th:text="${subproject.getSubProjectName()}"></h3>
     <p class="project_description_description" th:text="${subproject.getSubProjectDescription()}"></p>
 </div>

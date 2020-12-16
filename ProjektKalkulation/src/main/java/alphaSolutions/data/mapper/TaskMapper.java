@@ -169,83 +169,6 @@ public class TaskMapper {
         return sum;
     }
 
-    /*------------------------------------------------------------------*/
-    /*----------------------Setters-------------------------------------*/
-    /*------------------------------------------------------------------*/
-
-    public void setTasksEstimatetWorkHoursTable(Task task) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT EstimatetWorkHours, TasksEWH_Id\n" +
-                    "FROM tasksestimatetworkhours\n" +
-                    "WHERE Task_Id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, task.getTaskId());
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()) {
-                task.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
-                task.setTasksEWHId(rs.getInt("TasksEWH_Id"));
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /*------------------------------------------------------------------*/
-    /*----------------------Updaters------------------------------------*/
-    /*------------------------------------------------------------------*/
-
-    public void updateTask(Task task) {
-     Connection con = DBManager.getConnection();
-     try {
-         con.setAutoCommit(false);
-
-         updateTaskTable(task);
-         updateTasksEstimatetWorkhours(task);
-
-         con.commit();
-         con.setAutoCommit(true);
-
-     } catch (SQLException ex) {
-        try {
-            con.rollback();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-    public void updateTaskTable(Task task) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "UPDATE tasks SET Task_Name = ?, Task_Description = ? WHERE Task_Id = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, task.getTaskName());
-            ps.setString(2, task.getTaskDescription());
-            ps.setInt(3, task.getTaskId());
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void updateTasksEstimatetWorkhours (Task task) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "UPDATE tasksestimatetworkhours SET EstimatetWorkHours = ? WHERE TasksEWH_Id = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setDouble(1, task.getEstimatetWorkHours());
-            ps.setInt(2, task.getTasksEWHId());
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public ArrayList<Task> getTaskDependencies(int taskId) {
         ArrayList<Task> tasksList = new ArrayList<>();
         try {
@@ -316,6 +239,103 @@ public class TaskMapper {
         return subProject_Id;
 
     }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Setters-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void setTasksEstimatetWorkHoursTable(Task task) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT EstimatetWorkHours, TasksEWH_Id\n" +
+                    "FROM tasksestimatetworkhours\n" +
+                    "WHERE Task_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, task.getTaskId());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                task.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
+                task.setTasksEWHId(rs.getInt("TasksEWH_Id"));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Updaters------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void updateTask(Task task) {
+        Connection con = DBManager.getConnection();
+        try {
+            con.setAutoCommit(false);
+
+            updateTaskTable(task);
+            updateTasksEstimatetWorkhours(task);
+
+            con.commit();
+            con.setAutoCommit(true);
+
+        } catch (SQLException ex) {
+            try {
+                con.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void updateTaskTable(Task task) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE tasks SET Task_Name = ?, Task_Description = ? WHERE Task_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, task.getTaskName());
+            ps.setString(2, task.getTaskDescription());
+            ps.setInt(3, task.getTaskId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateTasksEstimatetWorkhours (Task task) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE tasksestimatetworkhours SET EstimatetWorkHours = ? WHERE TasksEWH_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setDouble(1, task.getEstimatetWorkHours());
+            ps.setInt(2, task.getTasksEWHId());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateTasksEstimatetWorkhours (int taskId, double eWH) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE tasksestimatetworkhours SET EstimatetWorkHours = ? WHERE Task_Id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setDouble(1,eWH);
+            ps.setInt(2, taskId);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Deleters------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public void deleteTask(Task task) {
         try {
@@ -388,9 +408,7 @@ public class TaskMapper {
             String s = "" + idTask;
             ps.setInt(2, idTask);
             //ps.setString(2,"'" + idTask + "'");
-
             ResultSet rs = ps.executeQuery();
-
             while(rs.next()) {
                 int taskId = rs.getInt("Task_Id");
                 int projectId = rs.getInt("Project_Id");
@@ -406,26 +424,21 @@ public class TaskMapper {
         }
         return tasksList;
     }
-
     public ArrayList<String> getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(int idSubProject, int idTask) {
         ArrayList<String> tasksList = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
-
             String SQL = "SELECT *\n" +
                     "FROM Tasks  \n" +
                     "LEFT JOIN TaskDependencies ON TaskDependencies.Task_Id = Tasks.Task_Id\n" +
                     "WHERE SubProject_Id = ?\n" +
                     "AND Tasks.Task_Id NOT IN (SELECT TaskDependency_Id FROM TaskDependencies WHERE Task_Id = ?)\n" +
                     "AND  Tasks.Task_Id != ?;";
-
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1,idSubProject);
             ps.setInt(2, idTask);
             ps.setInt(3, idTask);
-
             ResultSet rs = ps.executeQuery();
-
             while(rs.next()) {
                 String taskName = rs.getString("Task_Name");
                 tasksList.add(taskName);
@@ -435,7 +448,6 @@ public class TaskMapper {
         }
         return tasksList;
     }
-
      */
 
 

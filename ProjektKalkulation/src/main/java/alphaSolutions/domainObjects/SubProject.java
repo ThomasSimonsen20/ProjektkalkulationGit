@@ -51,7 +51,8 @@ public class SubProject {
 
     public double getEstimatetWorkHours() {
         double tasksOfCurrentSubProjectEWHSum = systemController.getSubProjectEstimatetWorkHoursSum(this.subProjectId);
-        return Math.max(tasksOfCurrentSubProjectEWHSum, estimatetWorkHours);
+        systemController.updateSubProjectsEstimatetWorkhours(this.subProjectId, Math.max(tasksOfCurrentSubProjectEWHSum, this.estimatetWorkHours));
+        return Math.max(tasksOfCurrentSubProjectEWHSum, this.estimatetWorkHours);
     }
 
     public int getSubProjectEWHId() {

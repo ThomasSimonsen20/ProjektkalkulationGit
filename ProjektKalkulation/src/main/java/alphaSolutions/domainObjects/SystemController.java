@@ -170,6 +170,14 @@ public class SystemController {
         return subTask;
     }
 
+    public void updateSubProjectsEstimatetWorkhours(int subProjectId, double eWH) {
+        facade.updateSubProjectsEstimatetWorkhours(subProjectId, eWH);
+    }
+
+    public void updateTasksEstimatetWorkhours(int taskId, double eWH) {
+        facade.updateTasksEstimatetWorkhours(taskId, eWH);
+    }
+
 
     /*------------------------------------------------------------------*/
     /*----------------------Deletes-------------------------------------*/
@@ -195,6 +203,7 @@ public class SystemController {
         facade.deleteSubTask(subTask);
         return subTask;
     }
+
 
 
 }
