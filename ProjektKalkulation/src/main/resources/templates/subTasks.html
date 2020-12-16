@@ -32,6 +32,7 @@
     <p class="project_description_description" th:text="${task.getTaskDescription()}"></p>
 </div>
 
+<h1 class="no_item_found" th:if="${subTasks.size() == 0}">No subTasks found </h1>
 
 <div class="project_body">
     <div class="project_container">
