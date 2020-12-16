@@ -113,7 +113,7 @@ CREATE TABLE `projects` (
   `Project_Description` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`Project_Id`),
   UNIQUE KEY `Project_Id_UNIQUE` (`Project_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +122,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (7,'Alpha Solution','Skal lave kalkulationsværktøj'),(8,'Project 2','Project 2 descrip'),(9,'Project 3','Project 3 descrip');
+INSERT INTO `projects` VALUES (8,'Project 2','Project 2 descrip');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +175,6 @@ CREATE TABLE `subprojectdependencies` (
 
 LOCK TABLES `subprojectdependencies` WRITE;
 /*!40000 ALTER TABLE `subprojectdependencies` DISABLE KEYS */;
-INSERT INTO `subprojectdependencies` VALUES (28,22),(22,27),(28,29);
 /*!40000 ALTER TABLE `subprojectdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +194,7 @@ CREATE TABLE `subprojects` (
   UNIQUE KEY `SubProject_Id_UNIQUE` (`SubProject_Id`),
   KEY `Project_Id_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_SP` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +203,7 @@ CREATE TABLE `subprojects` (
 
 LOCK TABLES `subprojects` WRITE;
 /*!40000 ALTER TABLE `subprojects` DISABLE KEYS */;
-INSERT INTO `subprojects` VALUES (22,7,'Loginshit','lav loginshit'),(23,8,'SubProject 2','SubProject 2 Descrip'),(24,9,'SubProject 3','SubProject 3 Descrip'),(27,7,'Jeg er et Subproject','JEg er beskrivelsen'),(28,7,'Backend','Backend Beskrivelse'),(29,7,'Frontend','Frontend bestrivelse');
+INSERT INTO `subprojects` VALUES (23,8,'SubProject 2','SubProject 2 Descrip');
 /*!40000 ALTER TABLE `subprojects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +222,7 @@ CREATE TABLE `subprojectsestimatetworkhours` (
   UNIQUE KEY `SubProjectEWH_Id_UNIQUE` (`SubProjectEWH_Id`),
   KEY `SubProject_Id` (`SubProject_Id`),
   CONSTRAINT `SubProject_Id` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +231,6 @@ CREATE TABLE `subprojectsestimatetworkhours` (
 
 LOCK TABLES `subprojectsestimatetworkhours` WRITE;
 /*!40000 ALTER TABLE `subprojectsestimatetworkhours` DISABLE KEYS */;
-INSERT INTO `subprojectsestimatetworkhours` VALUES (1,22,12),(2,22,11),(3,22,222),(4,22,6);
 /*!40000 ALTER TABLE `subprojectsestimatetworkhours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +257,6 @@ CREATE TABLE `subtaskdependencies` (
 
 LOCK TABLES `subtaskdependencies` WRITE;
 /*!40000 ALTER TABLE `subtaskdependencies` DISABLE KEYS */;
-INSERT INTO `subtaskdependencies` VALUES (8,4);
 /*!40000 ALTER TABLE `subtaskdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,7 +275,7 @@ CREATE TABLE `subtaskestimatetworkhours` (
   UNIQUE KEY `SubTaskEWH_Id_UNIQUE` (`SubTaskEWH_Id`),
   KEY `SubTask_Id_idx` (`Subtask_Id`),
   CONSTRAINT `SubTask_Id` FOREIGN KEY (`Subtask_Id`) REFERENCES `subtasks` (`SubTask_Id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,7 +284,6 @@ CREATE TABLE `subtaskestimatetworkhours` (
 
 LOCK TABLES `subtaskestimatetworkhours` WRITE;
 /*!40000 ALTER TABLE `subtaskestimatetworkhours` DISABLE KEYS */;
-INSERT INTO `subtaskestimatetworkhours` VALUES (1,8,2.5),(2,9,1.5),(3,10,0.5),(4,11,2),(6,12,0.5);
 /*!40000 ALTER TABLE `subtaskestimatetworkhours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +306,7 @@ CREATE TABLE `subtasks` (
   KEY `Project_Id_ST_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_ST` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`) ON DELETE CASCADE,
   CONSTRAINT `Task_Id_ST` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +315,7 @@ CREATE TABLE `subtasks` (
 
 LOCK TABLES `subtasks` WRITE;
 /*!40000 ALTER TABLE `subtasks` DISABLE KEYS */;
-INSERT INTO `subtasks` VALUES (4,8,'LOGIIIIIIIIIIIIIIIIN WOOOOOOOOOOOOOO KOM NUUUUUUUUUUUUU',7,'Lav Login'),(5,9,'Subtask 2 Description',8,'ST2'),(6,10,'Subtask 3 Description',9,'ST3'),(7,10,'Subtask 3a Description',9,'ST3a'),(8,8,'SubSUbSUB',7,'Subtask'),(9,8,'Nyny subtask',7,'nySubtask'),(10,22,'Jeg er en subtask Beskrivelse',7,'jeg er en subtask'),(11,22,'Jeg er dens descrip',7,'Jeg er endnu en subtask'),(12,22,'hurtigt',7,'kvæl en hjort');
+INSERT INTO `subtasks` VALUES (5,9,'Subtask 2 Description',8,'ST2');
 /*!40000 ALTER TABLE `subtasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +342,6 @@ CREATE TABLE `taskdependencies` (
 
 LOCK TABLES `taskdependencies` WRITE;
 /*!40000 ALTER TABLE `taskdependencies` DISABLE KEYS */;
-INSERT INTO `taskdependencies` VALUES (8,17),(20,18),(8,20);
 /*!40000 ALTER TABLE `taskdependencies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,7 +364,7 @@ CREATE TABLE `tasks` (
   KEY `Project_Id_Tasks_idx` (`Project_Id`),
   CONSTRAINT `Project_Id_Tasks` FOREIGN KEY (`Project_Id`) REFERENCES `projects` (`Project_Id`) ON DELETE CASCADE,
   CONSTRAINT `SubProject_Id_Tasks` FOREIGN KEY (`SubProject_Id`) REFERENCES `subprojects` (`SubProject_Id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +373,7 @@ CREATE TABLE `tasks` (
 
 LOCK TABLES `tasks` WRITE;
 /*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-INSERT INTO `tasks` VALUES (8,7,22,'mere loginshit','alt for meget loginshit'),(9,8,23,'Task 2','Task 2 Descrip'),(10,9,24,'Task 3','Task 3 Descrip'),(17,7,22,'Rediger HP','Gør det flot'),(18,7,22,'Udfyld CSS','Blå farver'),(19,7,22,'Tøm Skraldespand','Sæt ny pose i bagefter'),(20,7,22,'Ny Task','Dette er en helt ny Task'),(21,7,22,'siadte task','jeg lavede en slåfejl i SIDSTE'),(22,7,27,'Jeg er en Task','Jeg er en task beskrivelse'),(23,7,22,'IdTid','decrip');
+INSERT INTO `tasks` VALUES (9,8,23,'Task 2','Task 2 Descrip');
 /*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +392,7 @@ CREATE TABLE `tasksestimatetworkhours` (
   UNIQUE KEY `Task_Id_UNIQUE` (`Task_Id`),
   UNIQUE KEY `TasksEWH_Id_UNIQUE` (`TasksEWH_Id`),
   CONSTRAINT `Task_Id` FOREIGN KEY (`Task_Id`) REFERENCES `tasks` (`Task_Id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,7 +401,6 @@ CREATE TABLE `tasksestimatetworkhours` (
 
 LOCK TABLES `tasksestimatetworkhours` WRITE;
 /*!40000 ALTER TABLE `tasksestimatetworkhours` DISABLE KEYS */;
-INSERT INTO `tasksestimatetworkhours` VALUES (1,22,2.5),(2,19,4),(3,20,2),(4,23,0);
 /*!40000 ALTER TABLE `tasksestimatetworkhours` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,4 +443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-15 17:21:25
+-- Dump completed on 2020-12-16 10:30:21
