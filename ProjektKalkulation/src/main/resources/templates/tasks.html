@@ -30,6 +30,8 @@
     <p class="project_description_description" th:text="${subproject.getSubProjectDescription()}"></p>
 </div>
 
+<h1 class="no_item_found" th:if="${tasks.size() == 0}">No Tasks found </h1>
+
 <div class="project_body">
    <div class="project_container">
         <div class="project_card_container" th:each="task : ${tasks}">
