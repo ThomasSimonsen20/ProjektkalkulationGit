@@ -9,6 +9,7 @@ public class Employee {
     private int employeeId;
     private String firstName;
     private String lastName;
+    private String profilePicture;
     private int employeeNumber;
     private double workHoursAvailable;
     private ArrayList<String> skills = new ArrayList<>();
@@ -20,10 +21,11 @@ public class Employee {
     /*----------------------Constructors--------------------------------*/
     /*------------------------------------------------------------------*/
 
-    public Employee(String firstName, String lastName, int employeeNumber) {
+    public Employee(String firstName, String lastName, int employeeNumber, String profilePicture) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeNumber = employeeNumber;
+        this.profilePicture = profilePicture;
 
     }
 
@@ -58,6 +60,10 @@ public class Employee {
         return workHoursAvailable;
     }
 
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
     /*------------------------------------------------------------------*/
     /*----------------------Setters-------------------------------------*/
     /*------------------------------------------------------------------*/
@@ -84,5 +90,9 @@ public class Employee {
 
     public void setWorkHoursAvailable(double workHoursAvailable) {
         this.workHoursAvailable = workHoursAvailable;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

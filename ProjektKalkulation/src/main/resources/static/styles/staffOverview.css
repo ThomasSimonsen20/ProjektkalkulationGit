@@ -1,0 +1,231 @@
+/*------------------------------------------------------------------*/
+/*----------------------Fonts---------------------------------------*/
+/*------------------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, p, a {
+    font-family: Montserrat, sans-serif; }
+
+
+p {
+    font-size: 20px;
+    letter-spacing: 0.9px;
+    line-height: 1.38; }
+@media only screen and (max-width: 768px) {
+    p {
+        font-size: 18px; } }
+@media only screen and (max-width: 400px) {
+    p {
+        font-size: 15px; } }
+@media only screen and (max-width: 350px) {
+    p {
+        font-size: 13px; } }
+
+h1 {
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: 2.4px;
+    line-height: 1.2; }
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 40px; } }
+@media only screen and (max-width: 550px) {
+    h1 {
+        font-size: 25px; } }
+@media only screen and (max-width: 360px) {
+    h1 {
+        font-size: 20px; } }
+h1 p {
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: 2.4px;
+    line-height: 1.2; }
+@media only screen and (max-width: 768px) {
+    h1 p {
+        font-size: 40px; } }
+@media only screen and (max-width: 550px) {
+    h1 p {
+        font-size: 25px; } }
+@media only screen and (max-width: 350px) {
+    h1 p {
+        font-size: 20px; } }
+
+h2 {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.25; }
+@media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 30px; } }
+@media only screen and (max-width: 400px) {
+    h2 {
+        font-size: 25px; } }
+h2 p {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.25; }
+@media only screen and (max-width: 768px) {
+    h2 p {
+        font-size: 30px; } }
+@media only screen and (max-width: 400px) {
+    h2 p {
+        font-size: 25px; } }
+
+h3 {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 1.2px; }
+@media only screen and (max-width: 768px) {
+    h3 {
+        font-size: 25px; } }
+h3 p {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 1.2px; }
+
+h4 {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1.2px; }
+@media only screen and (max-width: 768px) {
+    h4 {
+        font-size: 20px; } }
+h4 p {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 1.2px; }
+@media only screen and (max-width: 400px) {
+    h4 p {
+        font-size: 20px; } }
+
+h5 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.3; }
+@media only screen and (max-width: 1100px) {
+    h5 {
+        font-size: 18px; } }
+@media only screen and (max-width: 768px) {
+    h5 {
+        font-size: 16px; } }
+h5 p {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.3; }
+@media only screen and (max-width: 1100px) {
+    h5 p {
+        font-size: 18px; } }
+@media only screen and (max-width: 768px) {
+    h5 p {
+        font-size: 16px; } }
+
+/*------------------------------------------------------------------*/
+/*----------------------Topnav/Header-------------------------------*/
+/*------------------------------------------------------------------*/
+
+
+.header {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+    align-items: center;
+}
+
+.header #topnav_path {
+    position: absolute;
+    margin-left: 150px;
+
+}
+
+.header #topnav_path a:hover {
+    border-bottom: rgba(255, 50, 90, 0.54) 2px solid;
+    transition: 0.3s;
+}
+
+.header_project_title {
+    font-size: 30px;
+}
+
+.header_button {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 5px 0 5px;
+}
+
+.header_button_active {
+    border-bottom: #FF325A 2px solid;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 5px 0 5px;
+}
+
+.logo {
+    height: 75px;
+}
+
+.header_title {
+    text-align: center;
+    margin-top: 125px;
+    color: #4F758C;
+}
+
+/*------------------------------------------------------------------*/
+/*----------------------Employees-------------------------------*/
+/*------------------------------------------------------------------*/
+
+.employee_image {
+    width: 50px;
+    height: 50px;
+}
+
+.employee_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 75px;
+}
+
+.employee_infomation {
+    display: flex;
+    flex-direction: column;
+    width: 170px;
+    align-items: center;
+}
+
+.employee_name {
+    font-weight: bold;
+}
+
+.employee_skills {
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 0px 20px 0 #C9CCEF;
+    border-radius: 13px;
+    padding: 8px;
+    margin: 3px;
+}
+
+.employee_workhours {
+
+}
+
+.workhours_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+

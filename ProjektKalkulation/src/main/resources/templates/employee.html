@@ -14,6 +14,7 @@
 
 <div th:each="employee : ${Employee}">
     <div style="background: aqua; width: 75px">
+
             <p th:text="${employee.getFirstName()} + ${employee.getLastName()}"></p>
             <p th:text="${employee.getEmployeeNumber()}"></p>
         </a>

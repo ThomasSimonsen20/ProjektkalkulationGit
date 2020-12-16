@@ -4,28 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Staff Overview</title>
-    <link th:href="@{/styles/home.css}" rel="stylesheet">
+    <link th:href="@{/styles/staffOverview.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Staff Page</h1>
 
-<br>
-
-<!--
-<div th:each="employee : ${Staff}">
-    <div style="background: aqua; width: 75px">
-        <a th:href="@{/employee(id=${employee.getEmployeeId()})}">
-            <p th:utext="${employee.getFirstName()} + ${employee.getLastName()}"></p>
-            <p th:utext="${employee.getEmployeeNumber()}"></p>
-        </a>
+<div class="header">
+    <img class="logo" src="/styles/images/logo.PNG">
+    <div id="topnav_path">
+        <a class="header_button" href="/projects">Projects</a>
+        <span>⇢</span>
+        <a class="header_button_active" href="/staffOverview">Staff overview</a>
     </div>
 </div>
--->
+
+<h1 class="header_title">Current workload</h1>
+
+<div class="employee_container">
+    <div class="employee_infomation" th:each="employee : ${Staff}">
+        <img class="employee_image" th:src="${employee.getProfilePicture()}">
+        <span class="employee_name" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"></span>
+        <div class="workhours_container">
+            <span class="employee_workhours">Time available</span>
+               <span><span th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></span> hours</span>
+
+        </div>
+        <span class="employee_skills" th:each="skills : ${employee.getSkills()}" th:text="${skills}"></span>
+       <!-- <span class="employee_workhours" th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></span> -->
+    </div>
+</div>
 
 
+<!--
 <table >
     <tbody class="tbody">
     <tr class="tr" th:each="employee : ${Staff}">
+        <th th:src="${employee.getProfilePicture()}">
         <th th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"> NAME & AGE </th>
         <td th:each="skills : ${employee.getSkills()}" th:text="${skills}"></td>
         <td th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></td>
@@ -34,6 +47,6 @@
     </tbody>
 </table>
 
-
+-->
 </body>
 </html>
