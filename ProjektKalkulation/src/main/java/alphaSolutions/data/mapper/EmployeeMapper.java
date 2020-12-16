@@ -22,11 +22,12 @@ public class EmployeeMapper {
 
             while(rs.next()) {
                 int employeeId = rs.getInt("Employee_Id");
-                int employeeNumber = rs.getInt("Employee_Number");
                 String firstName = rs.getString("First_Name");
                 String lastName = rs.getString("Last_Name");
+                String profilePicture = rs.getString("Profile_Picture");
+                int employeeNumber = rs.getInt("Employee_Number");
                 double workHoursAvailable = rs.getDouble("WorkHoursAvailable");
-                Employee employee = new Employee(firstName, lastName, employeeNumber);
+                Employee employee = new Employee(firstName, lastName, employeeNumber, profilePicture);
                 employee.setEmployeeId(employeeId);
                 employee.setSkills(employeeId);
                 employee.setWorkHoursAvailable(workHoursAvailable);
@@ -53,11 +54,13 @@ public class EmployeeMapper {
                 int employeeNumber = rs.getInt("Employee_Number");
                 String firstName = rs.getString("First_Name");
                 String lastName = rs.getString("Last_Name");
+                String profilePicture = rs.getString("Profile_Picture");
 
                 employee.setEmployeeId(employeeId);
                 employee.setEmployeeNumber(employeeNumber);
                 employee.setFirstName(firstName);
                 employee.setLastName(lastName);
+                employee.setProfilePicture(profilePicture);
 
             }
         } catch (SQLException ex) {
