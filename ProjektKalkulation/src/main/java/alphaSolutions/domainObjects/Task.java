@@ -58,8 +58,13 @@ public class Task {
 
     public double getEstimatetWorkHours() {
         double subTasksOfCurrentTaskEWHSum = systemController.getTaskEstimatetWorkHoursSum(this.taskId);
-        systemController.updateTasksEstimatetWorkhours(this.taskId, Math.max(subTasksOfCurrentTaskEWHSum, this.estimatetWorkHours));
-        return Math.max(subTasksOfCurrentTaskEWHSum, this.estimatetWorkHours);
+        if(subTasksOfCurrentTaskEWHSum > 0) {
+            systemController.updateTasksEstimatetWorkhours(this.taskId, subTasksOfCurrentTaskEWHSum);
+            return subTasksOfCurrentTaskEWHSum;
+        } else {
+            systemController.updateTasksEstimatetWorkhours(this.taskId, Math.max(subTasksOfCurrentTaskEWHSum, this.estimatetWorkHours));
+            return Math.max(subTasksOfCurrentTaskEWHSum, this.estimatetWorkHours);
+        }
     }
 
     public int getTasksEWHId() {
