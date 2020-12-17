@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `AlphaSolutions`.`Employees` (
   `Last_Name` VARCHAR(100) NOT NULL,
   `Profile_Picture` VARCHAR(200) NULL DEFAULT NULL,
   `Employee_Number` INT NOT NULL,
-  `WorkHoursAvailable` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`Employee_Id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 11
