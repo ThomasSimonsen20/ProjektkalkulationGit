@@ -29,11 +29,9 @@ public class EmployeeMapper {
                 String lastName = rs.getString("Last_Name");
                 String profilePicture = rs.getString("Profile_Picture");
                 int employeeNumber = rs.getInt("Employee_Number");
-                double workHoursAvailable = rs.getDouble("WorkHoursAvailable");
                 Employee employee = new Employee(firstName, lastName, employeeNumber, profilePicture);
                 employee.setEmployeeId(employeeId);
                 employee.setSkills(employeeId);
-                employee.setWorkHoursAvailable(workHoursAvailable);
                 employeeList.add(employee);
             }
 
@@ -78,8 +76,8 @@ public class EmployeeMapper {
             Connection con = DBManager.getConnection();
 
             String SQL = "Select Skill_Description\n" +
-                    "FROM Employee_Skills\n" +
-                    "LEFT JOIN Skills ON Employee_Skills.Skill_Id = Skills.Skill_Id\n" +
+                    "FROM employeeskills\n" +
+                    "LEFT JOIN Skills ON employeeskills.Skill_Id = Skills.Skill_Id\n" +
                     "WHERE Employee_Id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, id);

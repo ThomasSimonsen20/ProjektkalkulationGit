@@ -6,7 +6,7 @@
 
 LOCK TABLES `Employees` WRITE;
 /*!40000 ALTER TABLE `Employees` DISABLE KEYS */;
-INSERT INTO `Employees` VALUES (1,'Søren','Sørensen',NULL,1234),(2,'Mike','Jensen',NULL,3411),(3,'Sean','Pearsen',NULL,5622),(4,'Ole','Henriksen',NULL,7611),(5,'Michael','Henningensen',NULL,6533),(6,'Ulla','Mogensen',NULL,8766),(7,'Sabine','Sleif',NULL,1223),(8,'Trine','Poulsen',NULL,4352),(9,'Magrethe','Egebo',NULL,3244),(10,'Stine','Arresø',NULL,4322);
+INSERT INTO `Employees` VALUES (1,'Søren','Sørensen','/images/Søren.jpg',1234),(2,'Mike','Jensen','/images/Mike.jpg',3411),(3,'Sean','Pearsen','/images/Sean.jpg',5622),(4,'Ole','Henriksen','/images/Ole.jpg',7611),(5,'Michael','Henningensen','/images/Michael.jpg',6533),(6,'Ulla','Mogensen','/images/Ulla.jpg',8766),(7,'Sabine','Sleif','/images/Sabine.jpg',1223),(8,'Trine','Poulsen','/images/Trine.jpg',4352),(9,'Magrethe','Egebo','/images/Magrethe.jpg',3244),(10,'Stine','Arresø','/images/Stine.jpg',4322);
 /*!40000 ALTER TABLE `Employees` ENABLE KEYS */;
 UNLOCK TABLES;
 

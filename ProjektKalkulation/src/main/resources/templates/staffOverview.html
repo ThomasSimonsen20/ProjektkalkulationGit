@@ -9,7 +9,7 @@
 <body>
 
 <div class="header">
-    <img class="logo" src="/styles/images/logo.PNG">
+    <img class="logo" src="/images/logo.PNG">
     <div id="topnav_path">
         <a class="header_button" href="/projects">Projects</a>
         <span>⇢</span>
@@ -23,11 +23,6 @@
     <div class="employee_infomation" th:each="employee : ${Staff}">
         <img class="employee_image" th:src="${employee.getProfilePicture()}">
         <span class="employee_name" th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"></span>
-        <div class="workhours_container">
-            <span class="employee_workhours">Time available</span>
-               <span><span th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></span> hours</span>
-
-        </div>
         <span class="employee_skills" th:each="skills : ${employee.getSkills()}" th:text="${skills}"></span>
     </div>
 </div>
