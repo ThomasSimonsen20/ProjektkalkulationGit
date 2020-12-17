@@ -2,13 +2,12 @@ package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.Project;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class ProjectMapper {
-// Creates project in DB with pojos from Project.
+
 
     /*------------------------------------------------------------------*/
     /*----------------------Creators------------------------------------*/

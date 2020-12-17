@@ -24,7 +24,7 @@
 <div class="project_body">
     <div class="project_container">
         <div class="project_card_container" th:each="project : ${Project}">
-            <h1 th:if="${Project.size() == 0}">No project </h1>
+            <h1 th:if="${Project.size() == 0}">No Project found</h1>
             <a class="project_card_link" th:href="@{/subProject(id=${project.getProjectId()})}">
                 <div class="project_card">
                     <p class="title" th:text="${project.getProjectName()}"><br></p>

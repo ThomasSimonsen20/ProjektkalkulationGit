@@ -2,7 +2,6 @@ package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.Employee;
-import alphaSolutions.domainObjects.Project;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EmployeeMapper {
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Getters-------------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public ArrayList<Employee> getAllStaff() {
         ArrayList<Employee> employeeList = new ArrayList<>();

@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<h1 class="header_title">Current workload</h1>
+<h1 class="header_title">Employees</h1>
 
 <div class="employee_container">
     <div class="employee_infomation" th:each="employee : ${Staff}">
@@ -29,24 +29,9 @@
 
         </div>
         <span class="employee_skills" th:each="skills : ${employee.getSkills()}" th:text="${skills}"></span>
-       <!-- <span class="employee_workhours" th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></span> -->
     </div>
 </div>
 
 
-<!--
-<table >
-    <tbody class="tbody">
-    <tr class="tr" th:each="employee : ${Staff}">
-        <th th:src="${employee.getProfilePicture()}">
-        <th th:text="${employee.getFirstName()} + ' ' + ${employee.getLastName()}"> NAME & AGE </th>
-        <td th:each="skills : ${employee.getSkills()}" th:text="${skills}"></td>
-        <td th:each="workHoursAvailable : ${employee.getWorkHoursAvailable()}" th:text="${workHoursAvailable}"></td>
-
-    </tr>
-    </tbody>
-</table>
-
--->
 </body>
 </html>

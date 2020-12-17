@@ -173,25 +173,6 @@ public class SubProjectMapper {
         return dependency_id;
     }
 
-    public void setSubprojectsEstimatetWorkHoursTable(SubProject subProject) {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT EstimatetWorkHours, SubProjectEWH_Id\n" +
-                    "FROM SubprojectsEstimatetWorkHours\n" +
-                    "WHERE SubProject_Id = ?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, subProject.getSubProjectId());
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                subProject.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
-                subProject.setSubProjectEWHId(rs.getInt("SubProjectEWH_Id"));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public double getSubProjectEstimatetWorkHoursSum(int subProjectId) {
         double sum = 0;
         try {
@@ -213,6 +194,29 @@ public class SubProjectMapper {
             ex.printStackTrace();
         }
         return sum;
+    }
+
+    /*------------------------------------------------------------------*/
+    /*----------------------Setters-------------------------------------*/
+    /*------------------------------------------------------------------*/
+
+    public void setSubprojectsEstimatetWorkHoursTable(SubProject subProject) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT EstimatetWorkHours, SubProjectEWH_Id\n" +
+                    "FROM SubprojectsEstimatetWorkHours\n" +
+                    "WHERE SubProject_Id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subProject.getSubProjectId());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                subProject.setEstimatetWorkHours(rs.getDouble("EstimatetWorkHours"));
+                subProject.setSubProjectEWHId(rs.getInt("SubProjectEWH_Id"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -285,7 +289,6 @@ public class SubProjectMapper {
     }
 
 
-
     /*------------------------------------------------------------------*/
     /*----------------Prepared Statement Generators---------------------*/
     /*------------------------------------------------------------------*/
@@ -325,7 +328,7 @@ public class SubProjectMapper {
 
 
     /*------------------------------------------------------------------*/
-    /*----------------------------Deletes-------------------------------*/
+    /*----------------------------Deleters-------------------------------*/
     /*------------------------------------------------------------------*/
 
     public void deleteSubProject(SubProject subProject) {
