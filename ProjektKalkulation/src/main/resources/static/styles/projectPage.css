@@ -182,6 +182,7 @@ h5 p {
     margin: 0 20px 0 20px;
 }
 
+
 .project_container {
     display: grid;
     grid-template-columns: 1fr;
@@ -223,6 +224,12 @@ h5 p {
     padding: 5px 15px 5px 15px;
     display: flex;
     flex-direction: column;
+}
+
+.project_card:hover {
+    border-left: #add8e6 3px solid;
+    border-bottom: #add8e6 5px solid;
+    transition: 0.2s;
 }
 
 .title {
@@ -346,7 +353,8 @@ h5 p {
 }
 
 .project_btn:hover{
-    border-bottom: #d3d3d3 3px solid;
+    border-left: #add8e6 3px solid;
+    border-bottom: #add8e6 5px solid;
     transition: 0.2s;
 }
 

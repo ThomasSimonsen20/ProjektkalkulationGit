@@ -11,7 +11,6 @@ public class Employee {
     private String lastName;
     private String profilePicture;
     private int employeeNumber;
-    private double workHoursAvailable;
     private ArrayList<String> skills = new ArrayList<>();
 
     private SystemController systemController = new SystemController(new Facade());
@@ -56,10 +55,6 @@ public class Employee {
         return skills;
     }
 
-    public double getWorkHoursAvailable() {
-        return workHoursAvailable;
-    }
-
     public String getProfilePicture() {
         return profilePicture;
     }
@@ -86,10 +81,6 @@ public class Employee {
 
     public void setSkills (int employeeId){
         this.skills = systemController.getSkillsForCertainEmployee(employeeId);
-    }
-
-    public void setWorkHoursAvailable(double workHoursAvailable) {
-        this.workHoursAvailable = workHoursAvailable;
     }
 
     public void setProfilePicture(String profilePicture) {
