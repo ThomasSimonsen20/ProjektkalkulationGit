@@ -69,8 +69,8 @@ public class SystemController {
         return facade.getProject(id);
     }
 
-    public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
-        return facade.getSubProjectBasedOnProjectID(id);
+    public ArrayList<SubProject> getSubProjectsBasedOnProjectID(int id) {
+        return facade.getSubProjectsBasedOnProjectID(id);
     }
 
     public SubProject getSubProject(int id) {

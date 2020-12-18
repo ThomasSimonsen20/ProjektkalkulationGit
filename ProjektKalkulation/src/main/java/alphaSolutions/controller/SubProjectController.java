@@ -23,7 +23,7 @@ public class SubProjectController {
         Project currentProject = systemController.getProject(idProject);
         sessionInfo.projectSessionInfo(request, currentProject);
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(idProject));
+        model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(idProject));
         model.addAttribute("project", currentProject);
 
         return "subProjects";
@@ -48,7 +48,7 @@ public class SubProjectController {
 
         systemController.createSubProject(subProject, currentProject.getProjectId());
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);
 
 
@@ -78,7 +78,7 @@ public class SubProjectController {
 
         systemController.updateSubProject(subProject);
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);
 
         return "subProjects";
@@ -96,7 +96,7 @@ public class SubProjectController {
             systemController.createSubProjectDependency(idSubProject, dependency);
         }
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);
 
         return "subProjects";
@@ -110,7 +110,7 @@ public class SubProjectController {
 
         systemController.deleteSubProject(subProject);
 
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);
         return "subProjects";
     }
@@ -119,7 +119,7 @@ public class SubProjectController {
     @GetMapping("/backToSubProject")
     public String BacktoSubProject(WebRequest request, Model model) {
         Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
+        model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);
         return "subProjects";
     }

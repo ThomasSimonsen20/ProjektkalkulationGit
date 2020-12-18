@@ -47,7 +47,10 @@ public class TaskMapper {
             ps.executeUpdate();
 
 
-        } catch (SQLException ex) {
+        } catch (SQLIntegrityConstraintViolationException dupEntry){
+            System.out.println("Duplicate entry");
+        }
+        catch (SQLException ex) {
             ex.printStackTrace();
         }
 

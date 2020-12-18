@@ -48,7 +48,10 @@ public class SubProjectMapper {
             ps.executeUpdate();
 
 
-        } catch (SQLException ex) {
+        } catch (SQLIntegrityConstraintViolationException dupEntry){
+            System.out.println("Duplicate entry");
+        }
+        catch (SQLException ex) {
             ex.printStackTrace();
         }
 
@@ -92,7 +95,8 @@ public class SubProjectMapper {
                 subProjectList.add(subProject);
             }
 
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             ex.printStackTrace();
         }
         return subProjectList;

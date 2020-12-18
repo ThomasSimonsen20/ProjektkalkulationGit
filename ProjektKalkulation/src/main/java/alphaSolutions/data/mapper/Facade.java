@@ -63,7 +63,7 @@ public class Facade {
     }
 
 
-    public ArrayList<SubProject> getSubProjectBasedOnProjectID(int id) {
+    public ArrayList<SubProject> getSubProjectsBasedOnProjectID(int id) {
         return subProjectMapper.getSubProjectsBasedOnProjectID(id);
     }
 
