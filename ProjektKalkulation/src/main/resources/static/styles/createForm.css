@@ -225,25 +225,53 @@ h5 p {
     justify-content: center;
 }
 
-.form_button {
-    margin: 15px 5px 15px 5px;
-    background: #4F758C;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    align-self: center;
-    border: none;
-    height: 47px;
-}
-
 .project_btn {
     margin: 15px 5px 15px 5px;
-    background: #ff0e0e;
+    background: #4F758C;
+    border-top: none;
+    border-right: none;
+    border-left: #8EB7C5 3px solid;
+    border-bottom: #add8e6 5px solid;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.project_btn:hover{
+    border-left: #4C636F 3px solid;
+    border-bottom: #7CA5B3 5px solid;
+    transition: 0.2s;
+}
+
+.project_btn:active {
+    border-left: #4C636F 1px solid;
+    border-bottom: #7CA5B3 3px solid;
+
+}
+
+.delete_btn {
+    margin: 15px 5px 15px 5px;
+    background: #B40001;
+    border-left: rgb(216, 14, 14) 3px solid;
+    border-bottom: rgba(255, 1, 10, 0.57) 5px solid;
+    padding: 15px;
+    border-radius: 15px;
     color: white;
     text-decoration: none;
     align-self: center;
     text-align: center;
+
+}
+
+.delete_btn:hover{
+    border-left: rgba(255, 14, 14, 0.89) 3px solid;
+    border-bottom: rgba(255, 14, 14, 0.82) 5px solid;
+    transition: 0.2s;
+}
+
+.delete_btn:active {
+    border-left: rgba(255, 14, 14, 0.89) 3px solid;
+    border-bottom: rgba(255, 14, 14, 0.82) 5px solid;
 
 }

@@ -28,8 +28,8 @@
             <textarea  type="text" name="projectDescription" th:text="${project.getProjectDescription()}" cols="65" rows="13"></textarea>
         </div>
         <div class="button_container">
-        <button  class="form_button" type="submit">Update</button>
-        <a class="project_btn" th:href="@{/deleteProject/submit}" onclick="return confirm('Are you sure you wanna delete?')">Delete</a>
+        <button  class="project_btn" type="submit">Update</button>
+        <a class="delete_btn" th:href="@{/deleteProject/submit}" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
         </div>
     </form>
 </div>

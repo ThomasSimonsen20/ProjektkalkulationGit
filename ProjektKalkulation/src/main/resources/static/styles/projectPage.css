@@ -248,10 +248,6 @@ h5 p {
     margin: 5px;
 }
 
-.description {
-
-}
-
 .project_body_selected_task {
     margin: 0 30px 0 30px;
     display: flex;
@@ -370,23 +366,25 @@ h5 p {
 .project_submitbtn {
     margin: 15px 0 15px 0;
     background: #4F758C;
-    border-left: #8EB7C5 3px solid;
-    border-bottom: #add8e6 5px solid;
-    padding: 4px;
+    border-right: none;
+    border-top: none;
+    border-left: #8EB7C5 2px solid;
+    border-bottom: #add8e6 4px solid;
+    padding: 5px;
     border-radius: 9px;
     color: white;
     text-decoration: none;
-    border: none;
+
 }
 
 .project_submitbtn:hover{
-    border-left: #4C636F 3px solid;
-    border-bottom: #7CA5B3 5px solid;
+    border-left: #4C636F 2px solid;
+    border-bottom: #7CA5B3 4px solid;
     transition: 0.2s;
 }
 
 
 .project_card:active {
-    border-left: #4C636F 1px solid;
-    border-bottom: #7CA5B3 3px solid;
+    border-left: #4C636F 0px solid;
+    border-bottom: #7CA5B3 2px solid;
 }
