@@ -38,7 +38,9 @@ public class SubTaskController {
         String getDependency = request.getParameter("dependency");
         int dependency = systemController.getSubTaskDependencyIdFromDependencyName(getDependency);
 
-        systemController.createSubTaskDependency(idSubTask, dependency);
+        if(dependency > 0) {
+            systemController.createSubTaskDependency(idSubTask, dependency);
+        }
 
         model.addAttribute("task", currentTask);
         model.addAttribute("subTasks", systemController.getSubTasksBasedOnTaskId(currentTask.getTaskId()));

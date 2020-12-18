@@ -25,7 +25,7 @@ class ProjectMapperTest {
     void getProjectRunRed() {
         ProjectMapper projectMapper = new ProjectMapper();
 
-        Project project = projectMapper.getProject(13);
+        Project project = projectMapper.getProject(12);
 
         assertEquals(project.getProjectName(), "asd");
 

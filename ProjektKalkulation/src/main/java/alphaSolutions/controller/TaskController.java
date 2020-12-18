@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.ArrayList;
+
 @Controller
 public class TaskController {
 
@@ -72,7 +74,9 @@ public class TaskController {
         String test = request.getParameter("dependency");
         int dependency = systemController.getTaskDependencyIdFromDependencyName(test);
 
-        systemController.createTaskDependency(idTask, dependency);
+        if(dependency > 0) {
+            systemController.createTaskDependency(idTask, dependency);
+        }
 
 
         model.addAttribute("subproject", subProject);

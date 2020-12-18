@@ -87,13 +87,14 @@ public class SubProjectController {
 
     @PostMapping("/createSubProjectDependency/submit")
     public String createDependencySubmit(@RequestParam("id") int idSubProject,WebRequest request, Model model){
-
         Project currentProject = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
         String getDependency = request.getParameter("dependency");
         int dependency = systemController.getSubProjectDependencyIdFromDependencyName(getDependency);
 
-        systemController.createSubProjectDependency(idSubProject, dependency);
+        if (dependency > 0) {
+            systemController.createSubProjectDependency(idSubProject, dependency);
+        }
 
         model.addAttribute("subProject", systemController.getSubProjectBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);

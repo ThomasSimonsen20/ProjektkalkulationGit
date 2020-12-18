@@ -15,11 +15,14 @@ class SubTaskMapperTest {
         SubTask subTask = new SubTask();
 
         subTask.setSubTaskId(16);
-        subTask.setEstimatetWorkHours(1000);
+        subTask.setEstimatetWorkHours(2000);
+        subTask.setSubtasksEWHId(10);
+
+        subTaskMapper.updateSubTasksEstimatetWorkhours(subTask);
 
         subTaskMapper.setSubTasksEstimatetWorkHoursTable(subTask);
 
-        assertEquals(subTask.getEstimatetWorkHours(), 8000);
+        assertEquals(subTask.getEstimatetWorkHours(), 2000);
 
     }
 
