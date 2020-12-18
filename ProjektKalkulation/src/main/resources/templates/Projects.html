@@ -23,6 +23,7 @@
 
 <div class="project_body">
     <div class="project_container">
+
         <div class="project_card_container" th:each="project : ${Project}">
             <h1 th:if="${Project.size() == 0}">No Project found</h1>
             <a class="project_card_link" th:href="@{/subProject(id=${project.getProjectId()})}">
@@ -33,6 +34,7 @@
             </a>
              <a class="project_btn" th:href="@{/updateProject(id=${project.getProjectId()})}">Edit</a>
         </div>
+
     </div>
 </div>
 

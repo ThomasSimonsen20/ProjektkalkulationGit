@@ -220,6 +220,8 @@ h5 p {
 .project_card {
     width: 415px;
     height: 190px;
+    border-left: #8EB7C5 4px solid;
+    border-bottom: #add8e6 6px solid;
     border-radius: 10px;
     padding: 5px 15px 5px 15px;
     display: flex;
@@ -227,10 +229,17 @@ h5 p {
 }
 
 .project_card:hover {
-    border-left: #add8e6 3px solid;
-    border-bottom: #add8e6 5px solid;
+    border-left: #4C636F 4px solid;
+    border-bottom: #7CA5B3 6px solid;
     transition: 0.2s;
 }
+
+.project_card:active {
+    border-left: #4C636F 1px solid;
+    border-bottom: #7CA5B3 3px solid;
+
+}
+
 
 .title {
     text-align: center;
@@ -333,19 +342,13 @@ h5 p {
 /*----------------------Buttons-------------------------------------*/
 /*------------------------------------------------------------------*/
 
-.project_submitbtn {
-    margin: 15px 0 15px 0;
-    background: #4F758C;
-    padding: 4px;
-    border-radius: 9px;
-    color: white;
-    text-decoration: none;
-    border: none;
-}
+
 
 .project_btn {
     margin: 15px 0 15px 0;
     background: #4F758C;
+    border-left: #8EB7C5 3px solid;
+    border-bottom: #add8e6 5px solid;
     padding: 15px;
     border-radius: 15px;
     color: white;
@@ -353,12 +356,37 @@ h5 p {
 }
 
 .project_btn:hover{
-    border-left: #add8e6 3px solid;
-    border-bottom: #add8e6 5px solid;
+    border-left: #4C636F 3px solid;
+    border-bottom: #7CA5B3 5px solid;
     transition: 0.2s;
 }
 
+.project_btn:active {
+    border-left: #4C636F 1px solid;
+    border-bottom: #7CA5B3 3px solid;
+
+}
+
+.project_submitbtn {
+    margin: 15px 0 15px 0;
+    background: #4F758C;
+    border-left: #8EB7C5 3px solid;
+    border-bottom: #add8e6 5px solid;
+    padding: 4px;
+    border-radius: 9px;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+
 .project_submitbtn:hover{
-    border-bottom: #d3d3d3 3px solid;
+    border-left: #4C636F 3px solid;
+    border-bottom: #7CA5B3 5px solid;
     transition: 0.2s;
+}
+
+
+.project_card:active {
+    border-left: #4C636F 1px solid;
+    border-bottom: #7CA5B3 3px solid;
 }
