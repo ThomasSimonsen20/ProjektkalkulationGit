@@ -62,8 +62,8 @@ public class Task {
             systemController.updateTasksEstimatetWorkhours(this.taskId, subTasksOfCurrentTaskEWHSum);
             return subTasksOfCurrentTaskEWHSum;
         } else {
-            systemController.updateTasksEstimatetWorkhours(this.taskId, Math.max(subTasksOfCurrentTaskEWHSum, this.estimatetWorkHours));
-            return Math.max(subTasksOfCurrentTaskEWHSum, this.estimatetWorkHours);
+            systemController.updateTasksEstimatetWorkhours(this.taskId,this.estimatetWorkHours);
+            return this.estimatetWorkHours;
         }
     }
 
