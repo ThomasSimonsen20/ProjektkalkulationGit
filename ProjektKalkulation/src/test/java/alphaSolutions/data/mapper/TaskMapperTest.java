@@ -30,7 +30,9 @@ class TaskMapperTest {
 
         taskMapper.updateTask(task);
 
-        assertEquals(task.getTaskName(), "Jens");
+
+        Task newTask = taskMapper.getTask(31);
+        assertEquals(newTask.getTaskName(), "Jens");
 
     }
 

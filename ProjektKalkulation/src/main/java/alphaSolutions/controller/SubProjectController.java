@@ -51,7 +51,6 @@ public class SubProjectController {
         model.addAttribute("subProject", systemController.getSubProjectsBasedOnProjectID(currentProject.getProjectId()));
         model.addAttribute("project", currentProject);
 
-
         return "subProjects";
     }
 

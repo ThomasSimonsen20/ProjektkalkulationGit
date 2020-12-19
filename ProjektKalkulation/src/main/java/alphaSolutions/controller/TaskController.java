@@ -29,10 +29,6 @@ public class TaskController {
         model.addAttribute("subproject", currentSubProject);
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(idSubProject));
 
-        //Hent liste over dependencies
-        //model.addAttribute("taskNames", systemController.getTaskNamesBySubProjectIdOmitCurrentAndDependentTasks(idSubProject, idTask));
-
-
         return "tasks";
     }
 
@@ -134,15 +130,6 @@ public class TaskController {
         model.addAttribute("tasks", systemController.getTasksBasedOnSubProjectID(subProject.getSubProjectId()));
         model.addAttribute("subproject", subProject);
         return "tasks";
-    }
-
-    @GetMapping("/taskDependencies")
-    public String taskDependencies(@RequestParam("id") int idTask, WebRequest request, Model model) {
-        Task currentTask = systemController.getTask(idTask);
-        sessionInfo.taskSessionInfo(request, currentTask);
-        model.addAttribute("tasks", currentTask);
-
-        return "taskDependencies";
     }
 
 }
