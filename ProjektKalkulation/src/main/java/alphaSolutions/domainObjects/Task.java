@@ -19,7 +19,9 @@ public class Task {
     private int tasksEWHId;
     private final SystemController systemController = new SystemController(new Facade());
 
-
+    /*------------------------------------------------------------------*/
+    /*----------------------Constructors--------------------------------*/
+    /*------------------------------------------------------------------*/
 
     public Task(int taskId, int projectId, int subProjectId, String taskName, String taskDescription) {
         this.taskId = taskId;
@@ -70,6 +72,8 @@ public class Task {
             return this.estimatetWorkHours;
         }
     }
+
+
 
     public int getTasksEWHId() {
         return tasksEWHId;

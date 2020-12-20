@@ -186,8 +186,9 @@ h5 p {
 /*------------------------------------------------------------------*/
 
 .employee_image {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 25px;
 }
 
 .employee_container {
@@ -205,7 +206,9 @@ h5 p {
 }
 
 .employee_name {
+    text-align: center;
     font-weight: bold;
+    padding: 10px;
 }
 
 .employee_skills {

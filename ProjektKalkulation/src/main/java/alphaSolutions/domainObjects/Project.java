@@ -15,8 +15,6 @@ public class Project {
     private String projectDescription;
     private final SystemController systemController = new SystemController(new Facade());
 
-
-
     /*------------------------------------------------------------------*/
     /*----------------------Constructors--------------------------------*/
     /*------------------------------------------------------------------*/

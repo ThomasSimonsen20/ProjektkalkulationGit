@@ -19,7 +19,6 @@ public class Employee {
 
     private SystemController systemController = new SystemController(new Facade());
 
-
     /*------------------------------------------------------------------*/
     /*----------------------Constructors--------------------------------*/
     /*------------------------------------------------------------------*/

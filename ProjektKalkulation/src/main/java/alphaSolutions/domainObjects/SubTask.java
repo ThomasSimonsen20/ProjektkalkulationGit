@@ -19,6 +19,10 @@ public class SubTask {
     private int subtasksEWHId;
     private final SystemController systemController = new SystemController(new Facade());
 
+    /*------------------------------------------------------------------*/
+    /*----------------------Constructors--------------------------------*/
+    /*------------------------------------------------------------------*/
+
     public SubTask(int subTaskId, int projectId, int taskId, String subTaskName, String subTaskDescription) {
         this.subTaskId = subTaskId;
         this.projectId = projectId;

@@ -18,7 +18,6 @@ public class SubProject {
     private int subProjectEWHId;
     private final SystemController systemController = new SystemController(new Facade());
 
-
     /*------------------------------------------------------------------*/
     /*----------------------Constructors--------------------------------*/
     /*------------------------------------------------------------------*/
