@@ -2,9 +2,12 @@ package alphaSolutions.data.mapper;
 
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.Project;
-
 import java.sql.*;
 import java.util.ArrayList;
+
+/*------------------------------------------------------------------*/
+/*---------------------author; Mikkel F-----------------------------*/
+/*------------------------------------------------------------------*/
 
 public class ProjectMapper {
 

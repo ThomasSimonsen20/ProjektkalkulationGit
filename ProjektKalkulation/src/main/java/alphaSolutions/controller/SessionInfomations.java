@@ -3,6 +3,10 @@ package alphaSolutions.controller;
 import alphaSolutions.domainObjects.*;
 import org.springframework.web.context.request.WebRequest;
 
+/*------------------------------------------------------------------*/
+/*---------------------author; Thomas S-----------------------------*/
+/*------------------------------------------------------------------*/
+
 public class SessionInfomations {
 
     public void projectSessionInfo(WebRequest request, Project project) {

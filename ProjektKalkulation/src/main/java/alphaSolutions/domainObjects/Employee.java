@@ -4,6 +4,10 @@ import alphaSolutions.data.mapper.Facade;
 
 import java.util.ArrayList;
 
+/*------------------------------------------------------------------*/
+/*---------------------author; Mikkel F-----------------------------*/
+/*------------------------------------------------------------------*/
+
 public class Employee {
 
     private int employeeId;

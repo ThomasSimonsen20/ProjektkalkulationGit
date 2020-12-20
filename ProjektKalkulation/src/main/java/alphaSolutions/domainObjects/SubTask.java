@@ -4,6 +4,10 @@ import alphaSolutions.data.mapper.Facade;
 
 import java.util.ArrayList;
 
+/*------------------------------------------------------------------*/
+/*---------------------author; Simon K------------------------------*/
+/*------------------------------------------------------------------*/
+
 public class SubTask {
 
     private int subTaskId;

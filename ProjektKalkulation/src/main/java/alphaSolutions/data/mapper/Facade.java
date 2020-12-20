@@ -4,6 +4,10 @@ import alphaSolutions.domainObjects.*;
 
 import java.util.ArrayList;
 
+/*------------------------------------------------------------------*/
+/*---------------------author; MF, TS, SK---------------------------*/
+/*------------------------------------------------------------------*/
+
 public class Facade {
 
     private ProjectMapper projectMapper = new ProjectMapper();

@@ -3,9 +3,12 @@ package alphaSolutions.data.mapper;
 import alphaSolutions.data.database.DBManager;
 import alphaSolutions.domainObjects.SubProject;
 import alphaSolutions.domainObjects.Task;
-
 import java.sql.*;
 import java.util.ArrayList;
+
+/*------------------------------------------------------------------*/
+/*---------------------author; Simon K------------------------------*/
+/*------------------------------------------------------------------*/
 
 public class TaskMapper {
 
