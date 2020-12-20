@@ -24,7 +24,7 @@ The program itself is located in the `ProjektKalkulation` directory.
 
 ## Run
 1. Setup Database 
-Run the content of `schema.sql` file in MySQL, to create the `AlphaSolutions` database.
+Run the content of `schema.sql` file (located under resources in the ProjektKalkulation directory) in MySQL, to create the `AlphaSolutions` database.
 Then run the content of `data.sql` file in MySQL, to create fill the database with test data.
 
 2. Create application.properties
